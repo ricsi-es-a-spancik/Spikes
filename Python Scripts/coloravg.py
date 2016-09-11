@@ -3,9 +3,11 @@ import numpy as np
 from skimage.io import imread, imsave
 
 '''
+Tiling an image to given sized sqaure regions and replacing them with the average value of the color channels.
+
 Python 2.7.10 |Anaconda 2.3.0 (64-bit)| (default, May 28 2015, 16:44:52) [MSC v.1500 64 bit (AMD64)] on win32
 
-> python coloravg.py Images/portrait.jpg 10 Images/portrait_avg_mosaic.jpg
+> python coloravg.py ../Images/portrait.jpg 10 ../Images/portrait_avg_mosaic.jpg
 '''
 
 def set_up_and_parse_arguments():
