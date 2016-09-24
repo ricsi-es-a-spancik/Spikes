@@ -73,29 +73,23 @@ namespace PhotosSearchWPF.ViewModel
 
         private void DoSearch()
         {
-            PhotoSearchOptions options;
+            var options = new PhotoSearchOptions()
+            {
+                Text = _currentSearchCriteria,
+                PerPage = PHOTOS_PER_PAGE,
+                Page = PageNumber,
+                SortOrder = PhotoSearchSortOrder.Relevance,
+                Extras = PhotoSearchExtras.ThumbnailUrl
+            };
 
             if (_currentSearchByText)
             {
-                options = new PhotoSearchOptions
-                {
-                    Text = _currentSearchCriteria,
-                    PerPage = PHOTOS_PER_PAGE,
-                    Page = PageNumber,
-                    SortOrder = PhotoSearchSortOrder.Relevance,
-                    Extras = PhotoSearchExtras.ThumbnailUrl
-                };
+                options.Text = _currentSearchCriteria;
             }
             else
             {
-                options = new PhotoSearchOptions
-                {
-                    Tags = _currentSearchCriteria,
-                    PerPage = PHOTOS_PER_PAGE,
-                    Page = PageNumber,
-                    SortOrder = PhotoSearchSortOrder.Relevance,
-                    Extras = PhotoSearchExtras.ThumbnailUrl | PhotoSearchExtras.Tags
-                };
+                options.Tags = _currentSearchCriteria;
+                options.Extras |= PhotoSearchExtras.Tags;
             }
 
             SearchResults = new ObservableCollection<Photo>(_flickr.PhotosSearch(options));
