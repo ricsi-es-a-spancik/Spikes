@@ -1,0 +1,32 @@
+﻿<Window x:Class="WPFUserControls.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUserControls"
+        xmlns:view="clr-namespace:WPFUserControls.View"
+        xmlns:viewmodel="clr-namespace:WPFUserControls.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <view:FieldUserControl Label="Label1" Value="111"/>
+        <view:FieldUserControl Label="Label2" Value="222" Grid.Row="1"/>
+        <view:FieldUserControl Label="Label3" Value="333" Grid.Row="2"/>
+        <view:FieldUserControl Label="{Binding MainLabel}" Value="{Binding MainValue}" Grid.Row="3"/>
+        
+        <view:ResourceCollectionUserControl ResourceCollection="{Binding Resources}" Grid.Row="4"/>
+    </Grid>
+</Window>
