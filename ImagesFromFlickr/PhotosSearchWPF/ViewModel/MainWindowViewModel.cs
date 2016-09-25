@@ -3,6 +3,7 @@ using Microsoft.Practices.Prism.Commands;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System;
 
 namespace PhotosSearchWPF.ViewModel
 {
@@ -24,10 +25,12 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand ShowPictureByUrl { get; private set; }
 
-        public ObservableCollection<Photo> SearchResults { get; private set; }
+        public ICommand InitiateNewSearchByTag { get; private set; }
+
+        public ObservableCollection<Photo> PhotoSearchResults { get; private set; }
 
         private readonly Flickr _flickr;
-        private const int PHOTOS_PER_PAGE = 20;
+        private const int PHOTOS_PER_PAGE = 40;
         private string _currentSearchCriteria;
         private bool _currentSearchByText;
 
@@ -43,6 +46,7 @@ namespace PhotosSearchWPF.ViewModel
             PrevPage = new DelegateCommand(PrevPageImpl);
             NextPage = new DelegateCommand(NextPageImpl);
             ShowPictureByUrl = new DelegateCommand<string>(ShowPictureByUrlImpl);
+            InitiateNewSearchByTag = new DelegateCommand<string>(InitiateNewSearchByTagImpl);
         }
 
         private void SearchImpl()
@@ -92,14 +96,25 @@ namespace PhotosSearchWPF.ViewModel
                 options.Extras |= PhotoSearchExtras.Tags;
             }
 
-            SearchResults = new ObservableCollection<Photo>(_flickr.PhotosSearch(options));
+            PhotoSearchResults = new ObservableCollection<Photo>(_flickr.PhotosSearch(options));
             NotifyPropertyChanged(nameof(PageNumber));
-            NotifyPropertyChanged(nameof(SearchResults));
+            NotifyPropertyChanged(nameof(PhotoSearchResults));
         }
 
         private void ShowPictureByUrlImpl(string url)
         {
             MessageBox.Show(url);
+        }
+
+        private void InitiateNewSearchByTagImpl(string tag)
+        {
+            SearchByTags = true;
+            SearchByText = false;
+            SearchCriteria = tag;
+            NotifyPropertyChanged(nameof(SearchByTags));
+            NotifyPropertyChanged(nameof(SearchByText));
+            NotifyPropertyChanged(nameof(SearchCriteria));
+            SearchImpl();
         }
     }
 }

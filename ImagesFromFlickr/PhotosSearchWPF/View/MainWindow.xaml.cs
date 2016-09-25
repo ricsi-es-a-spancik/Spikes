@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PhotosSearchWPF
+namespace PhotosSearchWPF.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

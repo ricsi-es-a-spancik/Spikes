@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="PhotosSearchWPF.View.TagsCollectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhotosSearchWPF.View"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <ItemsControl x:Name="TagsWrapPanel" ItemsSource="{Binding Tags}"
+                                     BorderThickness="0" Width="120" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5,0,5,5">
+
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type system:String}">
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,5">
+                    <Image Source="../labelend.png" Height="18"/>
+                    <Button Height="18" BorderThickness="0" Background="LightGray" Style="{StaticResource TransparentStyle}" Cursor="Hand"
+                            Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SearchByTagSelectedCommand}" 
+                            CommandParameter="{Binding}">
+                        <TextBlock Text="{Binding}" FontSize="10" Background="LightGray"/>
+                    </Button>
+                    <TextBlock Text=" " Height="18" Background="LightGray"/>
+                </StackPanel>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>
