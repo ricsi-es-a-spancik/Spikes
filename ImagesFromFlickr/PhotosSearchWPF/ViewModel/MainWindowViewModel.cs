@@ -79,11 +79,10 @@ namespace PhotosSearchWPF.ViewModel
         {
             var options = new PhotoSearchOptions()
             {
-                Text = _currentSearchCriteria,
                 PerPage = PHOTOS_PER_PAGE,
                 Page = PageNumber,
                 SortOrder = PhotoSearchSortOrder.Relevance,
-                Extras = PhotoSearchExtras.ThumbnailUrl
+                Extras = PhotoSearchExtras.Tags | PhotoSearchExtras.ThumbnailUrl
             };
 
             if (_currentSearchByText)
@@ -93,7 +92,6 @@ namespace PhotosSearchWPF.ViewModel
             else
             {
                 options.Tags = _currentSearchCriteria;
-                options.Extras |= PhotoSearchExtras.Tags;
             }
 
             PhotoSearchResults = new ObservableCollection<Photo>(_flickr.PhotosSearch(options));
