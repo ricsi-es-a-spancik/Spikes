@@ -20,7 +20,7 @@
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type system:String}">
                 <StackPanel Orientation="Horizontal" Margin="0,0,5,5">
-                    <Image Source="../labelend.png" Height="18"/>
+                    <Image Source="../Images/labelend.png" Height="18"/>
                     <Button Height="18" BorderThickness="0" Background="LightGray" Style="{StaticResource TransparentStyle}" Cursor="Hand"
                             Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SearchByTagSelectedCommand}" 
                             CommandParameter="{Binding}">

@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>flickr.ico</ApplicationIcon>
+    <ApplicationIcon>Images\flickr.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -104,10 +104,6 @@
     <Compile Include="View\TagsCollectionView.xaml.cs">
       <DependentUpon>TagsCollectionView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\FlickrPhotoListBoxView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\FlickrPhotoWrapPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,9 +115,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\FlickrPhotoListBoxView.xaml.cs">
-      <DependentUpon>FlickrPhotoListBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FlickrPhotoWrapPanelView.xaml.cs">
       <DependentUpon>FlickrPhotoWrapPanelView.xaml</DependentUpon>
@@ -176,32 +169,32 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="flickr.ico">
+    <Resource Include="Images\flickr.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="no-thumb.png">
+    <Resource Include="Images\no-thumb.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="check.png">
+    <Resource Include="Images\check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="add.png">
+    <Resource Include="Images\add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="labelend.png">
+    <Resource Include="Images\labelend.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="spinner.gif">
+    <Resource Include="Images\spinner.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

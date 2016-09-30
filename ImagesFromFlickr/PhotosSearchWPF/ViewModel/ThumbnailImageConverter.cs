@@ -13,7 +13,7 @@ namespace PhotosSearchWPF.ViewModel
 
             source.BeginInit();
             var thumbnailUrl = value as string;
-            var uriString = thumbnailUrl ?? @"no-thumb.png";
+            var uriString = thumbnailUrl ?? @"../Images/no-thumb.png";
             source.UriSource = new Uri(uriString);
             source.EndInit();
 

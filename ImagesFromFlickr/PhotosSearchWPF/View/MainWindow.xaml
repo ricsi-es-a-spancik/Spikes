@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="FlickrNet Photo Search" 
         Height="550" Width="720"
-        Icon="../flickr.ico">
+        Icon="../Images/flickr.ico">
 
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>

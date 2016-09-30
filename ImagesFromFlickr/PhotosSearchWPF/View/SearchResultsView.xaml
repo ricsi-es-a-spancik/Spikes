@@ -41,7 +41,7 @@
                 <Label x:Name="PageNumberTextLabel" Content="Page:" Margin="0,5,0,0" Grid.Column="1"/>
                 <Label x:Name="PageNumberLabel" Content="{Binding PageNumber}" Margin="0,5,0,0" Grid.Column="2"/>
                 <Button x:Name="NextPageButton" Content="Next" Command="{Binding NextPage}" Margin="10,5,0,0" Width="75" Grid.Column="3"/>
-                <Image gif:ImageBehavior.AnimatedSource="../spinner.gif" Visibility="{Binding QueryInProgress, Converter={StaticResource BoolToVisibilityConverter}}" Width="20" Height="20" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                <Image gif:ImageBehavior.AnimatedSource="../Images/spinner.gif" Visibility="{Binding QueryInProgress, Converter={StaticResource BoolToVisibilityConverter}}" Width="20" Height="20" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0"/>
             </Grid>
 
             <local:FlickrPhotoWrapPanelView SearchResults="{Binding PhotoSearchResults}" Grid.Row="2"/>
