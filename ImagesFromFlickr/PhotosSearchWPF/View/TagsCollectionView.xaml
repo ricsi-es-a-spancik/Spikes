@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <ItemsControl x:Name="TagsWrapPanel" ItemsSource="{Binding Tags}"
-                                     BorderThickness="0" Width="120" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5,0,5,5">
+    <ItemsControl x:Name="TagsWrapPanel" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Tags}"
+                                     BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>

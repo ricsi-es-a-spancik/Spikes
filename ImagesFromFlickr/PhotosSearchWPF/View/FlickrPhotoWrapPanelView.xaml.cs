@@ -1,8 +1,7 @@
-﻿using FlickrNet;
+﻿using PhotosSearchWPF.ViewModel;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace PhotosSearchWPF.View
 {
@@ -11,23 +10,14 @@ namespace PhotosSearchWPF.View
     /// </summary>
     public partial class FlickrPhotoWrapPanelView : UserControl
     {
-        public ObservableCollection<Photo> SearchResults
+        public ObservableCollection<PhotoViewModel> SearchResults
         {
-            get { return (ObservableCollection<Photo>)GetValue(SearchResultsProperty); }
+            get { return (ObservableCollection<PhotoViewModel>)GetValue(SearchResultsProperty); }
             set { SetValue(SearchResultsProperty, value); }
         }
 
         public static readonly DependencyProperty SearchResultsProperty =
-            DependencyProperty.Register("SearchResults", typeof(ObservableCollection<Photo>), typeof(FlickrPhotoWrapPanelView));
-
-        public ICommand SearchByTagSelectedCommand
-        {
-            get { return (ICommand)GetValue(SearchByTagSelectedCommandProperty); }
-            set { SetValue(SearchByTagSelectedCommandProperty, value); }
-        }
-
-        public static readonly DependencyProperty SearchByTagSelectedCommandProperty =
-            DependencyProperty.Register("SearchByTagSelectedCommand", typeof(ICommand), typeof(FlickrPhotoWrapPanelView));
+            DependencyProperty.Register("SearchResults", typeof(ObservableCollection<PhotoViewModel>), typeof(FlickrPhotoWrapPanelView));
 
         public FlickrPhotoWrapPanelView()
         {

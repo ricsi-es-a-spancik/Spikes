@@ -8,7 +8,8 @@
         <viewmodels:TagsConverter x:Key="TagsConverter"/>
         <viewmodels:UrlEnabledConverter x:Key="UrlEnabledConverter"/>
         <viewmodels:ThumbnailImageConverter x:Key="ThumbnailImageConverter"/>
-
+        <viewmodels:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        
         <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>

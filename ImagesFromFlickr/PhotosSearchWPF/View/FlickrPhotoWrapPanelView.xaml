@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PhotosSearchWPF.View"
-             xmlns:flickr="clr-namespace:FlickrNet;assembly=FlickrNet"
+             xmlns:viewmodels="clr-namespace:PhotosSearchWPF.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -24,7 +24,7 @@
         </ListBox.ItemContainerStyle>
         
         <ListBox.ItemTemplate>
-            <DataTemplate DataType="{x:Type flickr:Photo}">
+            <DataTemplate DataType="{x:Type viewmodels:PhotoViewModel}">
                 <Grid>
                     <Border BorderThickness="1" BorderBrush="LightGray" Margin="5,5,5,5">
                         <Grid Background="White">
@@ -41,12 +41,11 @@
                                 <Button Content=" ... " VerticalAlignment="Center" Margin="0,5,5,0" Height="20" BorderBrush="LightGray"/>
                             </StackPanel>
 
-                            <Button Name="ThumbnailImageButton" Width="95" Height="95" Margin="10,5,5,10" Grid.Row="1" Style="{StaticResource TransparentStyle}">
-                                <Image Source="{Binding ThumbnailUrl, Converter={StaticResource ThumbnailImageConverter}}"  />
+                            <Button Name="ThumbnailImageButton" Command="{Binding ShowPhotoDetails}" CommandParameter="{Binding}" Cursor="Hand" Width="95" Height="95" Margin="10,5,5,10" Grid.Row="1" Style="{StaticResource TransparentStyle}">
+                                <Image Source="{Binding Photo.ThumbnailUrl, Converter={StaticResource ThumbnailImageConverter}}"/>
                             </Button>
 
-                            <local:TagsCollectionView Grid.Row="2" Tags="{Binding Tags}" 
-                                                      SearchByTagSelectedCommand="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SearchByTagSelectedCommand}"/>
+                            <local:TagsCollectionView Grid.Row="2" Tags="{Binding Photo.Tags}" Width="120" Margin="5,0,5,5"/>
                         </Grid>
                     </Border>
 
