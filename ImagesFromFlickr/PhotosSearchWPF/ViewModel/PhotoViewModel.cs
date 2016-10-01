@@ -1,5 +1,7 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Prism.Commands;
+using PhotosSearchWPF.ViewModel.Events;
+using Prism.Events;
 using System;
 using System.Windows.Input;
 
@@ -7,6 +9,7 @@ namespace PhotosSearchWPF.ViewModel
 {
     public class PhotoViewModel : BindableBase
     {
+        private IEventAggregator _eventAggregator;
         private Photo _photo;
 
         public Photo Photo
@@ -33,36 +36,25 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand ShowPhotoDetails { get; private set; }
 
-        public ICommand Download { get; private set; }
+        public ICommand DownloadPhoto { get; private set; }
 
-        public PhotoViewModel(Photo photo)
+        public PhotoViewModel(IEventAggregator eventAggregator, Photo photo)
         {
+            _eventAggregator = eventAggregator;
             Photo = photo;
-            TagsCollection = new TagsCollectionViewModel(Photo.Tags);
-            TagsCollection.SearchByTagRequested += OnSearchByTagRequested;
+            TagsCollection = new TagsCollectionViewModel(eventAggregator, Photo.Tags);
             ShowPhotoDetails = new DelegateCommand<PhotoViewModel>(OnShowPhotoDetails);
-            Download = new DelegateCommand<PhotoViewModel>(OnDownload);
+            DownloadPhoto = new DelegateCommand<PhotoViewModel>(OnDownloadPhoto);
         }
-
-        public event Action<string> SearchByTagRequested;
-
-        private void OnSearchByTagRequested(string tag)
-        {
-            SearchByTagRequested?.Invoke(tag);
-        }
-
-        public event Action<PhotoViewModel> PhotoDetailsRequested;
 
         private void OnShowPhotoDetails(PhotoViewModel photoViewModel)
         {
-            PhotoDetailsRequested?.Invoke(photoViewModel);
+            _eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Publish(photoViewModel);
         }
 
-        public event Action<PhotoViewModel> DownloadRequested;
-
-        private void OnDownload(PhotoViewModel photoViewModel)
+        private void OnDownloadPhoto(PhotoViewModel photoViewModel)
         {
-            DownloadRequested?.Invoke(photoViewModel);
+            _eventAggregator.GetEvent<DownloadPhotoRequested>().Publish(photoViewModel);
         }
     }
 }

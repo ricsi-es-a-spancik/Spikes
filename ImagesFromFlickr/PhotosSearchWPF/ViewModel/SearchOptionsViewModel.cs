@@ -1,12 +1,15 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using System;
 using FlickrNet;
+using Prism.Events;
+using PhotosSearchWPF.ViewModel.Events;
 
 namespace PhotosSearchWPF.ViewModel
 {
     public class SearchOptionsViewModel : BindableBase
     {
         private const int PHOTOS_PER_PAGE = 20;
+        private IEventAggregator _eventAggregator;
 
         private string _searchCriteria;
 
@@ -38,13 +41,12 @@ namespace PhotosSearchWPF.ViewModel
 
         public DelegateCommand Search { get; private set; }
 
-        public SearchOptionsViewModel()
+        public SearchOptionsViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             SearchByText = true;
             Search = new DelegateCommand(OnSearch, () => !string.IsNullOrEmpty(SearchCriteria));
         }
-
-        public event Action<PhotoSearchOptions> PhotoSearchRequested;
 
         private void OnSearch()
         {
@@ -61,7 +63,7 @@ namespace PhotosSearchWPF.ViewModel
             else
                 options.Tags = SearchCriteria;
 
-            PhotoSearchRequested?.Invoke(options);
+            _eventAggregator.GetEvent<PhotoSearchRequested>().Publish(options);
         }
     }
 }

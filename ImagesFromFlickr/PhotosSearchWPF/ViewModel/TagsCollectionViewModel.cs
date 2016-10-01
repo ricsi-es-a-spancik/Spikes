@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using System;
+using Prism.Events;
+using PhotosSearchWPF.ViewModel.Events;
 
 namespace PhotosSearchWPF.ViewModel
 {
     public class TagsCollectionViewModel : BindableBase
     {
+        private IEventAggregator _eventAggregator;
         private ICollection<string> _tags;
 
         public ICollection<string> Tags
@@ -17,17 +20,16 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand SearchByTag { get; private set; }
 
-        public TagsCollectionViewModel(ICollection<string> tags)
+        public TagsCollectionViewModel(IEventAggregator eventAggregator, ICollection<string> tags)
         {
+            _eventAggregator = eventAggregator;
             Tags = tags;
             SearchByTag = new DelegateCommand<string>(OnSearchByTag);
         }
 
-        public event Action<string> SearchByTagRequested;
-
         private void OnSearchByTag(string tag)
         {
-            SearchByTagRequested?.Invoke(tag);
+            _eventAggregator.GetEvent<SearchByTagRequested>().Publish(tag);
         }
     }
 }

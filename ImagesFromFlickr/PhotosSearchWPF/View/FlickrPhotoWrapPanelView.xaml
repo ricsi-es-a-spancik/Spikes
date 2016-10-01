@@ -36,7 +36,7 @@
 
                             <Button Margin="0,5,5,0" BorderBrush="LightGray" Width="20" Height="20" 
                                     Style="{StaticResource TransparentStyle}"
-                                    Command="{Binding Download}" CommandParameter="{Binding}" HorizontalAlignment="Right"
+                                    Command="{Binding DownloadPhoto}" CommandParameter="{Binding}" HorizontalAlignment="Right"
                                     IsEnabled="{Binding IsLocalCopyExists, Converter={StaticResource BoolNegateConverter}}"
                                     Cursor="Hand">
                                 <Grid>

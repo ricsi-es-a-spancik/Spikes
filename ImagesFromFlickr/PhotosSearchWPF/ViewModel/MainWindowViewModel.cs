@@ -1,9 +1,13 @@
 ﻿using FlickrNet;
+using PhotosSearchWPF.ViewModel.Events;
+using Prism.Events;
 
 namespace PhotosSearchWPF.ViewModel
 {
     public class MainWindowViewModel : BindableBase
     {
+        private IEventAggregator _eventAggregator;
+
         private BindableBase _currentViewModel;
 
         public BindableBase CurrentViewModel
@@ -14,18 +18,34 @@ namespace PhotosSearchWPF.ViewModel
 
         public SearchOptionsViewModel SearchOptionsViewModel { get; private set; }
 
-        private SearchResultsViewModel _searchResultsViewModel = new SearchResultsViewModel();
-        private PhotoDetailsViewModel _photoDetailsViewModel = new PhotoDetailsViewModel();
+        private SearchResultsViewModel _searchResultsViewModel;
+        private PhotoDetailsViewModel _photoDetailsViewModel;
 
         public MainWindowViewModel()
         {
-            SearchOptionsViewModel = new SearchOptionsViewModel();
-            SearchOptionsViewModel.PhotoSearchRequested += OnPhotoSearchRequested;
+            _eventAggregator = new EventAggregator();
+            _eventAggregator.GetEvent<PhotoSearchRequested>().Subscribe(OnPhotoSearchRequested, ThreadOption.UIThread);
+            _eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Subscribe(OnPhotoDetailsRequested, ThreadOption.UIThread);
+            _eventAggregator.GetEvent<SearchByTagRequested>().Subscribe(OnSearchByTagRequested, ThreadOption.UIThread);   
+            _eventAggregator.GetEvent<NavigateBackToSearchResultsRequested>().Subscribe(OnNavigateBackToSearchResultsRequested, ThreadOption.UIThread);
+            SearchOptionsViewModel = new SearchOptionsViewModel(_eventAggregator);
 
-            _searchResultsViewModel.PhotoDetailsRequested += OnPhotoDetailsRequested;
-            _searchResultsViewModel.SearchByTagRequested += OnSearchByTagRequested;
+            _searchResultsViewModel = new SearchResultsViewModel(_eventAggregator);
 
-            _photoDetailsViewModel.BackToSearchResultsRequested += OnBackToSearchResultsRequested;
+            _photoDetailsViewModel = new PhotoDetailsViewModel(_eventAggregator);
+        }
+
+        private void OnPhotoSearchRequested(PhotoSearchOptions options)
+        {
+            _searchResultsViewModel.SearchOptions = options;
+            CurrentViewModel = _searchResultsViewModel;
+            _searchResultsViewModel.DoSearch();
+        }
+
+        private void OnPhotoDetailsRequested(PhotoViewModel photoViewModel)
+        {
+            _photoDetailsViewModel.PhotoViewModel = photoViewModel;
+            CurrentViewModel = _photoDetailsViewModel;
         }
 
         private void OnSearchByTagRequested(string tag)
@@ -36,22 +56,9 @@ namespace PhotosSearchWPF.ViewModel
             SearchOptionsViewModel.Search.Execute();
         }
 
-        private void OnPhotoDetailsRequested(PhotoViewModel photoViewModel)
-        {
-            _photoDetailsViewModel.PhotoViewModel = photoViewModel;
-            CurrentViewModel = _photoDetailsViewModel;
-        }
-
-        private void OnBackToSearchResultsRequested()
+        private void OnNavigateBackToSearchResultsRequested()
         {
             CurrentViewModel = _searchResultsViewModel;
-        }
-
-        private void OnPhotoSearchRequested(PhotoSearchOptions options)
-        {
-            _searchResultsViewModel.SearchOptions = options;
-            CurrentViewModel = _searchResultsViewModel;
-            _searchResultsViewModel.DoSearch();
-        }
+        } 
     }
 }

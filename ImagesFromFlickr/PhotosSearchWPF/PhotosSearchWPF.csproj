@@ -56,6 +56,10 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -87,6 +91,11 @@
     <Compile Include="ViewModel\BoolToVisibilityConverter.cs" />
     <Compile Include="Model\ILocalPhotoRepository.cs" />
     <Compile Include="Model\LocalPhotoRepository.cs" />
+    <Compile Include="ViewModel\Events\DownloadPhotoRequested.cs" />
+    <Compile Include="ViewModel\Events\NavigateBackToSearchResultsRequested.cs" />
+    <Compile Include="ViewModel\Events\PhotoSearchRequested.cs" />
+    <Compile Include="ViewModel\Events\SearchByTagRequested.cs" />
+    <Compile Include="ViewModel\Events\ShowPhotoDetailsRequested.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PhotoDetailsViewModel.cs" />
     <Compile Include="ViewModel\PhotoViewModel.cs" />

@@ -1,6 +1,8 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Prism.Commands;
 using PhotosSearchWPF.Model;
+using PhotosSearchWPF.ViewModel.Events;
+using Prism.Events;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace PhotosSearchWPF.ViewModel
 {
     public class SearchResultsViewModel : BindableBase
     {
+        private IEventAggregator _eventAggregator;
         private readonly Flickr _flickr = new Flickr("86d7596ef5548c8a082e8f4c45b47614", "383a46399c655e00");
 
         private int _pageNumber;
@@ -56,10 +59,6 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand NextPage { get; private set; }
 
-        public event Action<PhotoViewModel> PhotoDetailsRequested;
-
-        public event Action<string> SearchByTagRequested;
-
         private ObservableCollection<PhotoViewModel> _photoSearchResults;
 
         public ObservableCollection<PhotoViewModel> PhotoSearchResults
@@ -70,8 +69,11 @@ namespace PhotosSearchWPF.ViewModel
 
         private readonly ILocalPhotoRepository _localPhotoRepository;
 
-        public SearchResultsViewModel()
+        public SearchResultsViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<DownloadPhotoRequested>().Subscribe(OnDownloadPhotoRequested);
+
             PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
             NextPage = new DelegateCommand(NextPageImpl);
             QueryInProgress = false;
@@ -114,11 +116,8 @@ namespace PhotosSearchWPF.ViewModel
 
                 var photoViewModels = _flickr.PhotosSearch(SearchOptions).Select(p =>
                 {
-                    var photoViewModel = new PhotoViewModel(p);
-                    photoViewModel.PhotoDetailsRequested += OnShowPhotoDetailsRequested;
-                    photoViewModel.SearchByTagRequested += OnSearchByTagRequested;
+                    var photoViewModel = new PhotoViewModel(_eventAggregator, p);
                     photoViewModel.IsLocalCopyExists = _localPhotoRepository.IsLocalCopyExists(p).Result;
-                    photoViewModel.DownloadRequested += OnDownloadRequested;
                     return photoViewModel;
                 }).ToList();
 
@@ -127,17 +126,7 @@ namespace PhotosSearchWPF.ViewModel
             });
         }
 
-        private void OnShowPhotoDetailsRequested(PhotoViewModel photoViewModel)
-        {
-            PhotoDetailsRequested?.Invoke(photoViewModel);
-        }
-
-        private void OnSearchByTagRequested(string tag)
-        {
-            SearchByTagRequested?.Invoke(tag);
-        }
-
-        private async void OnDownloadRequested(PhotoViewModel photoViewModel)
+        private async void OnDownloadPhotoRequested(PhotoViewModel photoViewModel)
         {
             try
             {
