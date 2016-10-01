@@ -56,6 +56,8 @@ namespace PhotosSearchWPF.ViewModel
 
         public event Action<PhotoViewModel> PhotoDetailsRequested;
 
+        public event Action<string> SearchByTagRequested;
+
         public SearchResultsViewModel()
         {
             PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
@@ -107,8 +109,9 @@ namespace PhotosSearchWPF.ViewModel
 
                 var photoViewModels = _flickr.PhotosSearch(SearchOptions).Select(p =>
                 {
-                    var photoViewModel = new PhotoViewModel { Photo = p };
-                    photoViewModel.PhotoDetailsRequested += OnShowPhotoDetails;
+                    var photoViewModel = new PhotoViewModel(p);
+                    photoViewModel.PhotoDetailsRequested += OnShowPhotoDetailsRequested;
+                    photoViewModel.SearchByTagRequested += OnSearchByTagRequested;
                     return photoViewModel;
                 }).ToList();
 
@@ -117,9 +120,14 @@ namespace PhotosSearchWPF.ViewModel
             });
         }
 
-        private void OnShowPhotoDetails(PhotoViewModel photoViewModel)
+        private void OnShowPhotoDetailsRequested(PhotoViewModel photoViewModel)
         {
             PhotoDetailsRequested?.Invoke(photoViewModel);
+        }
+
+        private void OnSearchByTagRequested(string tag)
+        {
+            SearchByTagRequested?.Invoke(tag);
         }
     }
 }

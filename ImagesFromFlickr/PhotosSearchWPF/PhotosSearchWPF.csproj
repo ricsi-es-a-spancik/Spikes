@@ -88,6 +88,7 @@
     <Compile Include="ViewModel\PhotoViewModel.cs" />
     <Compile Include="ViewModel\SearchOptionsViewModel.cs" />
     <Compile Include="ViewModel\SearchResultsViewModel.cs" />
+    <Compile Include="ViewModel\TagsCollectionViewModel.cs" />
     <Compile Include="ViewModel\TagsConverter.cs" />
     <Compile Include="ViewModel\ThumbnailImageConverter.cs" />
     <Compile Include="ViewModel\UrlEnabledConverter.cs" />

@@ -18,32 +18,32 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding Photo.Medium640Url, Converter={StaticResource ThumbnailImageConverter}}" Width="640" Height="{Binding Photo.Medium640Height}"/>
+                <Image Source="{Binding PhotoViewModel.Photo.Medium640Url, Converter={StaticResource ThumbnailImageConverter}}" Width="640" Height="{Binding PhotoViewModel.Photo.Medium640Height}"/>
 
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-                    <TextBlock Text="{Binding Photo.DateUploaded}" HorizontalAlignment="Right" Foreground="DarkGray"/>
+                    <TextBlock Text="{Binding PhotoViewModel.Photo.DateUploaded}" HorizontalAlignment="Right" Foreground="DarkGray"/>
 
-                    <TextBlock Text="{Binding Photo.Title}" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Width="640"/>
-                    <TextBlock Text="{Binding Photo.Description}" FontSize="12" TextWrapping="Wrap" Width="640"/>
+                    <TextBlock Text="{Binding PhotoViewModel.Photo.Title}" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Width="640"/>
+                    <TextBlock Text="{Binding PhotoViewModel.Photo.Description}" FontSize="12" TextWrapping="Wrap" Width="640"/>
 
-                    <local:TagsCollectionView Tags="{Binding Photo.Tags}" Margin="0,20,0,0" HorizontalContentAlignment="Left" Width="640"/>
+                    <local:TagsCollectionView DataContext="{Binding PhotoViewModel.TagsCollection}" Margin="0,20,0,0" HorizontalContentAlignment="Left" Width="640"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Width="640">
                         <TextBlock Text="photo by "/>
-                        <TextBlock Text="{Binding Photo.OwnerName}" FontStyle="Italic"/>
+                        <TextBlock Text="{Binding PhotoViewModel.Photo.OwnerName}" FontStyle="Italic"/>
                         <TextBlock Text=" (id: "/>
-                        <TextBlock Text="{Binding Photo.UserId}"/>
+                        <TextBlock Text="{Binding PhotoViewModel.Photo.UserId}"/>
                         <TextBlock Text=")"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Number of comments " FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Photo.CountComments}"/>
+                        <TextBlock Text="{Binding PhotoViewModel.Photo.CountComments}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="License " FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Photo.License}"/>
+                        <TextBlock Text="{Binding PhotoViewModel.Photo.License}"/>
                     </StackPanel>
 
                     <Button Content="Open in browser" Command="{Binding OpenInBrowser}" Margin="0,20,0,0"/>

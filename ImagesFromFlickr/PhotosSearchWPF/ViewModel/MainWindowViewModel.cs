@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Commands;
 using System.Windows;
 using System.Windows.Input;
+using System;
 
 namespace PhotosSearchWPF.ViewModel
 {
@@ -24,15 +25,25 @@ namespace PhotosSearchWPF.ViewModel
             SearchOptionsViewModel.PhotoSearchRequested += OnPhotoSearchRequested;
 
             _searchResultsViewModel.PhotoDetailsRequested += OnPhotoDetailsRequested;
+            _searchResultsViewModel.SearchByTagRequested += OnSearchByTagRequested;
+
             _photoDetailsViewModel.BackToSearchResultsRequested += OnBackToSearchResultsRequested;
             
             ShowPictureByUrl = new DelegateCommand<string>(ShowPictureByUrlImpl);
             InitiateNewSearchByTag = new DelegateCommand<string>(InitiateNewSearchByTagImpl);
         }
 
+        private void OnSearchByTagRequested(string tag)
+        {
+            SearchOptionsViewModel.SearchCriteria = tag;
+            SearchOptionsViewModel.SearchByText = false;
+            SearchOptionsViewModel.SearchByTags = true;
+            SearchOptionsViewModel.Search.Execute();
+        }
+
         private void OnPhotoDetailsRequested(PhotoViewModel photoViewModel)
         {
-            _photoDetailsViewModel.Photo = photoViewModel.Photo;
+            _photoDetailsViewModel.PhotoViewModel = photoViewModel;
             CurrentViewModel = _photoDetailsViewModel;
             NotifyPropertyChanged(nameof(CurrentViewModel));
         }

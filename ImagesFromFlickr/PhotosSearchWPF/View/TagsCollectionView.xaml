@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <ItemsControl x:Name="TagsWrapPanel" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Tags}"
+    <ItemsControl x:Name="TagsWrapPanel" ItemsSource="{Binding Tags}"
                                      BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
         <ItemsControl.ItemsPanel>
@@ -22,7 +22,7 @@
                 <StackPanel Orientation="Horizontal" Margin="0,0,5,5">
                     <Image Source="../Images/labelend.png" Height="18"/>
                     <Button Height="18" BorderThickness="0" Background="LightGray" Style="{StaticResource TransparentStyle}" Cursor="Hand"
-                            Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SearchByTagSelectedCommand}" 
+                            Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SearchByTag}" 
                             CommandParameter="{Binding}">
                         <TextBlock Text="{Binding}" FontSize="10" Background="LightGray"/>
                     </Button>

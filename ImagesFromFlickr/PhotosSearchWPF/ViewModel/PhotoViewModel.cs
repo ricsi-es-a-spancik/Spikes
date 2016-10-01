@@ -15,11 +15,29 @@ namespace PhotosSearchWPF.ViewModel
             set { SetProperty(ref _photo, value); }
         }
 
+        private TagsCollectionViewModel _tagsCollection;
+
+        public TagsCollectionViewModel TagsCollection
+        {
+            get { return _tagsCollection; }
+            set { SetProperty(ref _tagsCollection, value); }
+        }
+
         public ICommand ShowPhotoDetails { get; private set; }
 
-        public PhotoViewModel()
+        public PhotoViewModel(Photo photo)
         {
+            Photo = photo;
+            TagsCollection = new TagsCollectionViewModel(Photo.Tags);
+            TagsCollection.SearchByTagRequested += OnSearchByTagRequested;
             ShowPhotoDetails = new DelegateCommand<PhotoViewModel>(OnShowPhotoDetails);
+        }
+
+        public event Action<string> SearchByTagRequested;
+
+        private void OnSearchByTagRequested(string tag)
+        {
+            SearchByTagRequested?.Invoke(tag);
         }
 
         public event Action<PhotoViewModel> PhotoDetailsRequested;

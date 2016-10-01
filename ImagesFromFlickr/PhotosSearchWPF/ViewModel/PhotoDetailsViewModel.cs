@@ -10,12 +10,12 @@ namespace PhotosSearchWPF.ViewModel
         public ICommand BackToSearchResults { get; private set; }
         public event Action BackToSearchResultsRequested;
 
-        private Photo _photo;
+        private PhotoViewModel _photoViewModel;
 
-        public Photo Photo
+        public PhotoViewModel PhotoViewModel
         {
-            get { return _photo; }
-            set { SetProperty(ref _photo, value); }
+            get { return _photoViewModel; }
+            set { SetProperty(ref _photoViewModel, value); }
         }
 
         public ICommand OpenInBrowser { get; set; }
@@ -23,7 +23,7 @@ namespace PhotosSearchWPF.ViewModel
         public PhotoDetailsViewModel()
         {
             BackToSearchResults = new DelegateCommand(OnBackToSearchResults);
-            OpenInBrowser = new DelegateCommand(OnOpenInBrowser, () => !string.IsNullOrEmpty(Photo.WebUrl));
+            OpenInBrowser = new DelegateCommand(OnOpenInBrowser, () => !string.IsNullOrEmpty(PhotoViewModel.Photo.WebUrl));
         }
 
         private void OnBackToSearchResults()
@@ -33,7 +33,7 @@ namespace PhotosSearchWPF.ViewModel
 
         private void OnOpenInBrowser()
         {
-            System.Diagnostics.Process.Start(Photo.WebUrl);
+            System.Diagnostics.Process.Start(PhotoViewModel.Photo.WebUrl);
         }
     }
 }

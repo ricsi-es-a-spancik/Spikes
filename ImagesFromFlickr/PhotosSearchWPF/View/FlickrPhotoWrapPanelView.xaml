@@ -45,7 +45,7 @@
                                 <Image Source="{Binding Photo.ThumbnailUrl, Converter={StaticResource ThumbnailImageConverter}}"/>
                             </Button>
 
-                            <local:TagsCollectionView Grid.Row="2" Tags="{Binding Photo.Tags}" Width="120" Margin="5,0,5,5"/>
+                            <local:TagsCollectionView Grid.Row="2" DataContext="{Binding TagsCollection}" Width="120" Margin="5,0,5,5"/>
                         </Grid>
                     </Border>
 
