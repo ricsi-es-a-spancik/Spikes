@@ -1,4 +1,6 @@
 ﻿using FlickrNet;
+using Microsoft.Practices.Unity;
+using PhotosSearchWPF.Model;
 using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
 
@@ -6,7 +8,7 @@ namespace PhotosSearchWPF.ViewModel
 {
     public class MainWindowViewModel : BindableBase
     {
-        private IEventAggregator _eventAggregator;
+        private IUnityContainer _container;
 
         private BindableBase _currentViewModel;
 
@@ -23,16 +25,25 @@ namespace PhotosSearchWPF.ViewModel
 
         public MainWindowViewModel()
         {
-            _eventAggregator = new EventAggregator();
-            _eventAggregator.GetEvent<PhotoSearchRequested>().Subscribe(OnPhotoSearchRequested, ThreadOption.UIThread);
-            _eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Subscribe(OnPhotoDetailsRequested, ThreadOption.UIThread);
-            _eventAggregator.GetEvent<SearchByTagRequested>().Subscribe(OnSearchByTagRequested, ThreadOption.UIThread);   
-            _eventAggregator.GetEvent<NavigateBackToSearchResultsRequested>().Subscribe(OnNavigateBackToSearchResultsRequested, ThreadOption.UIThread);
-            SearchOptionsViewModel = new SearchOptionsViewModel(_eventAggregator);
+            SetUpContainer();
 
-            _searchResultsViewModel = new SearchResultsViewModel(_eventAggregator);
+            SearchOptionsViewModel = _container.Resolve<SearchOptionsViewModel>();
+            _searchResultsViewModel = _container.Resolve<SearchResultsViewModel>();
+            _photoDetailsViewModel = _container.Resolve<PhotoDetailsViewModel>();
+        }
 
-            _photoDetailsViewModel = new PhotoDetailsViewModel(_eventAggregator);
+        private void SetUpContainer()
+        {
+            _container = new UnityContainer();
+            _container.RegisterType<ILocalPhotoRepository, LocalPhotoRepository>();
+
+            var eventAggregator = new EventAggregator();
+            eventAggregator.GetEvent<PhotoSearchRequested>().Subscribe(OnPhotoSearchRequested, ThreadOption.UIThread);
+            eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Subscribe(OnPhotoDetailsRequested, ThreadOption.UIThread);
+            eventAggregator.GetEvent<SearchByTagRequested>().Subscribe(OnSearchByTagRequested, ThreadOption.UIThread);
+            eventAggregator.GetEvent<NavigateBackToSearchResultsRequested>().Subscribe(OnNavigateBackToSearchResultsRequested, ThreadOption.UIThread);
+
+            _container.RegisterInstance<IEventAggregator>(eventAggregator);
         }
 
         private void OnPhotoSearchRequested(PhotoSearchOptions options)

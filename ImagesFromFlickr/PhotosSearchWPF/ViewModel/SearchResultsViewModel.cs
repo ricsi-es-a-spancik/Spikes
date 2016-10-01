@@ -69,7 +69,7 @@ namespace PhotosSearchWPF.ViewModel
 
         private readonly ILocalPhotoRepository _localPhotoRepository;
 
-        public SearchResultsViewModel(IEventAggregator eventAggregator)
+        public SearchResultsViewModel(IEventAggregator eventAggregator, ILocalPhotoRepository localPhotoRepository)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<DownloadPhotoRequested>().Subscribe(OnDownloadPhotoRequested);
@@ -77,7 +77,7 @@ namespace PhotosSearchWPF.ViewModel
             PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
             NextPage = new DelegateCommand(NextPageImpl);
             QueryInProgress = false;
-            _localPhotoRepository = new LocalPhotoRepository();
+            _localPhotoRepository = localPhotoRepository;
         }
 
         private void PrevPageImpl()
