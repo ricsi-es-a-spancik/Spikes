@@ -82,7 +82,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\BindableBase.cs" />
+    <Compile Include="ViewModel\BoolNegateConverter.cs" />
+    <Compile Include="ViewModel\BoolToCursorConverter.cs" />
     <Compile Include="ViewModel\BoolToVisibilityConverter.cs" />
+    <Compile Include="Model\ILocalPhotoRepository.cs" />
+    <Compile Include="Model\LocalPhotoRepository.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PhotoDetailsViewModel.cs" />
     <Compile Include="ViewModel\PhotoViewModel.cs" />

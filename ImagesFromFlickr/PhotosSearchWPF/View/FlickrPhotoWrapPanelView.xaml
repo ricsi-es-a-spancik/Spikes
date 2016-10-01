@@ -34,14 +34,19 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Margin="0,5,5,0" BorderBrush="LightGray" Width="20" Height="20">
-                                    <Image Source="../Images/add.png"/>
-                                </Button>
-                                <Button Content=" ... " VerticalAlignment="Center" Margin="0,5,5,0" Height="20" BorderBrush="LightGray"/>
-                            </StackPanel>
+                            <Button Margin="0,5,5,0" BorderBrush="LightGray" Width="20" Height="20" 
+                                    Style="{StaticResource TransparentStyle}"
+                                    Command="{Binding Download}" CommandParameter="{Binding}" HorizontalAlignment="Right"
+                                    IsEnabled="{Binding IsLocalCopyExists, Converter={StaticResource BoolNegateConverter}}"
+                                    Cursor="Hand">
+                                <Grid>
+                                <Image Source="../Images/add.png"
+                                       Visibility="{Binding IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={StaticResource True}}"/>
+                                </Grid>
+                            </Button>
 
-                            <Button Name="ThumbnailImageButton" Command="{Binding ShowPhotoDetails}" CommandParameter="{Binding}" Cursor="Hand" Width="95" Height="95" Margin="10,5,5,10" Grid.Row="1" Style="{StaticResource TransparentStyle}">
+                            <Button Name="ThumbnailImageButton" Command="{Binding ShowPhotoDetails}" CommandParameter="{Binding}" Cursor="Hand" 
+                                    Width="95" Height="95" Margin="10,5,5,10" Grid.Row="1" Style="{StaticResource TransparentStyle}">
                                 <Image Source="{Binding Photo.ThumbnailUrl, Converter={StaticResource ThumbnailImageConverter}}"/>
                             </Button>
 
@@ -49,7 +54,8 @@
                         </Grid>
                     </Border>
 
-                    <Image Source="../Images/check.png" Width="20" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                    <Image Source="../Images/check.png" Visibility="{Binding IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}}" 
+                           Width="20" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
                 </Grid>
             </DataTemplate>
         </ListBox.ItemTemplate>

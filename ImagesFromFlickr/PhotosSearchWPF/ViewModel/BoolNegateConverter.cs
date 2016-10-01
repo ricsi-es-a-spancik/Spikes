@@ -1,21 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.Windows;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace PhotosSearchWPF.ViewModel
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BoolNegateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var negateValue = parameter != null ? (bool)parameter : false;
-            var boolValue = negateValue ? !(bool)value : (bool)value;
-
-            if (boolValue)
-                return Visibility.Visible;
-
-            return Visibility.Collapsed;
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

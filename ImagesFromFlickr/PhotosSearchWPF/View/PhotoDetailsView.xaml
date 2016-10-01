@@ -46,7 +46,20 @@
                         <TextBlock Text="{Binding PhotoViewModel.Photo.License}"/>
                     </StackPanel>
 
-                    <Button Content="Open in browser" Command="{Binding OpenInBrowser}" Margin="0,20,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <Image Source="../Images/add.png" Width="20" Height="20" 
+                               Visibility="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={StaticResource True}}"/>
+
+                        <Image Source="../Images/check.png" Width="20" Height="20"
+                               Visibility="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        
+                        <Button Content="Download" Command="{Binding PhotoViewModel.Download}" CommandParameter="{Binding PhotoViewModel}" Margin="10,0,0,0" 
+                                Style="{StaticResource TransparentStyle}" 
+                                IsEnabled="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolNegateConverter}}"
+                                Cursor="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolToCursorConverter}, ConverterParameter={StaticResource True}}"/>
+                    </StackPanel>
+                    
+                    <Button Content="Open in browser" Command="{Binding OpenInBrowser}" Margin="0,10,0,0"/>
                 </StackPanel>
 
                 <Button Content="Back" Command="{Binding BackToSearchResults}" Grid.Row="2" Margin="0,10,0,0"/>

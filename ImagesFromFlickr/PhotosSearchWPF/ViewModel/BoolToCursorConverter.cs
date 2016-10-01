@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace PhotosSearchWPF.ViewModel
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BoolToCursorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -13,9 +13,9 @@ namespace PhotosSearchWPF.ViewModel
             var boolValue = negateValue ? !(bool)value : (bool)value;
 
             if (boolValue)
-                return Visibility.Visible;
+                return Cursors.Hand;
 
-            return Visibility.Collapsed;
+            return Cursors.Arrow;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,9 +1,11 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Prism.Commands;
+using PhotosSearchWPF.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PhotosSearchWPF.ViewModel
@@ -58,19 +60,22 @@ namespace PhotosSearchWPF.ViewModel
 
         public event Action<string> SearchByTagRequested;
 
-        public SearchResultsViewModel()
-        {
-            PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
-            NextPage = new DelegateCommand(NextPageImpl);
-            QueryInProgress = false;
-        }
-
         private ObservableCollection<PhotoViewModel> _photoSearchResults;
 
         public ObservableCollection<PhotoViewModel> PhotoSearchResults
         {
             get { return _photoSearchResults; }
             private set { SetProperty(ref _photoSearchResults, value); }
+        }
+
+        private readonly ILocalPhotoRepository _localPhotoRepository;
+
+        public SearchResultsViewModel()
+        {
+            PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
+            NextPage = new DelegateCommand(NextPageImpl);
+            QueryInProgress = false;
+            _localPhotoRepository = new LocalPhotoRepository();
         }
 
         private void PrevPageImpl()
@@ -112,6 +117,8 @@ namespace PhotosSearchWPF.ViewModel
                     var photoViewModel = new PhotoViewModel(p);
                     photoViewModel.PhotoDetailsRequested += OnShowPhotoDetailsRequested;
                     photoViewModel.SearchByTagRequested += OnSearchByTagRequested;
+                    photoViewModel.IsLocalCopyExists = _localPhotoRepository.IsLocalCopyExists(p).Result;
+                    photoViewModel.DownloadRequested += OnDownloadRequested;
                     return photoViewModel;
                 }).ToList();
 
@@ -128,6 +135,19 @@ namespace PhotosSearchWPF.ViewModel
         private void OnSearchByTagRequested(string tag)
         {
             SearchByTagRequested?.Invoke(tag);
+        }
+
+        private async void OnDownloadRequested(PhotoViewModel photoViewModel)
+        {
+            try
+            {
+                await _localPhotoRepository.DownloadPhoto(photoViewModel.Photo);
+                photoViewModel.IsLocalCopyExists = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Error happened while downloading photo {photoViewModel.Photo.PhotoId}");
+            }
         }
     }
 }

@@ -23,7 +23,17 @@ namespace PhotosSearchWPF.ViewModel
             set { SetProperty(ref _tagsCollection, value); }
         }
 
+        private bool _isLocalCopyExists;
+
+        public bool IsLocalCopyExists
+        {
+            get { return _isLocalCopyExists; }
+            set { SetProperty(ref _isLocalCopyExists, value); }
+        }
+
         public ICommand ShowPhotoDetails { get; private set; }
+
+        public ICommand Download { get; private set; }
 
         public PhotoViewModel(Photo photo)
         {
@@ -31,6 +41,7 @@ namespace PhotosSearchWPF.ViewModel
             TagsCollection = new TagsCollectionViewModel(Photo.Tags);
             TagsCollection.SearchByTagRequested += OnSearchByTagRequested;
             ShowPhotoDetails = new DelegateCommand<PhotoViewModel>(OnShowPhotoDetails);
+            Download = new DelegateCommand<PhotoViewModel>(OnDownload);
         }
 
         public event Action<string> SearchByTagRequested;
@@ -45,6 +56,13 @@ namespace PhotosSearchWPF.ViewModel
         private void OnShowPhotoDetails(PhotoViewModel photoViewModel)
         {
             PhotoDetailsRequested?.Invoke(photoViewModel);
+        }
+
+        public event Action<PhotoViewModel> DownloadRequested;
+
+        private void OnDownload(PhotoViewModel photoViewModel)
+        {
+            DownloadRequested?.Invoke(photoViewModel);
         }
     }
 }

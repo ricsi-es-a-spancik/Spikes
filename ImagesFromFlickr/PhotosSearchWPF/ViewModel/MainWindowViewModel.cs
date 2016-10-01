@@ -1,20 +1,18 @@
 ﻿using FlickrNet;
-using Microsoft.Practices.Prism.Commands;
-using System.Windows;
-using System.Windows.Input;
-using System;
 
 namespace PhotosSearchWPF.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : BindableBase
     {
-        public ICommand ShowPictureByUrl { get; private set; }
+        private BindableBase _currentViewModel;
 
-        public ICommand InitiateNewSearchByTag { get; private set; }
+        public BindableBase CurrentViewModel
+        {
+            get { return _currentViewModel; }
+            set { SetProperty(ref _currentViewModel, value); }
+        }
 
         public SearchOptionsViewModel SearchOptionsViewModel { get; private set; }
-
-        public BindableBase CurrentViewModel { get; private set; }
 
         private SearchResultsViewModel _searchResultsViewModel = new SearchResultsViewModel();
         private PhotoDetailsViewModel _photoDetailsViewModel = new PhotoDetailsViewModel();
@@ -28,9 +26,6 @@ namespace PhotosSearchWPF.ViewModel
             _searchResultsViewModel.SearchByTagRequested += OnSearchByTagRequested;
 
             _photoDetailsViewModel.BackToSearchResultsRequested += OnBackToSearchResultsRequested;
-            
-            ShowPictureByUrl = new DelegateCommand<string>(ShowPictureByUrlImpl);
-            InitiateNewSearchByTag = new DelegateCommand<string>(InitiateNewSearchByTagImpl);
         }
 
         private void OnSearchByTagRequested(string tag)
@@ -45,37 +40,18 @@ namespace PhotosSearchWPF.ViewModel
         {
             _photoDetailsViewModel.PhotoViewModel = photoViewModel;
             CurrentViewModel = _photoDetailsViewModel;
-            NotifyPropertyChanged(nameof(CurrentViewModel));
         }
 
         private void OnBackToSearchResultsRequested()
         {
             CurrentViewModel = _searchResultsViewModel;
-            NotifyPropertyChanged(nameof(CurrentViewModel));
         }
 
         private void OnPhotoSearchRequested(PhotoSearchOptions options)
         {
             _searchResultsViewModel.SearchOptions = options;
             CurrentViewModel = _searchResultsViewModel;
-            NotifyPropertyChanged(nameof(CurrentViewModel));
             _searchResultsViewModel.DoSearch();
-        }
-
-        private void ShowPictureByUrlImpl(string url)
-        {
-            MessageBox.Show(url);
-        }
-
-        private void InitiateNewSearchByTagImpl(string tag)
-        {
-            //SearchByTags = true;
-            //SearchByText = false;
-            //SearchCriteria = tag;
-            //NotifyPropertyChanged(nameof(SearchByTags));
-            //NotifyPropertyChanged(nameof(SearchByText));
-            //NotifyPropertyChanged(nameof(SearchCriteria));
-            //SearchImpl();
         }
     }
 }
