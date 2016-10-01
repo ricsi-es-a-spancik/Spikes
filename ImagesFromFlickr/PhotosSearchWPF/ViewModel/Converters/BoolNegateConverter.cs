@@ -1,21 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Input;
 
-namespace PhotosSearchWPF.ViewModel
+namespace PhotosSearchWPF.ViewModel.Converters
 {
-    public class BoolToCursorConverter : IValueConverter
+    public class BoolNegateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var negateValue = parameter != null ? (bool)parameter : false;
-            var boolValue = negateValue ? !(bool)value : (bool)value;
-
-            if (boolValue)
-                return Cursors.Hand;
-
-            return Cursors.Arrow;
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

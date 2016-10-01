@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace PhotosSearchWPF.ViewModel
+namespace PhotosSearchWPF.ViewModel.Converters
 {
     public class ThumbnailImageConverter : IValueConverter
     {

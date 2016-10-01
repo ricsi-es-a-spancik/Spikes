@@ -2,18 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PhotosSearchWPF"
-             xmlns:viewmodels="clr-namespace:PhotosSearchWPF.ViewModel"
+             xmlns:converters="clr-namespace:PhotosSearchWPF.ViewModel.Converters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <system:Boolean x:Key="True">True</system:Boolean>
 
-        <viewmodels:TagsConverter x:Key="TagsConverter"/>
-        <viewmodels:UrlEnabledConverter x:Key="UrlEnabledConverter"/>
-        <viewmodels:ThumbnailImageConverter x:Key="ThumbnailImageConverter"/>
-        <viewmodels:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <viewmodels:BoolToCursorConverter x:Key="BoolToCursorConverter"/>
-        <viewmodels:BoolNegateConverter x:Key="BoolNegateConverter"/>
+        <converters:UrlEnabledConverter x:Key="UrlEnabledConverter"/>
+        <converters:ThumbnailImageConverter x:Key="ThumbnailImageConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:BoolToCursorConverter x:Key="BoolToCursorConverter"/>
+        <converters:BoolNegateConverter x:Key="BoolNegateConverter"/>
         
         <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">

@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace PhotosSearchWPF.ViewModel
+namespace PhotosSearchWPF.ViewModel.Converters
 {
     public class UrlEnabledConverter : IValueConverter
     {

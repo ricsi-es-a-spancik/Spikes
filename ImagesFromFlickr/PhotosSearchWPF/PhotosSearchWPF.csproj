@@ -86,9 +86,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\BindableBase.cs" />
-    <Compile Include="ViewModel\BoolNegateConverter.cs" />
-    <Compile Include="ViewModel\BoolToCursorConverter.cs" />
-    <Compile Include="ViewModel\BoolToVisibilityConverter.cs" />
+    <Compile Include="ViewModel\Converters\BoolNegateConverter.cs" />
+    <Compile Include="ViewModel\Converters\BoolToCursorConverter.cs" />
+    <Compile Include="ViewModel\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Model\ILocalPhotoRepository.cs" />
     <Compile Include="Model\LocalPhotoRepository.cs" />
     <Compile Include="ViewModel\Events\DownloadPhotoRequested.cs" />
@@ -102,10 +102,8 @@
     <Compile Include="ViewModel\SearchOptionsViewModel.cs" />
     <Compile Include="ViewModel\SearchResultsViewModel.cs" />
     <Compile Include="ViewModel\TagsCollectionViewModel.cs" />
-    <Compile Include="ViewModel\TagsConverter.cs" />
-    <Compile Include="ViewModel\ThumbnailImageConverter.cs" />
-    <Compile Include="ViewModel\UrlEnabledConverter.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Converters\ThumbnailImageConverter.cs" />
+    <Compile Include="ViewModel\Converters\UrlEnabledConverter.cs" />
     <Compile Include="View\PhotoDetailsView.xaml.cs">
       <DependentUpon>PhotoDetailsView.xaml</DependentUpon>
     </Compile>
