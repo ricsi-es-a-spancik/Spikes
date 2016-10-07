@@ -38,8 +38,7 @@ namespace PhotosSearchWPF.ViewModel
         private void SetUpContainer()
         {
             _container = new UnityContainer();
-            _container.RegisterType<ILocalPhotoRepository, LocalPhotoRepository>();
-            _container.RegisterType<IPhotoLibraryRepository, InMemoryPhotoLibraryRepository>();
+            _container.RegisterType<IPhotoLibraryRepository, InMemoryPhotoLibraryRepository>(new ContainerControlledLifetimeManager());
 
             var eventAggregator = new EventAggregator();
             eventAggregator.GetEvent<PhotoSearchRequested>().Subscribe(OnPhotoSearchRequested, ThreadOption.UIThread);

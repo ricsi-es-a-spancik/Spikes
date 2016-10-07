@@ -1,68 +1,66 @@
 ﻿using FlickrNet;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhotosSearchWPF.Model
 {
     public class InMemoryPhotoLibraryRepository : IPhotoLibraryRepository
     {
-        private List<string> _libraries;
+        private Dictionary<string, List<string>> _libraries;
         private List<string> _lib1Photos;
         private List<string> _lib2Photos;
         private List<string> _lib3Photos;
 
         public InMemoryPhotoLibraryRepository()
         {
-            _libraries = new List<string> { "Lib1", "Lib2", "Lib3" };
-            _lib1Photos = new List<string> { "Photo_1/1", "Photo_1/2", "Photo_1/3" };
-            _lib2Photos = new List<string> { "Photo_2/1", "Photo_2/2" };
-            _lib3Photos = new List<string> { "Photo_3/1", "Photo_3/2", "Photo_3/3", "Photo_3/4", "Photo_3/5", "Photo_3/6" };
+            _libraries = new Dictionary<string, List<string>>
+            {
+                { "Lib1", new List<string> { "Photo_1/1", "Photo_1/2", "Photo_1/3" } },
+                { "Lib2", new List<string> { "Photo_2/1", "Photo_2/2" } },
+                { "Lib3", new List<string> { "Photo_3/1", "Photo_3/2", "Photo_3/3", "Photo_3/4", "Photo_3/5", "Photo_3/6" } }
+            };
         }
 
-        public async Task<List<string>> GetLibraryNames()
+        public Task<List<string>> GetLibraryNames()
         {
-            return await Task.Run(() =>
+            return Task.Run(() => _libraries.Keys.ToList());
+        }
+
+        public Task AddLibrary(string newLibraryName)
+        {
+            return Task.Run(() => _libraries.Add(newLibraryName, new List<string>()));
+        }
+
+        public Task<List<string>> GetPhotosOfLibrary(string libraryName)
+        {
+            return Task.Run(() =>
             {
-                return _libraries;
+                if (_libraries.ContainsKey(libraryName))
+                    return _libraries[libraryName];
+
+                throw new ArgumentException($"Couldn't find library in repository: {libraryName}");
             });
         }
 
-        public async Task AddLibrary(string newLibraryName)
+        public Task DownloadPhotoFromUrlToLibrary(Photo photo, string libraryName)
         {
-            await Task.Run(() => _libraries.Add(newLibraryName));
-        }
-
-        public async Task<List<string>> GetPhotosOfLibrary(string libraryName)
-        {
-            return await Task.Run(() =>
+            return Task.Run(() =>
             {
-                switch (libraryName)
+                if (_libraries.ContainsKey(libraryName))
                 {
-                    case "Lib1": return _lib1Photos;
-                    case "Lib2": return _lib2Photos;
-                    case "Lib3": return _lib3Photos;
+                    _libraries[libraryName].Add(photo.PhotoId);
+                    return;
                 }
 
-                return new List<string>();
+                throw new ArgumentException($"Library name not recognized: {libraryName}");
             });
         }
 
-        public async Task DownloadPhotoFromUrlToLibrary(Photo photo, string libraryName)
+        public Task DeleteLibrary(string libraryName)
         {
-            await Task.Run(() =>
-            {
-                switch (libraryName)
-                {
-                    case "Lib1": _lib1Photos.Add(photo.PhotoId);
-                        break;
-                    case "Lib2": _lib2Photos.Add(photo.PhotoId);
-                        break;
-                    case "Lib3": _lib3Photos.Add(photo.PhotoId);
-                        break;
-                    default: throw new ArgumentException($"Library name not recognized: {libraryName}");
-                }
-            });
+            return Task.Run(() => _libraries.Remove(libraryName));
         }
     }
 }

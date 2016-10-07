@@ -13,5 +13,7 @@ namespace PhotosSearchWPF.Model
         Task<List<string>> GetPhotosOfLibrary(string libraryName);
 
         Task DownloadPhotoFromUrlToLibrary(Photo photo, string libraryName);
+
+        Task DeleteLibrary(string libraryName);
     }
 }

@@ -1,21 +1,18 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Prism.Commands;
 using PhotosSearchWPF.Model;
-using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace PhotosSearchWPF.ViewModel
 {
     public class SearchResultsViewModel : BindableBase
     {
-        private IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IPhotoLibraryRepository _photoLibraryRepository;
         private readonly Flickr _flickr = new Flickr("86d7596ef5548c8a082e8f4c45b47614", "383a46399c655e00");
 
         private int _pageNumber;
@@ -68,17 +65,14 @@ namespace PhotosSearchWPF.ViewModel
             private set { SetProperty(ref _photoSearchResults, value); }
         }
 
-        private readonly ILocalPhotoRepository _localPhotoRepository;
-
-        public SearchResultsViewModel(IEventAggregator eventAggregator, ILocalPhotoRepository localPhotoRepository)
+        public SearchResultsViewModel(IEventAggregator eventAggregator, IPhotoLibraryRepository photoLibraryRepository)
         {
             _eventAggregator = eventAggregator;
-            //_eventAggregator.GetEvent<DownloadPhotoRequested>().Subscribe(OnDownloadPhotoRequested);
+            _photoLibraryRepository = photoLibraryRepository;
 
             PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
             NextPage = new DelegateCommand(NextPageImpl);
             QueryInProgress = false;
-            _localPhotoRepository = localPhotoRepository;
         }
 
         private void PrevPageImpl()
@@ -117,8 +111,7 @@ namespace PhotosSearchWPF.ViewModel
 
                 var photoViewModels = _flickr.PhotosSearch(SearchOptions).Select(p =>
                 {
-                    var photoViewModel = new PhotoViewModel(_eventAggregator, p);
-                    photoViewModel.IsLocalCopyExists = _localPhotoRepository.IsLocalCopyExists(p).Result;
+                    var photoViewModel = new PhotoViewModel(_eventAggregator, _photoLibraryRepository, p);
                     return photoViewModel;
                 }).ToList();
 

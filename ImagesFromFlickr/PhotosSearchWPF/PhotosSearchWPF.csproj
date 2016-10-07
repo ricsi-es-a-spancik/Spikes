@@ -118,12 +118,12 @@
     <Compile Include="ViewModel\Converters\BoolNegateConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToCursorConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Model\ILocalPhotoRepository.cs" />
-    <Compile Include="Model\LocalPhotoRepository.cs" />
     <Compile Include="ViewModel\Converters\IsExpandedFlagToFolderImageConverter.cs" />
+    <Compile Include="ViewModel\Events\PhotoLibraryDeletedEvent.cs" />
     <Compile Include="ViewModel\Events\DownloadPhotoRequested.cs" />
     <Compile Include="ViewModel\Events\DownloadRequestParameters.cs" />
     <Compile Include="ViewModel\Events\NavigateBackToSearchResultsRequested.cs" />
+    <Compile Include="ViewModel\Events\PhotoLibraryAddedEvent.cs" />
     <Compile Include="ViewModel\Events\PhotoSearchRequested.cs" />
     <Compile Include="ViewModel\Events\SearchByTagRequested.cs" />
     <Compile Include="ViewModel\Events\ShowPhotoDetailsRequested.cs" />
@@ -137,6 +137,9 @@
     <Compile Include="ViewModel\TagsCollectionViewModel.cs" />
     <Compile Include="ViewModel\Converters\ThumbnailImageConverter.cs" />
     <Compile Include="ViewModel\Converters\UrlEnabledConverter.cs" />
+    <Compile Include="View\AddToLibraryButton.xaml.cs">
+      <DependentUpon>AddToLibraryButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LibrariesView.xaml.cs">
       <DependentUpon>LibrariesView.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
     <Compile Include="View\TagsCollectionView.xaml.cs">
       <DependentUpon>TagsCollectionView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddToLibraryButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FlickrPhotoWrapPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -267,6 +274,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\Cancel_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\Refresh_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\CollapseGroup_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\ExpandAll_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
