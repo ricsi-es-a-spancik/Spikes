@@ -13,6 +13,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:BoolToCursorConverter x:Key="BoolToCursorConverter"/>
         <converters:BoolNegateConverter x:Key="BoolNegateConverter"/>
+        <converters:IsExpandedFlagToFolderImageConverter x:Key="IsExpandedFlagToFolderImageConverter"/>
         
         <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">

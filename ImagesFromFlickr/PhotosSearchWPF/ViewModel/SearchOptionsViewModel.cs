@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.Prism.Commands;
-using System;
 using FlickrNet;
 using Prism.Events;
 using PhotosSearchWPF.ViewModel.Events;

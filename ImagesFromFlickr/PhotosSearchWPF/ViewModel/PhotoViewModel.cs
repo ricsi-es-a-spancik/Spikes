@@ -3,6 +3,7 @@ using Microsoft.Practices.Prism.Commands;
 using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PhotosSearchWPF.ViewModel
@@ -36,7 +37,15 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand ShowPhotoDetails { get; private set; }
 
-        public ICommand DownloadPhoto { get; private set; }
+        public ICommand DownloadToLibrary { get; private set; }
+
+        private ObservableCollection<string> _libraries;
+
+        public ObservableCollection<string> Libraries
+        {
+            get { return _libraries; }
+            set { SetProperty(ref _libraries, value); }
+        }
 
         public PhotoViewModel(IEventAggregator eventAggregator, Photo photo)
         {
@@ -44,7 +53,8 @@ namespace PhotosSearchWPF.ViewModel
             Photo = photo;
             TagsCollection = new TagsCollectionViewModel(eventAggregator, Photo.Tags);
             ShowPhotoDetails = new DelegateCommand<PhotoViewModel>(OnShowPhotoDetails);
-            DownloadPhoto = new DelegateCommand<PhotoViewModel>(OnDownloadPhoto);
+            DownloadToLibrary = new DelegateCommand<string>(OnDownloadToLibrary);
+            Libraries = new ObservableCollection<string> { "Lib1", "Lib2", "Lib3" };
         }
 
         private void OnShowPhotoDetails(PhotoViewModel photoViewModel)
@@ -52,9 +62,9 @@ namespace PhotosSearchWPF.ViewModel
             _eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Publish(photoViewModel);
         }
 
-        private void OnDownloadPhoto(PhotoViewModel photoViewModel)
+        private void OnDownloadToLibrary(string library)
         {
-            _eventAggregator.GetEvent<DownloadPhotoRequested>().Publish(photoViewModel);
+            _eventAggregator.GetEvent<DownloadPhotoRequested>().Publish(new DownloadRequestParameters { PhotoViewModel = this, TargetLibrary = library });
         }
     }
 }

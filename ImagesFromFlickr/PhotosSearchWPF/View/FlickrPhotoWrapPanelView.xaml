@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PhotosSearchWPF.View"
              xmlns:viewmodels="clr-namespace:PhotosSearchWPF.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <ListBox x:Name="ResultsWrapPanel" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SearchResults}" Margin="0,10,0,0" 
+    <ListBox x:Name="ResultsWrapPanel" ItemsSource="{Binding PhotoSearchResults}" Margin="0,10,0,0" 
              Background="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Top">
         
         <ListBox.ItemsPanel>
@@ -34,15 +37,47 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Button Margin="0,5,5,0" BorderBrush="LightGray" Width="20" Height="20" 
-                                    Style="{StaticResource TransparentStyle}"
-                                    Command="{Binding DownloadPhoto}" CommandParameter="{Binding}" HorizontalAlignment="Right"
-                                    IsEnabled="{Binding IsLocalCopyExists, Converter={StaticResource BoolNegateConverter}}"
-                                    Cursor="Hand">
-                                <Grid>
-                                <Image Source="../Images/add.png"
-                                       Visibility="{Binding IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={StaticResource True}}"/>
-                                </Grid>
+                            <!--Command="{Binding DownloadPhoto}" CommandParameter="{Binding}"-->
+                            <!--Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"-->
+                            <Button x:Name="addButton" Margin="0,5,5,0" Width="16" Height="16"
+                                        Style="{StaticResource TransparentStyle}"
+                                        HorizontalAlignment="Right"
+                                        
+                                        IsEnabled="{Binding IsLocalCopyExists, Converter={StaticResource BoolNegateConverter}}"
+                                        Cursor="Hand">
+                                
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <ei:ChangePropertyAction TargetObject="{Binding ContextMenu, ElementName=addButton}" PropertyName="PlacementTarget" Value="{Binding ElementName=addButton, Mode=OneWay}"/>
+                                        <ei:ChangePropertyAction TargetObject="{Binding ContextMenu, ElementName=addButton}" PropertyName="IsOpen" Value="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <Button.ContextMenu>
+                                    <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}" 
+                                                 ItemsSource="{Binding DataContext.Libraries}">
+                                        <ContextMenu.Resources>
+                                            <Image x:Key="FolderIcon" Source="../Images/Icons/Folder_grey_16x.png" x:Shared="false"/>
+                                        </ContextMenu.Resources>
+                                        <ContextMenu.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type system:String}">
+                                                <TextBlock Text="{Binding}"/>
+                                            </DataTemplate>
+                                        </ContextMenu.ItemTemplate>
+                                        <ContextMenu.ItemContainerStyle>
+                                            <Style TargetType="{x:Type MenuItem}">
+                                                <Setter Property="Command" Value="{Binding DataContext.DownloadToLibrary, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
+                                                <Setter Property="CommandParameter" Value="{Binding}"/>
+                                                <Setter Property="Icon" Value="{StaticResource FolderIcon}"/> 
+                                            </Style>
+                                        </ContextMenu.ItemContainerStyle>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+
+                                <Image Source="../Images/Icons/Add_16x.png"
+                                           Visibility="{Binding IsLocalCopyExists, 
+                                                                Converter={StaticResource BoolToVisibilityConverter}, 
+                                                                ConverterParameter={StaticResource True}}"/>
                             </Button>
 
                             <Button Name="ThumbnailImageButton" Command="{Binding ShowPhotoDetails}" CommandParameter="{Binding}" Cursor="Hand" 

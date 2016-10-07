@@ -4,6 +4,7 @@ using PhotosSearchWPF.Model;
 using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -72,7 +73,7 @@ namespace PhotosSearchWPF.ViewModel
         public SearchResultsViewModel(IEventAggregator eventAggregator, ILocalPhotoRepository localPhotoRepository)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<DownloadPhotoRequested>().Subscribe(OnDownloadPhotoRequested);
+            //_eventAggregator.GetEvent<DownloadPhotoRequested>().Subscribe(OnDownloadPhotoRequested);
 
             PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
             NextPage = new DelegateCommand(NextPageImpl);
@@ -126,17 +127,17 @@ namespace PhotosSearchWPF.ViewModel
             });
         }
 
-        private async void OnDownloadPhotoRequested(PhotoViewModel photoViewModel)
-        {
-            try
-            {
-                await _localPhotoRepository.DownloadPhoto(photoViewModel.Photo);
-                photoViewModel.IsLocalCopyExists = true;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show($"Error happened while downloading photo {photoViewModel.Photo.PhotoId}");
-            }
-        }
+        //private async void OnDownloadPhotoRequested(PhotoViewModel photoViewModel)
+        //{
+        //    try
+        //    {
+        //        await _localPhotoRepository.DownloadPhoto(photoViewModel.Photo);
+        //        photoViewModel.IsLocalCopyExists = true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MessageBox.Show($"Error happened while downloading photo {photoViewModel.Photo.PhotoId}");
+        //    }
+        //}
     }
 }
