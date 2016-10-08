@@ -47,16 +47,9 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                        <Image Source="../Images/add.png" Width="20" Height="20" 
-                               Visibility="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={StaticResource True}}"/>
+                        <local:AddToLibraryButton DataContext="{Binding PhotoViewModel}" Margin="0,5,0,0"/>
 
-                        <Image Source="../Images/check.png" Width="20" Height="20"
-                               Visibility="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-                        <Button Content="Download" Command="{Binding PhotoViewModel.DownloadPhoto}" CommandParameter="{Binding PhotoViewModel}" Margin="10,0,0,0" 
-                                Style="{StaticResource TransparentStyle}" 
-                                IsEnabled="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolNegateConverter}}"
-                                Cursor="{Binding PhotoViewModel.IsLocalCopyExists, Converter={StaticResource BoolToCursorConverter}, ConverterParameter={StaticResource True}}"/>
+                        <Label Content="Download"/>
                     </StackPanel>
                     
                     <Button Content="Open in browser" Command="{Binding OpenInBrowser}" Margin="0,10,0,0"/>

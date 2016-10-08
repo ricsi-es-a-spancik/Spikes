@@ -2,7 +2,7 @@
 
 namespace PhotosSearchWPF.ViewModel.Events
 {
-    public class DownloadPhotoRequested : PubSubEvent<DownloadRequestParameters>
+    public class PhotoLibraryDeletedEvent : PubSubEvent<string>
     {
     }
 }

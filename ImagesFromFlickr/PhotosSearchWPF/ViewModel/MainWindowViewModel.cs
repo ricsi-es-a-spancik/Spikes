@@ -20,6 +20,8 @@ namespace PhotosSearchWPF.ViewModel
 
         public SearchOptionsViewModel SearchOptionsViewModel { get; private set; }
 
+        public LibrariesViewModel LibrariesViewModel { get; private set; }
+
         private SearchResultsViewModel _searchResultsViewModel;
         private PhotoDetailsViewModel _photoDetailsViewModel;
 
@@ -28,6 +30,7 @@ namespace PhotosSearchWPF.ViewModel
             SetUpContainer();
 
             SearchOptionsViewModel = _container.Resolve<SearchOptionsViewModel>();
+            LibrariesViewModel = _container.Resolve<LibrariesViewModel>();
             _searchResultsViewModel = _container.Resolve<SearchResultsViewModel>();
             _photoDetailsViewModel = _container.Resolve<PhotoDetailsViewModel>();
         }
@@ -35,7 +38,7 @@ namespace PhotosSearchWPF.ViewModel
         private void SetUpContainer()
         {
             _container = new UnityContainer();
-            _container.RegisterType<ILocalPhotoRepository, LocalPhotoRepository>();
+            _container.RegisterType<IPhotoLibraryRepository, InMemoryPhotoLibraryRepository>(new ContainerControlledLifetimeManager());
 
             var eventAggregator = new EventAggregator();
             eventAggregator.GetEvent<PhotoSearchRequested>().Subscribe(OnPhotoSearchRequested, ThreadOption.UIThread);

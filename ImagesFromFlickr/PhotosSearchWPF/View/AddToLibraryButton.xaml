@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="PhotosSearchWPF.View.AddToLibraryButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhotosSearchWPF.View"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Button x:Name="addButton" Width="16" Height="16"
+            Style="{StaticResource TransparentStyle}" HorizontalAlignment="Right" Cursor="Hand">
+
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+                <ei:ChangePropertyAction TargetObject="{Binding ContextMenu, ElementName=addButton}" PropertyName="PlacementTarget" Value="{Binding ElementName=addButton, Mode=OneWay}"/>
+                <ei:ChangePropertyAction TargetObject="{Binding ContextMenu, ElementName=addButton}" PropertyName="IsOpen" Value="True"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
+        <Button.ContextMenu>
+            <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}" 
+                         ItemsSource="{Binding DataContext.Libraries}">
+                <ContextMenu.Resources>
+                    <Image x:Key="FolderIcon" Source="../Images/Icons/Folder_grey_16x.png" x:Shared="false"/>
+                </ContextMenu.Resources>
+                <ContextMenu.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type system:String}">
+                        <TextBlock Text="{Binding}"/>
+                    </HierarchicalDataTemplate>
+                </ContextMenu.ItemTemplate>
+                <ContextMenu.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Command" Value="{Binding DataContext.DownloadToLibrary, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="Icon" Value="{StaticResource FolderIcon}"/>
+                    </Style>
+                </ContextMenu.ItemContainerStyle>
+            </ContextMenu>
+        </Button.ContextMenu>
+
+        <Image Source="../Images/Icons/Add_16x.png"
+                                           Visibility="{Binding IsLocalCopyExists, 
+                                                                Converter={StaticResource BoolToVisibilityConverter}, 
+                                                                ConverterParameter={StaticResource True}}"/>
+    </Button>
+</UserControl>
