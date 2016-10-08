@@ -21,8 +21,9 @@ namespace LiteDBConsoleApp
                   .Index(x => x.OrderDate);              // Index this field
 
             // open db
-            var dbName = $"orders-{Guid.NewGuid().ToString()}.db";
-            using (var db = new LiteDatabase($@"Data/{dbName}"))
+            //var dbName = $"orders-{Guid.NewGuid().ToString()}.db";
+            //using (var db = new LiteDatabase($@"Data/{dbName}"))
+            using (var db = new OrdersContext())
             {
                 Console.WriteLine("Adding document to database...");
 
