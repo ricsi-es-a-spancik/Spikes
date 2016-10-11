@@ -43,6 +43,10 @@
       <HintPath>..\packages\FlickrNet.3.22.0\lib\net20\FlickrNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LiteDB, Version=2.0.2.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.2.0.2\lib\net35\LiteDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
@@ -85,6 +89,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -112,25 +117,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\InMemoryPhotoLibraryRepository.cs" />
-    <Compile Include="Model\IPhotoLibraryRepository.cs" />
+    <Compile Include="Data\ImageLibraryContext.cs" />
+    <Compile Include="Data\ImageLibraryContextExtensions.cs" />
+    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\Library.cs" />
+    <Compile Include="Services\FileSystem.cs" />
+    <Compile Include="Services\IFileSystem.cs" />
+    <Compile Include="Services\IImageLibraryRepository.cs" />
+    <Compile Include="Services\ILibraryManager.cs" />
+    <Compile Include="Services\ImageLibraryRepository.cs" />
+    <Compile Include="Services\IWebClient.cs" />
+    <Compile Include="Services\LibraryManager.cs" />
+    <Compile Include="Services\WebClient.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="ViewModel\Converters\BoolNegateConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToCursorConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="ViewModel\Converters\IsExpandedFlagToFolderImageConverter.cs" />
-    <Compile Include="ViewModel\Events\PhotoLibraryDeletedEvent.cs" />
+    <Compile Include="ViewModel\Converters\LibraryToFolderIconMultiValueConverter.cs" />
+    <Compile Include="ViewModel\Events\DeleteImageLibraryRequested.cs" />
     <Compile Include="ViewModel\Events\DownloadPhotoRequested.cs" />
     <Compile Include="ViewModel\Events\DownloadRequestParameters.cs" />
     <Compile Include="ViewModel\Events\NavigateBackToSearchResultsRequested.cs" />
-    <Compile Include="ViewModel\Events\PhotoLibraryAddedEvent.cs" />
+    <Compile Include="ViewModel\Events\AddImageLibraryRequested.cs" />
     <Compile Include="ViewModel\Events\PhotoSearchRequested.cs" />
     <Compile Include="ViewModel\Events\SearchByTagRequested.cs" />
     <Compile Include="ViewModel\Events\ShowPhotoDetailsRequested.cs" />
     <Compile Include="ViewModel\LibrariesViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PhotoDetailsViewModel.cs" />
-    <Compile Include="ViewModel\PhotoLibraryViewModel.cs" />
+    <Compile Include="ViewModel\ImageLibraryViewModel.cs" />
     <Compile Include="ViewModel\PhotoViewModel.cs" />
     <Compile Include="ViewModel\SearchOptionsViewModel.cs" />
     <Compile Include="ViewModel\SearchResultsViewModel.cs" />
@@ -258,11 +273,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Icons\FolderOpen_exp_16x.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Icons\Folder_grey_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -289,6 +299,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\ExpandAll_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\Folder_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\FolderOpen_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\FolderWarning_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Prism.Commands;
-using PhotosSearchWPF.Model;
+using PhotosSearchWPF.Services;
 using Prism.Events;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace PhotosSearchWPF.ViewModel
     public class SearchResultsViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IPhotoLibraryRepository _photoLibraryRepository;
+        private readonly ILibraryManager _libraryManager;
         private readonly Flickr _flickr = new Flickr("86d7596ef5548c8a082e8f4c45b47614", "383a46399c655e00");
 
         private int _pageNumber;
@@ -65,10 +65,10 @@ namespace PhotosSearchWPF.ViewModel
             private set { SetProperty(ref _photoSearchResults, value); }
         }
 
-        public SearchResultsViewModel(IEventAggregator eventAggregator, IPhotoLibraryRepository photoLibraryRepository)
+        public SearchResultsViewModel(IEventAggregator eventAggregator, ILibraryManager libraryManager)
         {
             _eventAggregator = eventAggregator;
-            _photoLibraryRepository = photoLibraryRepository;
+            _libraryManager = libraryManager;
 
             PrevPage = new DelegateCommand(PrevPageImpl, () => PageNumber > 1);
             NextPage = new DelegateCommand(NextPageImpl);
@@ -111,7 +111,7 @@ namespace PhotosSearchWPF.ViewModel
 
                 var photoViewModels = _flickr.PhotosSearch(SearchOptions).Select(p =>
                 {
-                    var photoViewModel = new PhotoViewModel(_eventAggregator, _photoLibraryRepository, p);
+                    var photoViewModel = new PhotoViewModel(_eventAggregator, _libraryManager, p);
                     return photoViewModel;
                 }).ToList();
 
@@ -119,18 +119,5 @@ namespace PhotosSearchWPF.ViewModel
                 QueryInProgress = false;
             });
         }
-
-        //private async void OnDownloadPhotoRequested(PhotoViewModel photoViewModel)
-        //{
-        //    try
-        //    {
-        //        await _localPhotoRepository.DownloadPhoto(photoViewModel.Photo);
-        //        photoViewModel.IsLocalCopyExists = true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show($"Error happened while downloading photo {photoViewModel.Photo.PhotoId}");
-        //    }
-        //}
     }
 }

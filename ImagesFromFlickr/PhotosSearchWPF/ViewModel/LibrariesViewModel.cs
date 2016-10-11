@@ -1,19 +1,22 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Prism.Events;
-using PhotosSearchWPF.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using PhotosSearchWPF.ViewModel.Events;
 using System.Windows.Input;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using PhotosSearchWPF.Services;
+using PhotosSearchWPF.Model;
+using System.IO;
 
 namespace PhotosSearchWPF.ViewModel
 {
     public class LibrariesViewModel : BindableBase
     {
+        private const string LIBRARIES_FOLDER_PATH = "Libraries";
+
         private IEventAggregator _eventAggregator;
-        private IPhotoLibraryRepository _photoLibraryRepository;
+        private ILibraryManager _libraryManager;
 
         private string _newLibraryName;
 
@@ -37,51 +40,59 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand DeleteLibrary { get; private set; }
 
-        public ObservableCollection<PhotoLibraryViewModel> _photoLibraryViewModels;
+        public ObservableCollection<ImageLibraryViewModel> _photoLibraryViewModels;
 
-        public ObservableCollection<PhotoLibraryViewModel> PhotoLibraryViewModels
+        public ObservableCollection<ImageLibraryViewModel> PhotoLibraryViewModels
         {
             get { return _photoLibraryViewModels; }
             set { SetProperty(ref _photoLibraryViewModels, value); }
         }
 
-        public LibrariesViewModel(IEventAggregator eventAggregator, IPhotoLibraryRepository photoLibraryRepository)
+        public LibrariesViewModel(IEventAggregator eventAggregator, ILibraryManager libraryManager)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<DownloadPhotoRequested>().Subscribe(OnDownloadPhotoRequested);
 
-            _photoLibraryRepository = photoLibraryRepository;
+            _libraryManager = libraryManager;
 
             CreateNewLibrary = new DelegateCommand(OnCreateNewLibrary, () => !string.IsNullOrEmpty(NewLibraryName));
             RefreshLibraries = new DelegateCommand(RefreshLibrariesImpl);
             ExpandAll = new DelegateCommand(OnExpandAll);
             CollapseAll = new DelegateCommand(OnCollapseAll);
-            DeleteLibrary = new DelegateCommand<PhotoLibraryViewModel>(OnDeleteLibrary);
+            DeleteLibrary = new DelegateCommand<ImageLibraryViewModel>(OnDeleteLibrary);
 
+            PhotoLibraryViewModels = new ObservableCollection<ImageLibraryViewModel>();
             RefreshLibrariesImpl();
         }
 
-        private async void OnCreateNewLibrary()
+        private void OnCreateNewLibrary()
         {
-            await _photoLibraryRepository.AddLibrary(NewLibraryName);
-            PhotoLibraryViewModels.Add(new PhotoLibraryViewModel(NewLibraryName, new List<string>()));
-            _eventAggregator.GetEvent<PhotoLibraryAddedEvent>().Publish(NewLibraryName);
+            var newLibrary = new Library
+            {
+                DirectoryPath = Path.Combine(LIBRARIES_FOLDER_PATH, NewLibraryName),
+                Name = NewLibraryName,
+                Images = new List<Image>()
+            };
+
+             var libraryAdded = _libraryManager.AddLibrary(newLibrary);
+
+            PhotoLibraryViewModels.Add(new ImageLibraryViewModel(libraryAdded));
+            _eventAggregator.GetEvent<AddImageLibraryRequested>().Publish(libraryAdded);
             NewLibraryName = string.Empty;
         }
 
-        private async void RefreshLibrariesImpl()
+        private void RefreshLibrariesImpl()
         {
-            var newLibraries = (await _photoLibraryRepository.GetLibraryNames()).Select(async name =>
-                new PhotoLibraryViewModel(name, await _photoLibraryRepository.GetPhotosOfLibrary(name)));
-
-            PhotoLibraryViewModels = new ObservableCollection<PhotoLibraryViewModel>(await Task.WhenAll(newLibraries));
+            var newLibraries = (_libraryManager.GetLibraries()).Select(lib => new ImageLibraryViewModel(lib));
+            PhotoLibraryViewModels.Clear();
+            PhotoLibraryViewModels.AddRange(newLibraries);
         }
 
-        private async void OnDownloadPhotoRequested(DownloadRequestParameters parameters)
+        private void OnDownloadPhotoRequested(DownloadRequestParameters parameters)
         {
-            await _photoLibraryRepository.DownloadPhotoFromUrlToLibrary(parameters.PhotoViewModel.Photo, parameters.TargetLibrary);
-            var photoViewModel = PhotoLibraryViewModels.FirstOrDefault(vm => vm.Name == parameters.TargetLibrary);
-            photoViewModel?.PhotoNames?.Add(parameters.PhotoViewModel.Photo.PhotoId);
+            var imageAdded = _libraryManager.DownloadImageToLibrary(parameters.PhotoViewModel.Photo.SmallUrl, $"{parameters.PhotoViewModel.Photo.PhotoId}.jpg", parameters.TargetLibrary);
+            var vm = PhotoLibraryViewModels.First(libvm => libvm.Library.Name == parameters.TargetLibrary.Name);
+            vm.Images.Add(imageAdded);
         }
 
         private void OnExpandAll()
@@ -96,11 +107,11 @@ namespace PhotosSearchWPF.ViewModel
                 vm.IsExpanded = false;
         }
 
-        private async void OnDeleteLibrary(PhotoLibraryViewModel photoLibraryViewModel)
+        private void OnDeleteLibrary(ImageLibraryViewModel photoLibraryViewModel)
         {
-            await _photoLibraryRepository.DeleteLibrary(photoLibraryViewModel.Name);
+            _libraryManager.RemoveLibrary(photoLibraryViewModel.Library);
             PhotoLibraryViewModels.Remove(photoLibraryViewModel);
-            _eventAggregator.GetEvent<PhotoLibraryDeletedEvent>().Publish(photoLibraryViewModel.Name);
+            _eventAggregator.GetEvent<DeleteImageLibraryRequested>().Publish(photoLibraryViewModel.Library);
         }
     }
 }

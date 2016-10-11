@@ -1,6 +1,7 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Unity;
 using PhotosSearchWPF.Model;
+using PhotosSearchWPF.Services;
 using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
 
@@ -38,7 +39,11 @@ namespace PhotosSearchWPF.ViewModel
         private void SetUpContainer()
         {
             _container = new UnityContainer();
-            _container.RegisterType<IPhotoLibraryRepository, InMemoryPhotoLibraryRepository>(new ContainerControlledLifetimeManager());
+
+            _container.RegisterType<IFileSystem, FileSystem>();
+            _container.RegisterType<IWebClient, WebClient>();
+            _container.RegisterType<IImageLibraryRepository, ImageLibraryRepository>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ILibraryManager, LibraryManager>();
 
             var eventAggregator = new EventAggregator();
             eventAggregator.GetEvent<PhotoSearchRequested>().Subscribe(OnPhotoSearchRequested, ThreadOption.UIThread);

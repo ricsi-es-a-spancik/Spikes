@@ -1,9 +1,11 @@
-﻿namespace PhotosSearchWPF.ViewModel.Events
+﻿using PhotosSearchWPF.Model;
+
+namespace PhotosSearchWPF.ViewModel.Events
 {
     public class DownloadRequestParameters
     {
         public PhotoViewModel PhotoViewModel { get; set; }
 
-        public string TargetLibrary { get; set; }
+        public Library TargetLibrary { get; set; }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PhotosSearchWPF.View"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:model="clr-namespace:PhotosSearchWPF.Model"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -27,9 +27,9 @@
                     <Image x:Key="FolderIcon" Source="../Images/Icons/Folder_grey_16x.png" x:Shared="false"/>
                 </ContextMenu.Resources>
                 <ContextMenu.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type system:String}">
-                        <TextBlock Text="{Binding}"/>
-                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type model:Library}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
                 </ContextMenu.ItemTemplate>
                 <ContextMenu.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PhotosSearchWPF.View"
              xmlns:viewModels="clr-namespace:PhotosSearchWPF.ViewModel"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:model="clr-namespace:PhotosSearchWPF.Model"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -46,7 +46,7 @@
             <ScrollViewer Grid.Row="2" Margin="0,10,0,0">
                 <ItemsControl ItemsSource="{Binding PhotoLibraryViewModels}">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:PhotoLibraryViewModel}">
+                        <DataTemplate DataType="{x:Type viewModels:ImageLibraryViewModel}">
                             <TreeViewItem IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
                                 <TreeViewItem.Header>
                                     <StackPanel Orientation="Horizontal"
@@ -62,18 +62,24 @@
                                                 </MenuItem>
                                             </ContextMenu>
                                         </StackPanel.ContextMenu>
-                                        
-                                        <Image Source="{Binding (TreeViewItem.IsExpanded), 
-                                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}},
-                                                        Converter={StaticResource ResourceKey=IsExpandedFlagToFolderImageConverter}}"/>
-                                        <Label Content="{Binding Name}"/>
+
+                                        <Image>
+                                            <Image.Source>
+                                                <MultiBinding Converter="{StaticResource LibraryToFolderIconMultiValueConverter}">
+                                                    <Binding Path="(TreeViewItem.IsExpanded)" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}"/>
+                                                    <Binding Path="DataContext.Library.ExistsOnDisk" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}"/>
+                                                </MultiBinding>
+                                            </Image.Source>
+                                        </Image>
+
+                                        <Label Content="{Binding Library.Name}"/>
                                     </StackPanel>
                                 </TreeViewItem.Header>
 
-                                <ItemsControl ItemsSource="{Binding PhotoNames}">
+                                <ItemsControl ItemsSource="{Binding Images}">
                                     <ItemsControl.ItemTemplate>
-                                        <DataTemplate DataType="{x:Type system:String}">
-                                            <TreeViewItem Header="{Binding}" Margin="-20,0,0,0"/>
+                                        <DataTemplate DataType="{x:Type Image}">
+                                            <TextBlock Text="{Binding Name}"/>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

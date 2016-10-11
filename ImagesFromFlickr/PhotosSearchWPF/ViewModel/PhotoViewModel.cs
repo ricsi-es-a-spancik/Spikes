@@ -1,9 +1,11 @@
 ﻿using FlickrNet;
 using Microsoft.Practices.Prism.Commands;
 using PhotosSearchWPF.Model;
+using PhotosSearchWPF.Services;
 using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace PhotosSearchWPF.ViewModel
@@ -11,7 +13,7 @@ namespace PhotosSearchWPF.ViewModel
     public class PhotoViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IPhotoLibraryRepository _photoLibraryRepository;
+        private readonly ILibraryManager _libraryManager;
         private Photo _photo;
 
         public Photo Photo
@@ -32,37 +34,37 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand DownloadToLibrary { get; private set; }
 
-        private ObservableCollection<string> _libraries;
+        private ObservableCollection<Library> _libraries;
 
-        public ObservableCollection<string> Libraries
+        public ObservableCollection<Library> Libraries
         {
             get { return _libraries; }
         }
 
-        public PhotoViewModel(IEventAggregator eventAggregator, IPhotoLibraryRepository photoLibraryRepository, Photo photo)
+        public PhotoViewModel(IEventAggregator eventAggregator, ILibraryManager libraryManager, Photo photo)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<PhotoLibraryAddedEvent>().Subscribe(OnPhotoLibraryAddedEvent);
-            _eventAggregator.GetEvent<PhotoLibraryDeletedEvent>().Subscribe(OnPhotoLibraryDeletedEvent);
+            _eventAggregator.GetEvent<AddImageLibraryRequested>().Subscribe(OnAddImageLibraryRequested);
+            _eventAggregator.GetEvent<DeleteImageLibraryRequested>().Subscribe(OnDeleteImageLibraryRequested);
 
-            _photoLibraryRepository = photoLibraryRepository;
+            _libraryManager = libraryManager;
             Photo = photo;
 
             TagsCollection = new TagsCollectionViewModel(eventAggregator, Photo.Tags);
             ShowPhotoDetails = new DelegateCommand<PhotoViewModel>(OnShowPhotoDetails);
-            DownloadToLibrary = new DelegateCommand<string>(OnDownloadToLibrary);
+            DownloadToLibrary = new DelegateCommand<Library>(OnDownloadToLibrary);
 
-            _libraries = new ObservableCollection<string>(_photoLibraryRepository.GetLibraryNames().Result);
+            _libraries = new ObservableCollection<Library>(_libraryManager.GetLibraries());
         }
 
-        private void OnPhotoLibraryAddedEvent(string libraryName)
+        private void OnAddImageLibraryRequested(Library library)
         {
-            Libraries.Add(libraryName);
+            Libraries.Add(library);
         }
 
-        private void OnPhotoLibraryDeletedEvent(string libraryName)
+        private void OnDeleteImageLibraryRequested(Library library)
         {
-            Libraries.Remove(libraryName);
+            Libraries.Remove(library);
         }
 
         private void OnShowPhotoDetails(PhotoViewModel photoViewModel)
@@ -70,7 +72,7 @@ namespace PhotosSearchWPF.ViewModel
             _eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Publish(photoViewModel);
         }
 
-        private void OnDownloadToLibrary(string library)
+        private void OnDownloadToLibrary(Library library)
         {
             _eventAggregator.GetEvent<DownloadPhotoRequested>().Publish(new DownloadRequestParameters { PhotoViewModel = this, TargetLibrary = library });
         }
