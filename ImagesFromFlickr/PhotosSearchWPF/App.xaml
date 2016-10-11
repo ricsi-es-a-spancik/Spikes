@@ -14,6 +14,7 @@
         <converters:BoolToCursorConverter x:Key="BoolToCursorConverter"/>
         <converters:BoolNegateConverter x:Key="BoolNegateConverter"/>
         <converters:LibraryToFolderIconMultiValueConverter x:Key="LibraryToFolderIconMultiValueConverter"/>
+        <converters:ImageToImageIconConverter x:Key="ImageToImageIconConverter"/>
         
         <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">

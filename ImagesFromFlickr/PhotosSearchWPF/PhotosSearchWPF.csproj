@@ -133,6 +133,7 @@
     <Compile Include="ViewModel\Converters\BoolNegateConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToCursorConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="ViewModel\Converters\ImageToImageIconConverter.cs" />
     <Compile Include="ViewModel\Converters\LibraryToFolderIconMultiValueConverter.cs" />
     <Compile Include="ViewModel\Events\DeleteImageLibraryRequested.cs" />
     <Compile Include="ViewModel\Events\DownloadPhotoRequested.cs" />
@@ -314,6 +315,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\FolderWarning_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\Image_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\ImageWarning_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

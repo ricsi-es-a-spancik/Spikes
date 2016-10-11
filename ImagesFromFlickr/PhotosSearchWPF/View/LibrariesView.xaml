@@ -76,10 +76,13 @@
                                     </StackPanel>
                                 </TreeViewItem.Header>
 
-                                <ItemsControl ItemsSource="{Binding Images}">
+                                <ItemsControl ItemsSource="{Binding Images}" Visibility="{Binding Library.ExistsOnDisk, Converter={StaticResource ResourceKey=BoolToVisibilityConverter}}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="{x:Type Image}">
-                                            <TextBlock Text="{Binding Name}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding ExistsOnDisk, Converter={StaticResource ResourceKey=ImageToImageIconConverter}}"/>
+                                                <TextBlock Text="{Binding Name}" Margin="5,0,0,0"/>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
