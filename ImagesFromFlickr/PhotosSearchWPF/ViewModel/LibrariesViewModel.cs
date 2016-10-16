@@ -40,6 +40,8 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand DeleteLibrary { get; private set; }
 
+        public ICommand DeleteImage { get; private set; }
+
         public ObservableCollection<ImageLibraryViewModel> _photoLibraryViewModels;
 
         public ObservableCollection<ImageLibraryViewModel> PhotoLibraryViewModels
@@ -60,6 +62,7 @@ namespace PhotosSearchWPF.ViewModel
             ExpandAll = new DelegateCommand(OnExpandAll);
             CollapseAll = new DelegateCommand(OnCollapseAll);
             DeleteLibrary = new DelegateCommand<ImageLibraryViewModel>(OnDeleteLibrary);
+            DeleteImage = new DelegateCommand<Image>(OnDeleteImage);
 
             PhotoLibraryViewModels = new ObservableCollection<ImageLibraryViewModel>();
             RefreshLibrariesImpl();
@@ -112,6 +115,13 @@ namespace PhotosSearchWPF.ViewModel
             _libraryManager.RemoveLibrary(photoLibraryViewModel.Library);
             PhotoLibraryViewModels.Remove(photoLibraryViewModel);
             _eventAggregator.GetEvent<DeleteImageLibraryRequested>().Publish(photoLibraryViewModel.Library);
+        }
+
+        private void OnDeleteImage(Image image)
+        {
+            _libraryManager.RemoveImageFromLibrary(image);
+            var libraryVM = PhotoLibraryViewModels.First(vm => vm.Library.Name == image.Library.Name);
+            libraryVM.Images.Remove(image);
         }
     }
 }

@@ -19,18 +19,18 @@ namespace PhotosSearchWPF.Services
                   .Index(l => l.Id);
 
             mapper.Entity<Image>()
-                  .Index(i => i.Id);
+                  .DbRef(i => i.Library, "libraries")
+                  .Index(l => l.Id);
         }
 
-        public Image AddImageToLibrary(int libraryId, Image image)
+        public Image AddImageToLibrary(Image image)
         {
             using (var db = new ImageLibraryContext())
             {
                 var libraryAddingTo = db.Libraries()
                                         .Include(lib => lib.Images)
-                                        .Find(lib => lib.Id == libraryId).First();
+                                        .Find(lib => lib.Id == image.Library.Id).First();
 
-                image.Library = new Library { Id = libraryAddingTo.Id };
                 db.Images().Insert(image);
                 libraryAddingTo.Images.Add(image);
                 db.Libraries().Update(libraryAddingTo);
@@ -55,11 +55,11 @@ namespace PhotosSearchWPF.Services
         {
             using (var db = new ImageLibraryContext())
             {
-                var library = db.Libraries()
-                                .Include(lib => lib.Images)
-                                .Find(lib => lib.Id == libraryId).First();
+                var images = db.Images()
+                               .Include(img => img.Library)
+                               .Find(img => img.Library.Id == libraryId);
 
-                return library.Images;
+                return images.ToList();
             }
         }
 

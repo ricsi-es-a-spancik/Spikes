@@ -38,7 +38,7 @@ namespace PhotosSearchWPF.Services
                 Library = library
             };
 
-            return _imageLibraryRepository.AddImageToLibrary(library.Id, imageToAdd);
+            return _imageLibraryRepository.AddImageToLibrary(imageToAdd);
         }
 
         public List<Library> GetLibraries()

@@ -13,7 +13,7 @@ namespace PhotosSearchWPF.Services
 
         List<Image> GetImagesOfLibrary(int libraryId);
 
-        Image AddImageToLibrary(int libraryId, Image image);
+        Image AddImageToLibrary(Image image);
 
         Library RemoveImageFromLibrary(int libraryId, int imageId);
     }
