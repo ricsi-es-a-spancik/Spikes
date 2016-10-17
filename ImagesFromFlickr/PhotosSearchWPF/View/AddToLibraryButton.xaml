@@ -33,6 +33,7 @@
                 </ContextMenu.ItemTemplate>
                 <ContextMenu.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="IsEnabled" Value="{Binding ExistsOnDisk}"/>
                         <Setter Property="Command" Value="{Binding DataContext.DownloadToLibrary, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon" Value="{StaticResource FolderIcon}"/>
