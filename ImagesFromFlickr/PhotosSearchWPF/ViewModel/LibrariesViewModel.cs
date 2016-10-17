@@ -94,8 +94,8 @@ namespace PhotosSearchWPF.ViewModel
         private void OnDownloadPhotoRequested(DownloadRequestParameters parameters)
         {
             var imageAdded = _libraryManager.DownloadImageToLibrary(parameters.PhotoViewModel.Photo.SmallUrl, $"{parameters.PhotoViewModel.Photo.PhotoId}.jpg", parameters.TargetLibrary);
-            var vm = PhotoLibraryViewModels.First(libvm => libvm.Library.Name == parameters.TargetLibrary.Name);
-            vm.Images.Add(imageAdded);
+            var libraryVM = PhotoLibraryViewModels.First(libvm => libvm.Library.Name == parameters.TargetLibrary.Name);
+            libraryVM.Images.Add(imageAdded);
         }
 
         private void OnExpandAll()
