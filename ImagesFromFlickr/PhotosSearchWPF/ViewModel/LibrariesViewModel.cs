@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using PhotosSearchWPF.Services;
 using PhotosSearchWPF.Model;
 using System.IO;
+using System.Windows;
 
 namespace PhotosSearchWPF.ViewModel
 {
@@ -70,6 +71,14 @@ namespace PhotosSearchWPF.ViewModel
 
         private void OnCreateNewLibrary()
         {
+            var libraryAlreadyExists = _libraryManager.IsLibraryExistsWithName(NewLibraryName);
+
+            if (libraryAlreadyExists)
+            {
+                MessageBox.Show($"Library with the desired name ({NewLibraryName}) alredy exists in the datastore.", "Error");
+                return;
+            }
+
             var newLibrary = new Library
             {
                 DirectoryPath = Path.Combine(LIBRARIES_FOLDER_PATH, NewLibraryName),

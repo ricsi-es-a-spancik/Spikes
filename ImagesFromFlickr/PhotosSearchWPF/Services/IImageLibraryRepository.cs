@@ -16,5 +16,7 @@ namespace PhotosSearchWPF.Services
         Image AddImageToLibrary(Image image);
 
         Library RemoveImageFromLibrary(int libraryId, int imageId);
+
+        bool IsLibraryExistsWithName(string libraryName);
     }
 }

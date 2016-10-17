@@ -14,5 +14,7 @@ namespace PhotosSearchWPF.Services
         void RemoveLibrary(Library library);
 
         Image DownloadImageToLibrary(string imageUrl, string imageFileName, Library library);
+
+        bool IsLibraryExistsWithName(string libraryName);
     }
 }

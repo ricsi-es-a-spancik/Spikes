@@ -3,6 +3,7 @@ using PhotosSearchWPF.Model;
 using LiteDB;
 using PhotosSearchWPF.Data;
 using System.Linq;
+using System;
 
 namespace PhotosSearchWPF.Services
 {
@@ -68,6 +69,15 @@ namespace PhotosSearchWPF.Services
             using (var db = new ImageLibraryContext())
             {
                 return db.Libraries().FindAll().ToList();
+            }
+        }
+
+        public bool IsLibraryExistsWithName(string libraryName)
+        {
+            using (var db = new ImageLibraryContext())
+            {
+                return db.Libraries()
+                         .Exists(lib => lib.Name.Equals(libraryName, StringComparison.CurrentCultureIgnoreCase));
             }
         }
 

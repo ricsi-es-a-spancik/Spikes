@@ -2,6 +2,7 @@
 using PhotosSearchWPF.Model;
 using System.Linq;
 using System.IO;
+using System;
 
 namespace PhotosSearchWPF.Services
 {
@@ -57,6 +58,11 @@ namespace PhotosSearchWPF.Services
                 }
                 return lib;
             }).ToList();
+        }
+
+        public bool IsLibraryExistsWithName(string libraryName)
+        {
+            return _imageLibraryRepository.IsLibraryExistsWithName(libraryName);
         }
 
         public Library RemoveImageFromLibrary(Image image)
