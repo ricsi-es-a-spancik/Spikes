@@ -9,6 +9,7 @@ using PhotosSearchWPF.Services;
 using PhotosSearchWPF.Model;
 using System.IO;
 using System.Windows;
+using System;
 
 namespace PhotosSearchWPF.ViewModel
 {
@@ -102,9 +103,22 @@ namespace PhotosSearchWPF.ViewModel
 
         private void OnDownloadPhotoRequested(DownloadRequestParameters parameters)
         {
-            var imageAdded = _libraryManager.DownloadImageToLibrary(parameters.PhotoViewModel.Photo.SmallUrl, $"{parameters.PhotoViewModel.Photo.PhotoId}.jpg", parameters.TargetLibrary);
-            var libraryVM = PhotoLibraryViewModels.First(libvm => libvm.Library.Name == parameters.TargetLibrary.Name);
-            libraryVM.Images.Add(imageAdded);
+            try
+            {
+                var imageAdded = _libraryManager.DownloadImageToLibrary(
+                    parameters.PhotoViewModel.Photo.SmallUrl, 
+                    parameters.PhotoViewModel.Photo.PhotoId, 
+                    $"{parameters.PhotoViewModel.Photo.PhotoId}.jpg", 
+                    parameters.LibraryTarget.Library);
+
+                var libraryVM = PhotoLibraryViewModels.First(libvm => libvm.Library.Name == parameters.LibraryTarget.Library.Name);
+                libraryVM.Images.Add(imageAdded);
+                parameters.LibraryTarget.HasLocalCopy = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Unexpected error occured during downloading the requested image Make sure your network connection is alive, and the target library still exists on disk.", "Error");
+            }
         }
 
         private void OnExpandAll()

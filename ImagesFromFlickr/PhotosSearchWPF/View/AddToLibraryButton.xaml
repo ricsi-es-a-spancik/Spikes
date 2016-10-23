@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PhotosSearchWPF.View"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             xmlns:model="clr-namespace:PhotosSearchWPF.Model"
+             xmlns:viewmodel="clr-namespace:PhotosSearchWPF.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -25,15 +25,22 @@
                          ItemsSource="{Binding DataContext.Libraries}">
                 <ContextMenu.Resources>
                     <Image x:Key="FolderIcon" Source="../Images/Icons/Folder_grey_16x.png" x:Shared="false"/>
+                    <BitmapImage  x:Key="CheckLocalCopy" UriSource="../Images/Icons/CheckAdd_16x.png" x:Shared="false"/>
                 </ContextMenu.Resources>
                 <ContextMenu.ItemTemplate>
-                    <DataTemplate DataType="{x:Type model:Library}">
-                        <TextBlock Text="{Binding Name}"/>
+                    <DataTemplate DataType="{x:Type viewmodel:LibraryTarget}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Library.Name}"/>
+                            <Image Source="{StaticResource CheckLocalCopy}" 
+                                   Grid.Column="1" 
+                                   Visibility="{Binding HasLocalCopy, Converter={StaticResource BoolToVisibilityConverter}}"
+                                   Margin="10,0,0,0"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ContextMenu.ItemTemplate>
                 <ContextMenu.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
-                        <Setter Property="IsEnabled" Value="{Binding ExistsOnDisk}"/>
+                        <Setter Property="IsEnabled" Value="{Binding Library.ExistsOnDisk}"/>
                         <Setter Property="Command" Value="{Binding DataContext.DownloadToLibrary, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon" Value="{StaticResource FolderIcon}"/>
@@ -42,9 +49,6 @@
             </ContextMenu>
         </Button.ContextMenu>
 
-        <Image Source="../Images/Icons/Add_16x.png"
-                                           Visibility="{Binding IsLocalCopyExists, 
-                                                                Converter={StaticResource BoolToVisibilityConverter}, 
-                                                                ConverterParameter={StaticResource True}}"/>
+        <Image Source="../Images/Icons/Add_16x.png"/>
     </Button>
 </UserControl>

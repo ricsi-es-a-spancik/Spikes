@@ -6,6 +6,7 @@ using PhotosSearchWPF.ViewModel.Events;
 using Prism.Events;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PhotosSearchWPF.ViewModel
@@ -34,9 +35,9 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand DownloadToLibrary { get; private set; }
 
-        private ObservableCollection<Library> _libraries;
+        private ObservableCollection<LibraryTarget> _libraries;
 
-        public ObservableCollection<Library> Libraries
+        public ObservableCollection<LibraryTarget> Libraries
         {
             get { return _libraries; }
         }
@@ -52,19 +53,25 @@ namespace PhotosSearchWPF.ViewModel
 
             TagsCollection = new TagsCollectionViewModel(eventAggregator, Photo.Tags);
             ShowPhotoDetails = new DelegateCommand<PhotoViewModel>(OnShowPhotoDetails);
-            DownloadToLibrary = new DelegateCommand<Library>(OnDownloadToLibrary);
+            DownloadToLibrary = new DelegateCommand<LibraryTarget>(OnDownloadToLibrary);
 
-            _libraries = new ObservableCollection<Library>(_libraryManager.GetLibraries());
+            var libraryTargets = _libraryManager.GetLibraries().Select(lib =>
+            {
+                var hasLocalCopyOfPhoto = lib.Images.Any(img => img.ExistsOnDisk && img.FlickrPhotoId == Photo.PhotoId);
+                return new LibraryTarget { Library = lib, HasLocalCopy = hasLocalCopyOfPhoto };
+            });
+
+            _libraries = new ObservableCollection<LibraryTarget>(libraryTargets);
         }
 
         private void OnAddImageLibraryRequested(Library library)
         {
-            Libraries.Add(library);
+            Libraries.Add(new LibraryTarget { Library = library, HasLocalCopy = false });
         }
 
         private void OnDeleteImageLibraryRequested(Library library)
         {
-            Libraries.Remove(library);
+            Libraries.Remove(Libraries.First(target => target.Library.Id == library.Id));
         }
 
         private void OnShowPhotoDetails(PhotoViewModel photoViewModel)
@@ -72,9 +79,20 @@ namespace PhotosSearchWPF.ViewModel
             _eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Publish(photoViewModel);
         }
 
-        private void OnDownloadToLibrary(Library library)
+        private void OnDownloadToLibrary(LibraryTarget libraryTarget)
         {
-            _eventAggregator.GetEvent<DownloadPhotoRequested>().Publish(new DownloadRequestParameters { PhotoViewModel = this, TargetLibrary = library });
+            if (!libraryTarget.Library.ExistsOnDisk)
+            {
+                MessageBox.Show($"Library {libraryTarget.Library.Name} does not exist on disk.", "Error");
+                return;
+            }
+            else if (libraryTarget.HasLocalCopy)
+            {
+                MessageBox.Show($"Library {libraryTarget.Library.Name} does already contain a photo with id {Photo.PhotoId}.", "Error");
+                return;
+            }
+
+            _eventAggregator.GetEvent<DownloadPhotoRequested>().Publish(new DownloadRequestParameters { PhotoViewModel = this, LibraryTarget = libraryTarget });
         }
     }
 }

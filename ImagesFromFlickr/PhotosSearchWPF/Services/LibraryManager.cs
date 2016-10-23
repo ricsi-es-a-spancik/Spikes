@@ -26,7 +26,7 @@ namespace PhotosSearchWPF.Services
             return _imageLibraryRepository.AddLibrary(library);
         }
 
-        public Image DownloadImageToLibrary(string imageUrl, string imageFileName, Library library)
+        public Image DownloadImageToLibrary(string imageUrl, string flickrPhotoId, string imageFileName, Library library)
         {
             var imagePath = Path.Combine(library.DirectoryPath, imageFileName);
             _webClient.DownloadFile(imageUrl, imagePath);
@@ -34,6 +34,7 @@ namespace PhotosSearchWPF.Services
             var imageToAdd = new Image
             {
                 FilePath = imagePath,
+                FlickrPhotoId = flickrPhotoId,
                 Name = Path.GetFileNameWithoutExtension(imageFileName),
                 ExistsOnDisk = true,
                 Library = library

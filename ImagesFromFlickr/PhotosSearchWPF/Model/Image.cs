@@ -4,6 +4,8 @@
     {
         public int Id { get; set; }
 
+        public string FlickrPhotoId { get; set; }
+
         public string Name { get; set; }
 
         public bool ExistsOnDisk { get; set; }

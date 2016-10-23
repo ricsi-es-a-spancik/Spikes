@@ -144,6 +144,7 @@
     <Compile Include="ViewModel\Events\SearchByTagRequested.cs" />
     <Compile Include="ViewModel\Events\ShowPhotoDetailsRequested.cs" />
     <Compile Include="ViewModel\LibrariesViewModel.cs" />
+    <Compile Include="ViewModel\LibraryTarget.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PhotoDetailsViewModel.cs" />
     <Compile Include="ViewModel\ImageLibraryViewModel.cs" />
@@ -327,6 +328,9 @@
     <Resource Include="Images\Icons\ImageWarning_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\CheckAdd_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

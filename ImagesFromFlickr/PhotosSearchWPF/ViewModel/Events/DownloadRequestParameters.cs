@@ -6,6 +6,6 @@ namespace PhotosSearchWPF.ViewModel.Events
     {
         public PhotoViewModel PhotoViewModel { get; set; }
 
-        public Library TargetLibrary { get; set; }
+        public LibraryTarget LibraryTarget { get; set; }
     }
 }
