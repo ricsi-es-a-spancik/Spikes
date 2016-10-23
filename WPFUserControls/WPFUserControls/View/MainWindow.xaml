@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:WPFUserControls.View"
         xmlns:viewmodel="clr-namespace:WPFUserControls.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="640">
+        Title="MainWindow" Height="600" Width="1024">
 
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
@@ -15,6 +15,7 @@
     
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -31,11 +32,11 @@
         
         <view:ResourceCollectionUserControl ResourceCollection="{Binding Resources}" Grid.Row="4"/>
 
-        <TreeView Grid.Row="5">
+        <TreeView Grid.Row="5" Background="#00E500">
             <TreeViewItem Header="Header 1" IsExpanded="True" Style="{DynamicResource TreeViewItemStyle1}">
-                <TreeViewItem Header="Child 1"/>
-                <TreeViewItem Header="Child 2"/>
-                <TreeViewItem Header="Child 3"/>
+                <TreeViewItem Header="Child 1" Focusable="False"/>
+                <TreeViewItem Header="Child 2" Focusable="False"/>
+                <TreeViewItem Header="Child 3" Focusable="False"/>
             </TreeViewItem>
             <TreeViewItem Header="Header 2" IsExpanded="True" Style="{DynamicResource TreeViewItemStyle1}">
                 <TreeViewItem Header="Child 4"/>
@@ -50,7 +51,10 @@
             <Button Content="Button 4" Style="{DynamicResource TransparentMenuButton}" IsEnabled="False"/>
             <Button Content="Button 5" Style="{DynamicResource TransparentMenuButton}" IsEnabled="False"/>
         </StackPanel>
-        
-        
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <ToggleButton x:Name="YomammaToggle" Content="Yomamma" IsChecked="{Binding IsChecked, ElementName=NiggaToggle}"/>
+            <ToggleButton x:Name="NiggaToggle" Content="Nigga"/>
+        </StackPanel>
     </Grid>
 </Window>
