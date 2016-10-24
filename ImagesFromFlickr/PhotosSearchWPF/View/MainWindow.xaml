@@ -22,6 +22,9 @@
         <DataTemplate DataType="{x:Type viewModels:PhotoDetailsViewModel}">
             <local:PhotoDetailsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ImageLibraryContentViewModel}">
+            <local:ImageLibraryContentView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Grid>

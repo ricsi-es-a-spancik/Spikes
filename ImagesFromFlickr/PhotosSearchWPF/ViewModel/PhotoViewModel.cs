@@ -72,6 +72,7 @@ namespace PhotosSearchWPF.ViewModel
         private void OnDeleteImageLibraryRequested(Library library)
         {
             Libraries.Remove(Libraries.First(target => target.Library.Id == library.Id));
+            _eventAggregator.GetEvent<ImageLibraryDeleted>().Publish(library);
         }
 
         private void OnShowPhotoDetails(PhotoViewModel photoViewModel)

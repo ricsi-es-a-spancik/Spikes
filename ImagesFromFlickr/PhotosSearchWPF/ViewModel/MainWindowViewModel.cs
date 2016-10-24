@@ -1,4 +1,5 @@
-﻿using FlickrNet;
+﻿using System;
+using FlickrNet;
 using Microsoft.Practices.Unity;
 using PhotosSearchWPF.Model;
 using PhotosSearchWPF.Services;
@@ -50,6 +51,7 @@ namespace PhotosSearchWPF.ViewModel
             eventAggregator.GetEvent<ShowPhotoDetailsRequested>().Subscribe(OnPhotoDetailsRequested, ThreadOption.UIThread);
             eventAggregator.GetEvent<SearchByTagRequested>().Subscribe(OnSearchByTagRequested, ThreadOption.UIThread);
             eventAggregator.GetEvent<NavigateBackToSearchResultsRequested>().Subscribe(OnNavigateBackToSearchResultsRequested, ThreadOption.UIThread);
+            eventAggregator.GetEvent<ShowLibraryRequested>().Subscribe(OnShowLibraryRequested, ThreadOption.UIThread);
 
             _container.RegisterInstance<IEventAggregator>(eventAggregator);
         }
@@ -78,6 +80,13 @@ namespace PhotosSearchWPF.ViewModel
         private void OnNavigateBackToSearchResultsRequested()
         {
             CurrentViewModel = _searchResultsViewModel;
-        } 
+        }
+
+        private void OnShowLibraryRequested(ImageLibraryViewModel imageLibraryViewModel)
+        {
+            var viewModel = _container.Resolve<ImageLibraryContentViewModel>();
+            viewModel.ImageLibraryViewModel = imageLibraryViewModel;
+            CurrentViewModel = viewModel;
+        }
     }
 }

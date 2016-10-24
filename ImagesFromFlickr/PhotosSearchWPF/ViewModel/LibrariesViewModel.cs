@@ -10,6 +10,7 @@ using PhotosSearchWPF.Model;
 using System.IO;
 using System.Windows;
 using System;
+using System.Diagnostics;
 
 namespace PhotosSearchWPF.ViewModel
 {
@@ -40,6 +41,10 @@ namespace PhotosSearchWPF.ViewModel
 
         public ICommand CollapseAll { get; private set; }
 
+        public ICommand ShowImages { get; private set; }
+
+        public ICommand OpenFolder { get; private set; }
+
         public ICommand DeleteLibrary { get; private set; }
 
         public ICommand DeleteImage { get; private set; }
@@ -63,6 +68,8 @@ namespace PhotosSearchWPF.ViewModel
             RefreshLibraries = new DelegateCommand(RefreshLibrariesImpl);
             ExpandAll = new DelegateCommand(OnExpandAll);
             CollapseAll = new DelegateCommand(OnCollapseAll);
+            ShowImages = new DelegateCommand<ImageLibraryViewModel>(OnShowImages);
+            OpenFolder = new DelegateCommand<ImageLibraryViewModel>(OnOpenFolder);
             DeleteLibrary = new DelegateCommand<ImageLibraryViewModel>(OnDeleteLibrary);
             DeleteImage = new DelegateCommand<Image>(OnDeleteImage);
 
@@ -133,11 +140,28 @@ namespace PhotosSearchWPF.ViewModel
                 vm.IsExpanded = false;
         }
 
+        private void OnShowImages(ImageLibraryViewModel photoLibraryViewModel)
+        {
+            _eventAggregator.GetEvent<ShowLibraryRequested>().Publish(photoLibraryViewModel);
+        }
+
+        private void OnOpenFolder(ImageLibraryViewModel photoLibraryViewModel)
+        {
+            try
+            {
+                Process.Start(photoLibraryViewModel.Library.DirectoryPath);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"The library {photoLibraryViewModel.Library.Name} does not exist on the disk.", "Could not open folder.");
+            }
+        }
+
         private void OnDeleteLibrary(ImageLibraryViewModel photoLibraryViewModel)
         {
             _libraryManager.RemoveLibrary(photoLibraryViewModel.Library);
             PhotoLibraryViewModels.Remove(photoLibraryViewModel);
-            _eventAggregator.GetEvent<DeleteImageLibraryRequested>().Publish(photoLibraryViewModel.Library);
+            _eventAggregator.GetEvent<ImageLibraryDeleted>().Publish(photoLibraryViewModel.Library);
         }
 
         private void OnDeleteImage(Image image)
