@@ -33,14 +33,14 @@
         <view:ResourceCollectionUserControl ResourceCollection="{Binding Resources}" Grid.Row="4"/>
 
         <TreeView Grid.Row="5" Background="#00E500">
-            <TreeViewItem Header="Header 1" IsExpanded="True" Style="{DynamicResource TreeViewItemStyle1}">
-                <TreeViewItem Header="Child 1" Focusable="False"/>
-                <TreeViewItem Header="Child 2" Focusable="False"/>
-                <TreeViewItem Header="Child 3" Focusable="False"/>
+            <TreeViewItem Header="Header 1" IsExpanded="True" Style="{DynamicResource TransparentTreeViewItemStyle}">
+                <TreeViewItem Header="Child 1" Focusable="False" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
+                <TreeViewItem Header="Child 2" Focusable="False" Style="{DynamicResource TransparentTreeViewItemStyle}" IsEnabled="False"/>
+                <TreeViewItem Header="Child 3" Focusable="False" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
             </TreeViewItem>
-            <TreeViewItem Header="Header 2" IsExpanded="True" Style="{DynamicResource TreeViewItemStyle1}">
-                <TreeViewItem Header="Child 4"/>
-                <TreeViewItem Header="Child 5"/>
+            <TreeViewItem Header="Header 2" IsExpanded="True" Style="{DynamicResource TransparentTreeViewItemStyle}">
+                <TreeViewItem Header="Child 4" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
+                <TreeViewItem Header="Child 5" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
             </TreeViewItem>
         </TreeView>
         
