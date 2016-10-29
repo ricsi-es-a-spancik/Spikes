@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PhotosSearchWPF.View.Resources"
+                    xmlns:converters="clr-namespace:PhotosSearchWPF.ViewModel.Converters">
+            
+    <converters:UrlEnabledConverter x:Key="UrlEnabledConverter"/>
+    <converters:ThumbnailImageConverter x:Key="ThumbnailImageConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:BoolToCursorConverter x:Key="BoolToCursorConverter"/>
+    <converters:BoolNegateConverter x:Key="BoolNegateConverter"/>
+    <converters:LibraryToFolderIconMultiValueConverter x:Key="LibraryToFolderIconMultiValueConverter"/>
+    <converters:ImageToImageIconConverter x:Key="ImageToImageIconConverter"/>
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+</ResourceDictionary>

@@ -37,7 +37,7 @@
                             <local:AddToLibraryButton DataContext="{Binding}" Margin="0,5,5,0"/>
 
                             <Button Name="ThumbnailImageButton" Command="{Binding ShowPhotoDetails}" CommandParameter="{Binding}" Cursor="Hand" 
-                                    Width="95" Height="95" Margin="10,5,5,10" Grid.Row="1" Style="{StaticResource TransparentStyle}">
+                                    Width="95" Height="95" Margin="10,5,5,10" Grid.Row="1" Style="{StaticResource TransparentButtonStyle}">
                                 <Image Source="{Binding Photo.ThumbnailUrl, Converter={StaticResource ThumbnailImageConverter}}"/>
                             </Button>
 
