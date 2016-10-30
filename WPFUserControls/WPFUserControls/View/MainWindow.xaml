@@ -59,6 +59,7 @@
             <ToggleButton x:Name="NiggaToggle" Content="Nigga"/>
         </StackPanel>
 
+        <!--https://blogs.msdn.microsoft.com/mikehillberg/2009/10/30/treeview-and-hierarchicaldatatemplate-step-by-step/-->
         <TreeView ItemsSource="{Binding League}" Grid.Row="8" Background="#00E500" ItemContainerStyle="{StaticResource TransparentTreeViewItemStyle}">
             <!--Conference teamplate-->
             <TreeView.ItemTemplate>
