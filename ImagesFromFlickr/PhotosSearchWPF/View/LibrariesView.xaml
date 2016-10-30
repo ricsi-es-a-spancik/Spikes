@@ -60,27 +60,24 @@
                             <StackPanel.ContextMenu>
                                 <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
                                     <MenuItem Header="Show Images"
-                                                          Command="{Binding ShowImages}"
-                                                          CommandParameter="{Binding Path=PlacementTarget.DataContext, 
-                                                                                     RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+                                              Command="{Binding ShowImages}"
+                                                CommandParameter="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
                                         <MenuItem.Icon>
                                             <Image Source="../Images/Icons/ImageStack_16x.png"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
 
                                     <MenuItem Header="Open Folder in File Explorer"
-                                                          Command="{Binding OpenFolder}"
-                                                          CommandParameter="{Binding Path=PlacementTarget.DataContext, 
-                                                                                     RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+                                              Command="{Binding OpenFolder}"
+                                              CommandParameter="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
                                         <MenuItem.Icon>
                                             <Image Source="../Images/Icons/Open_16x.png"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
 
                                     <MenuItem Header="Delete"
-                                                          Command="{Binding DeleteLibrary}"
-                                                          CommandParameter="{Binding Path=PlacementTarget.DataContext, 
-                                                                                     RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+                                              Command="{Binding DeleteLibrary}"
+                                              CommandParameter="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
                                         <MenuItem.Icon>
                                             <Image Source="../Images/Icons/Cancel_16x.png"/>
                                         </MenuItem.Icon>
