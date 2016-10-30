@@ -57,6 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Conference.cs" />
+    <Compile Include="Model\Team.cs" />
     <Compile Include="View\ResourceCollectionUserControl.xaml.cs">
       <DependentUpon>ResourceCollectionUserControl.xaml</DependentUpon>
     </Compile>
