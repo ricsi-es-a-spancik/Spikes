@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace RemoteSearch.View
 {
     /// <summary>
-    /// Interaction logic for SearchOptionsView.xaml
+    /// Interaction logic for RemoteItemDetailsView.xaml
     /// </summary>
-    public partial class SearchOptionsView : UserControl
+    public partial class RemoteItemDetailsView : UserControl
     {
-        public SearchOptionsView(SearchOptionsViewModel viewModel)
+        public RemoteItemDetailsView(RemoteItemDetailsViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

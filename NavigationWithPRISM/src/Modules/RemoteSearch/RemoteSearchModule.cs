@@ -22,8 +22,12 @@ namespace RemoteSearch
         {
             Container.RegisterType<SearchOptionsView>();
             Container.RegisterType<SearchOptionsViewModel>();
-            Container.RegisterType<SearchResultsViewModel>();
+
             Container.RegisterType(typeof(object), typeof(SearchResultsView), typeof(SearchResultsView).FullName);
+            Container.RegisterType<SearchResultsViewModel>();
+
+            Container.RegisterType(typeof(object), typeof(RemoteItemDetailsView), typeof(RemoteItemDetailsView).FullName);
+            Container.RegisterType<RemoteItemDetailsViewModel>();
         }
     }
 }

@@ -94,8 +94,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="RemoteSearchModule.cs" />
+    <Compile Include="ViewModel\RemoteItemDetailsViewModel.cs" />
     <Compile Include="ViewModel\SearchOptionsViewModel.cs" />
     <Compile Include="ViewModel\SearchResultsViewModel.cs" />
+    <Compile Include="View\RemoteItemDetailsView.xaml.cs">
+      <DependentUpon>RemoteItemDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SearchOptionsView.xaml.cs">
       <DependentUpon>SearchOptionsView.xaml</DependentUpon>
     </Compile>
@@ -114,12 +118,20 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Business\Business.csproj">
+      <Project>{57adf8ba-cade-4071-8d51-794c2a93e170}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\NavigationWithPRISM.Infrastructure\NavigationWithPRISM.Infrastructure.csproj">
       <Project>{58d53b2c-e605-4dbf-98f2-06b0c7420c59}</Project>
       <Name>NavigationWithPRISM.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\RemoteItemDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SearchOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

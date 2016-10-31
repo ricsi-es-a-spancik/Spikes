@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="RemoteSearch.View.RemoteItemDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RemoteSearch.View"
+             mc:Ignorable="d">
+    <GroupBox Header="Details">
+        <StackPanel>
+            <TextBlock Text="Remote item received"/>
+            <TextBlock Text="{Binding RemoteItem.Id}" FontWeight="Bold"/>
+            <TextBlock Text="{Binding RemoteItem.Content}"/>
+        </StackPanel>
+    </GroupBox>
+</UserControl>

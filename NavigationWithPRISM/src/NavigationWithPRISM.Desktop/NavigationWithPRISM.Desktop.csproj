@@ -131,6 +131,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LocalEntities\LocalEntities.csproj">
+      <Project>{4bfbba9e-2ddd-466f-9aba-c920a57a58ce}</Project>
+      <Name>LocalEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RemoteSearchService\RemoteSearchService.csproj">
+      <Project>{25bd189d-4f82-4877-bfae-128e757fc3a7}</Project>
+      <Name>RemoteSearchService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\RemoteSearch\RemoteSearch.csproj">
       <Project>{3f9e4253-2220-4c5e-9902-d3dcfa140e2a}</Project>
       <Name>RemoteSearch</Name>

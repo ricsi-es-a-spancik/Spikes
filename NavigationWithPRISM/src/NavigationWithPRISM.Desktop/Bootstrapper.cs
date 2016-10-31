@@ -3,6 +3,8 @@ using Prism.Unity;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using RemoteSearch;
+using RemoteSearchService;
+using LocalEntities;
 
 namespace NavigationWithPRISM.Desktop
 {
@@ -25,6 +27,8 @@ namespace NavigationWithPRISM.Desktop
         {
             var catalog = new ModuleCatalog();
             catalog.AddModule(typeof(RemoteSearchModule));
+            catalog.AddModule(typeof(RemoteSearchServiceModule));
+            catalog.AddModule(typeof(LocalEntitiesModule));
             return catalog;
         }
     }

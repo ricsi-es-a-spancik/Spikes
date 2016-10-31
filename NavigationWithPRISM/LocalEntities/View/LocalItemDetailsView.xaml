@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="LocalEntities.View.LocalItemDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LocalEntities.View"
+             mc:Ignorable="d">
+    <GroupBox Header="Details">
+        <StackPanel>
+            <TextBlock Text="Local item received"/>
+            <TextBlock Text="{Binding LocalItem.Id}" FontWeight="Bold"/>
+            <TextBlock Text="{Binding LocalItem.Content}"/>
+            <TextBlock Text="{Binding LocalItem.LocalProperty}"/>
+        </StackPanel>
+    </GroupBox>
+</UserControl>

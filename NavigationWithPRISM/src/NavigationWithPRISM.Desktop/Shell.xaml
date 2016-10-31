@@ -7,14 +7,14 @@
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:inf="clr-namespace:NavigationWithPRISM.Infrastructure;assembly=NavigationWithPRISM.Infrastructure"
         mc:Ignorable="d"
-        Title="Shell" Height="480" Width="640">
+        Title="Shell" Height="480" Width="820">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="270"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
