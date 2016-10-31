@@ -7,6 +7,8 @@
              mc:Ignorable="d">
     <GroupBox Header="Details">
         <StackPanel>
+            <Button Margin="0,0,0,20" Width="100" Content="Back" Command="{Binding NavigateBack}" HorizontalAlignment="Left"/>
+            
             <TextBlock Text="Remote item received"/>
             <TextBlock Text="{Binding RemoteItem.Id}" FontWeight="Bold"/>
             <TextBlock Text="{Binding RemoteItem.Content}"/>
