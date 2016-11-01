@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PhotosSearchWPF.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d">
     
     <GroupBox x:Name="SearchOptionsGroupBox" Header="Photo search options" FocusManager.FocusedElement="{Binding ElementName=SearchCriteriaTextBox}">
         <Grid>
@@ -18,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Label x:Name="SearchCriteriaLabel" Content="Criteria:" HorizontalContentAlignment="Right" Margin="10,5,10,0"/>
@@ -27,11 +27,25 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <Label x:Name="SearchByLabel" Content="Search by:" HorizontalContentAlignment="Right" Margin="10,5,10,0" Grid.Row="2"/>
-            <RadioButton x:Name="SearchByTextRadioButton" Content="Text" IsChecked="{Binding SearchByText}" Margin="10,10,10,0" Grid.Column="1" Grid.Row="2" GroupName="SearchByOptions"/>
-            <RadioButton x:Name="SearchByTagsRadioButton" Content="Tags" IsChecked="{Binding SearchByTags}" Margin="10,10,10,0" Grid.Column="2" Grid.Row="2" GroupName="SearchByOptions"/>
+            <Label x:Name="SearchByLabel" Content="Search by:" HorizontalContentAlignment="Right" Margin="10,5,10,0" Grid.Row="1"/>
+            <RadioButton x:Name="SearchByTextRadioButton" Content="Text" IsChecked="{Binding SearchByText}" Margin="10,10,10,0" Grid.Column="1" Grid.Row="1" GroupName="SearchByOptions"/>
+            <RadioButton x:Name="SearchByTagsRadioButton" Content="Tags" IsChecked="{Binding SearchByTags}" Margin="10,10,10,0" Grid.Column="2" Grid.Row="1" GroupName="SearchByOptions"/>
 
             <Button x:Name="SearchButton" Content="Search" Command="{Binding Search}" Grid.Column="3" HorizontalAlignment="Left" Margin="10,5,0,0" Width="75"/>
+
+            <ItemsControl Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{Binding Styles}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding}" Command="{Binding DataContext.AddStyle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                  CommandParameter="{Binding}" Margin="0,0,5,0"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </GroupBox>
 </UserControl>
