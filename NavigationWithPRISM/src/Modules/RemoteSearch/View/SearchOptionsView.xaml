@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="RemoteSearch.View.SearchOptionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RemoteSearch.View"
+             mc:Ignorable="d">
+    <GroupBox Header="Search options">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Search for:"/>
+            <TextBox Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="15, 0"/>
+            <Button Content="Go!" Command="{Binding SearchCommand}" Grid.Column="2"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

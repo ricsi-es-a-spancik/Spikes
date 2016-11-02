@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="LocalEntities.View.LocalItemsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LocalEntities.View"
+             xmlns:business="clr-namespace:Business;assembly=Business"
+             mc:Ignorable="d">
+    <GroupBox Header="Local items">
+        <ItemsControl Margin="0,10,0,0" ItemsSource="{Binding LocalItems}" BorderThickness="1" BorderBrush="LightGray">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type business:LocalItem}">
+                    <Border Margin="5" BorderThickness="1" BorderBrush="LightGray">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Id:"/>
+                                <TextBlock Text="{Binding Id}" Margin="10,0,0,0" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Content}"/>
+                            <TextBlock Text="{Binding LocalProperty}"/>
+                            <Button Content="Details" Margin="0,10,0,0"
+                                    Command="{Binding DataContext.SeeLocalItemDetails, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </GroupBox>
+</UserControl>

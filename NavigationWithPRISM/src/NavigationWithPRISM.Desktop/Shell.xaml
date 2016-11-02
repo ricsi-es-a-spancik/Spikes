@@ -1,0 +1,27 @@
+﻿<Window x:Class="NavigationWithPRISM.Desktop.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NavigationWithPRISM.Desktop"
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:inf="clr-namespace:NavigationWithPRISM.Infrastructure;assembly=NavigationWithPRISM.Infrastructure"
+        mc:Ignorable="d"
+        Title="Shell" Height="480" Width="820">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ContentControl Grid.RowSpan="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.LibrariesRegion}"/>
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" Margin="0,10,0,10" HorizontalAlignment="Stretch" />
+        <ContentControl Grid.Column="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.SearchRegion}"/>
+        <ContentControl Grid.Row="1" Grid.Column="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"/>
+    </Grid>
+</Window>
