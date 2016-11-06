@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:WPFUserControls"
         xmlns:view="clr-namespace:WPFUserControls.View"
         xmlns:viewmodel="clr-namespace:WPFUserControls.ViewModel"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1024"
-        WindowState="Maximized">
+        mc:Ignorable="d" Title="MainWindow" WindowState="Maximized">
 
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
