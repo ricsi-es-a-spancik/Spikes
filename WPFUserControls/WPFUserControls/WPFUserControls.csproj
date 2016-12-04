@@ -59,6 +59,8 @@
     </ApplicationDefinition>
     <Compile Include="Model\Conference.cs" />
     <Compile Include="Model\Team.cs" />
+    <Compile Include="ViewModel\LogEntryViewModel.cs" />
+    <Compile Include="ViewModel\LogLevels.cs" />
     <Compile Include="View\ResourceCollectionUserControl.xaml.cs">
       <DependentUpon>ResourceCollectionUserControl.xaml</DependentUpon>
     </Compile>
@@ -115,6 +117,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Icons\info-24.png" />
+    <Resource Include="View\Icons\fatal-24.png" />
+    <Resource Include="View\Icons\error-24.png" />
+    <Resource Include="View\Icons\warn-24.png" />
+    <Resource Include="View\Icons\debug-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

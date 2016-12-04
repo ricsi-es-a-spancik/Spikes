@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using WPFUserControls.Model;
 
@@ -13,6 +14,8 @@ namespace WPFUserControls.ViewModel
         public ObservableCollection<ResourceViewModel> Resources { get; set; }
 
         public ObservableCollection<Conference> League { get; set; }
+
+        public ObservableCollection<LogEntryViewModel> LogEntries { get; private set; }
 
         public MainWindowViewModel()
         {
@@ -57,6 +60,59 @@ namespace WPFUserControls.ViewModel
                         new Team("Toronto FC"),
                         new Team("Philadelphia Union 2010")
                     }
+                }
+            };
+
+            LogEntries = new ObservableCollection<LogEntryViewModel>
+            {
+                new LogEntryViewModel
+                {
+                    Date = DateTime.Now,
+                    Level = LogLevels.DEBUG,
+                    Logger = "LoggerInstance1",
+                    ResourceName = "Resource1",
+                    ThreadId = 1,
+                    Message = "Message of the first log entry."
+                },
+
+                new LogEntryViewModel
+                {
+                    Date = DateTime.Now + TimeSpan.FromMilliseconds(100),
+                    Level = LogLevels.ERROR,
+                    Logger = "LoggerInstance1",
+                    ResourceName = "Resource1",
+                    ThreadId = 1,
+                    Message = "Message of the second log entry."
+                },
+
+                new LogEntryViewModel
+                {
+                    Date = DateTime.Now + TimeSpan.FromMilliseconds(105),
+                    Level = LogLevels.FATAL,
+                    Logger = "LoggerInstance1",
+                    ResourceName = "Resource1",
+                    ThreadId = 1,
+                    Message = "Message of the third log entry."
+                },
+
+                new LogEntryViewModel
+                {
+                    Date = DateTime.Now + TimeSpan.FromMilliseconds(110),
+                    Level = LogLevels.INFO,
+                    Logger = "LoggerInstance2",
+                    ResourceName = "Resource1",
+                    ThreadId = 5,
+                    Message = "Message of the fourth log entry."
+                },
+
+                new LogEntryViewModel
+                {
+                    Date = DateTime.Now + TimeSpan.FromMilliseconds(115),
+                    Level = LogLevels.WARN,
+                    Logger = "LoggerInstance2",
+                    ResourceName = "Resource2",
+                    ThreadId = 3,
+                    Message = "Message of the fifth log entry."
                 }
             };
         }

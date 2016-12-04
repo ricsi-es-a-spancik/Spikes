@@ -22,6 +22,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -33,12 +34,12 @@
         <view:ResourceCollectionUserControl ResourceCollection="{Binding Resources}" Grid.Row="4"/>
 
         <TreeView Grid.Row="5" Background="#00E500">
-            <TreeViewItem Header="Header 1" IsExpanded="True" Style="{DynamicResource TransparentTreeViewItemStyle}">
+            <TreeViewItem Header="Header 1" IsExpanded="False" Style="{DynamicResource TransparentTreeViewItemStyle}">
                 <TreeViewItem Header="Child 1" Focusable="False" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
                 <TreeViewItem Header="Child 2" Focusable="False" Style="{DynamicResource TransparentTreeViewItemStyle}" IsEnabled="False"/>
                 <TreeViewItem Header="Child 3" Focusable="False" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
             </TreeViewItem>
-            <TreeViewItem Header="Header 2" IsExpanded="True" Style="{DynamicResource TransparentTreeViewItemStyle}">
+            <TreeViewItem Header="Header 2" IsExpanded="False" Style="{DynamicResource TransparentTreeViewItemStyle}">
                 <TreeViewItem Header="Child 4" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
                 <TreeViewItem Header="Child 5" Style="{DynamicResource TransparentTreeViewItemStyle}"/>
             </TreeViewItem>
@@ -47,9 +48,7 @@
         <StackPanel Grid.Row="6" Background="#00E500">
             <Button Content="Button 1" Style="{DynamicResource TransparentMenuButton}"/>
             <Button Content="Button 2" Style="{DynamicResource TransparentMenuButton}"/>
-            <Button Content="Button 3" Style="{DynamicResource TransparentMenuButton}"/>
-            <Button Content="Button 4" Style="{DynamicResource TransparentMenuButton}" IsEnabled="False"/>
-            <Button Content="Button 5" Style="{DynamicResource TransparentMenuButton}" IsEnabled="False"/>
+            <Button Content="Button 3" Style="{DynamicResource TransparentMenuButton}" IsEnabled="False"/>
         </StackPanel>
 
         <StackPanel Grid.Row="7" Orientation="Horizontal">
@@ -72,5 +71,45 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
+
+        <ListView Grid.Row="9" ItemsSource="{Binding LogEntries}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ResourceName" DisplayMemberBinding="{Binding ResourceName}"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="ThreadId" DisplayMemberBinding="{Binding ThreadId}"/>
+                    <GridViewColumn Header="Level">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:LogLevels}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image x:Name="LogLevelIcon" Width="16" Height="16" Margin="0,0,5,0"/>
+                                    <TextBlock x:Name="LogLevelText" Text="{Binding Level}"/>
+                                </StackPanel>
+
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Level}" Value="{x:Static viewmodel:LogLevels.DEBUG}">
+                                        <Setter TargetName="LogLevelIcon" Property="Source" Value="Icons/debug-24.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Level}" Value="{x:Static viewmodel:LogLevels.INFO}">
+                                        <Setter TargetName="LogLevelIcon" Property="Source" Value="Icons/info-24.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Level}" Value="{x:Static viewmodel:LogLevels.WARN}">
+                                        <Setter TargetName="LogLevelIcon" Property="Source" Value="Icons/warn-24.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Level}" Value="{x:Static viewmodel:LogLevels.ERROR}">
+                                        <Setter TargetName="LogLevelIcon" Property="Source" Value="Icons/error-24.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Level}" Value="{x:Static viewmodel:LogLevels.FATAL}">
+                                        <Setter TargetName="LogLevelIcon" Property="Source" Value="Icons/fatal-24.png"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Logger" DisplayMemberBinding="{Binding Logger}"/>
+                    <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Message}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
