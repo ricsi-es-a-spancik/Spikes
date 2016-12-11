@@ -14,7 +14,9 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFiles64Folder">
-				<Directory Id="INSTALLFOLDER" Name="Application.Console" />
+        <Directory Id="HoneyBadgersFolder" Name="Honey Badgers">
+          <Directory Id="INSTALLFOLDER" Name="Application.Console" />
+        </Directory>
 			</Directory>
 		</Directory>
 	</Fragment>
@@ -22,7 +24,9 @@
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <Component Id="CMP_ApplicationConsoleSetup" Win64="yes">
-        <File Id="FILE_ApplicationConsole.exe" Source="$(var.Application.Console.TargetPath)" KeyPath="yes" />
+        <File Id="FILE_Application.Console.exe" Source="$(var.Application.Console.TargetPath)" KeyPath="yes" />
+        <File Id="FILE_Application.Console.exe.config" Source="$(var.Application.Console.TargetPath).config" />
+        <File Id="FILE_LibraryCLRWrapper.dll" Source="$(var.Application.Console.TargetDir)/LibraryCLRWrapper.dll" />
       </Component>
 		</ComponentGroup>
 	</Fragment>
