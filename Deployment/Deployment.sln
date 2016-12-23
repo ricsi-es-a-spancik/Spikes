@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibraryCLRWrapper", "Librar
 		{6B057B5E-D37C-45D6-8F6D-8B13561B388E} = {6B057B5E-D37C-45D6-8F6D-8B13561B388E}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Setup.CustomActions", "Application.Setup.CustomActions\Application.Setup.CustomActions.csproj", "{29900030-62D9-4943-99F6-C8FA516F7156}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,14 @@ Global
 		{EC4F8D0E-CB68-46BB-8592-5C0DC8FBD688}.Release|x64.Build.0 = Release|x64
 		{EC4F8D0E-CB68-46BB-8592-5C0DC8FBD688}.Release|x86.ActiveCfg = Release|Win32
 		{EC4F8D0E-CB68-46BB-8592-5C0DC8FBD688}.Release|x86.Build.0 = Release|Win32
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Debug|x64.ActiveCfg = Debug|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Debug|x86.ActiveCfg = Debug|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Debug|x86.Build.0 = Debug|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Release|Any CPU.ActiveCfg = Release|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Release|x64.ActiveCfg = Release|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Release|x86.ActiveCfg = Release|x86
+		{29900030-62D9-4943-99F6-C8FA516F7156}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

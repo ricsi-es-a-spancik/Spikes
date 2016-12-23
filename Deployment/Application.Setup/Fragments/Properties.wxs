@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <Property Id="MyTestProperty" Value="0"/>
+
+    <Property Id="NPP_PATH">
+      <DirectorySearch Path="[ProgramFilesFolder]" Depth="0" AssignToProperty="no" Id="ProgramFilesFolderSearch">
+        <DirectorySearch Path="Notepad++" Depth="0" AssignToProperty="no" Id="NppFolderSearch">
+          <DirectorySearch Path="plugins" Depth="0" AssignToProperty="yes" Id="pluginsSearch" />
+        </DirectorySearch>
+      </DirectorySearch>
+    </Property>
+	</Fragment>
+</Wix>

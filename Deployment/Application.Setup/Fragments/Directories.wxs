@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="HoneyBadgersFolder" Name="Honey Badgers">
+          <Directory Id="INSTALLFOLDER" Name="Application.Console">
+            <Directory Id="SampleImagesFolder" Name="Images"/>
+            <Directory Id="BinFolder" Name="bin"/>
+            <Directory Id="DocFolder" Name="doc"/>
+            <Directory Id="ExamplesFolder" Name="examples"/>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+</Wix>

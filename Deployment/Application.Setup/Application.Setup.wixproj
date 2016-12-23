@@ -19,8 +19,17 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressAllWarnings>True</SuppressAllWarnings>
+    <Pedantic>False</Pedantic>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\CustomWarningDlg.wxs" />
+    <Compile Include="Dialogs\OptionsDlg.wxs" />
+    <Compile Include="Fragments\Directories.wxs" />
+    <Compile Include="Fragments\DocumentationComponents.wxs" />
+    <Compile Include="Fragments\ProductComponents.wxs" />
+    <Compile Include="Fragments\Properties.wxs" />
+    <Compile Include="HoneyBadger_Mondo.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +41,31 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\Application.Setup.CustomActions\Application.Setup.CustomActions.csproj">
+      <Name>Application.Setup.CustomActions</Name>
+      <Project>{29900030-62d9-4943-99f6-c8fa516f7156}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fragments" />
+    <Folder Include="Images" />
+    <Folder Include="Dialogs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HoneyBadgerLicense.rtf" />
+    <Content Include="Images\honeybadgerbanner.bmp" />
+    <Content Include="Images\honeybadgerdialog.bmp" />
+    <Content Include="Images\honeybadger_16x16.ico" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

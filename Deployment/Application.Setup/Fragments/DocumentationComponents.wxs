@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <ComponentGroup Id="DocumentationComponents">
+      <Component Id="CMP_EndUserLicenseAgreement" Directory="DocFolder" Win64="yes">
+        <File Id="FILE_HoneyBadgerLicense.rtf" Source="HoneyBadgerLicense.rtf" KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>
