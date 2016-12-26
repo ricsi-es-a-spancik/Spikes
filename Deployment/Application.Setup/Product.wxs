@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Honey Badger Application" Language="1033" Version="1.0.0.0" Manufacturer="Honey Badgers" UpgradeCode="b15a0165-41c0-41d1-8a9f-cbef50b48149">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+	<Product Id="*" Name="Honey Badger Application" Language="!(loc.LocaleId)" Codepage="1252" Version="1.0.0.0" Manufacturer="Honey Badgers" UpgradeCode="b15a0165-41c0-41d1-8a9f-cbef50b48149">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" Languages="!(loc.LocaleId)" SummaryCodepage="!(loc.SummaryCodepage)"/>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
 
+    <!-- Properties -->
+    <PropertyRef Id="NPP_PATH"/>
+    <PropertyRef Id="MyTestProperty"/>
+    
+    <!-- Launch properties -->
     <Property Id="LaunchConditionProperty" Value="1"/>
     
     <Condition Message="Value of launch condition property must be greater than 0.">
       <![CDATA[Installed OR LaunchConditionProperty > 0]]>
     </Condition>
     
+    <!-- Features -->
 		<Feature Id="ProductFeature" Title="Application.Setup" Level="1">
 			<ComponentGroupRef Id="ProductComponents"/>
     
@@ -30,13 +36,10 @@
       </Component>
     </Feature>
 
-    <PropertyRef Id="NPP_PATH"/>
-    <PropertyRef Id="MyTestProperty"/>
-    
+    <!-- Icons and UI -->
     <Icon Id="ProgramsAndFeaturesIcon" SourceFile="Images\HB_20x20.ico"/>
     <Property Id="ARPPRODUCTICON" Value="ProgramsAndFeaturesIcon" />
     
-    <!-- UI --> 
     <WixVariable Id="WixUIDialogBmp" Value="Images\honeybadgerdialog.bmp"/>
     <WixVariable Id="WixUIBannerBmp" Value="Images\honeybadgerbanner.bmp"/>
     <WixVariable Id="WixUILicenseRtf" Value="HoneyBadgerLicense.rtf"/>

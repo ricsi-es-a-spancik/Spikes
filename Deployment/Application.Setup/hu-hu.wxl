@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="hu-hu" Codepage="1250" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="LocaleId">1038</String>
+  <String Id="SummaryCodepage">1250</String>
+  
+  <String Id="OptionsDlg_Title">A(z) [ProductName] telepítése</String>
+  <String Id="OptionsDlgDescription">Ezen a lapon adhatja meg egyéni beállításait.</String>
+  <String Id="OptionsDlgTitle">{\WixUI_Font_Title}Egyéni beállítások</String>
+  <String Id="OptionsDlgBannerBitmap">WixUI_Bmp_Banner</String>
+  <String Id="OptionsDlgEnableDoCustomActionText">Custom action engedélyezése</String>
+  <String Id="OptionsDlgCustomMessage">Üzenet:</String>
+  <String Id="OptionsDlgDoCustomActionButtonText">Custom action</String>
+  <String Id="OptionsDlgSelectADirectoryText">Mappa választása:</String>
+  <String Id="OptionsDlgSelectAFileText">.txt fájl választása:</String>
+  <String Id="OptionsDlgBrowse">Tallózás...</String>
+  <String Id="OptionsDlgCustomWarningMessage">A kiválasztott mappa vagy fájl nem érvényes.</String>
+
+  <String Id="CustomWarningDlg_Title">Figyelem!</String>
+  <String Id="CustomWarningDlgOk">Rendben</String>
+  <String Id="CustomWarningDlgExit">Kilépés</String>
+  <String Id="CustomWarningDlgIcoExclam">WixUI_Ico_Exclam</String>
+</WixLocalization>

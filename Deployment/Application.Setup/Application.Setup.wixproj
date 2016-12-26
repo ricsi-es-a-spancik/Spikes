@@ -21,6 +21,7 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressAllWarnings>True</SuppressAllWarnings>
     <Pedantic>False</Pedantic>
+    <Cultures>en-US;hu-HU</Cultures>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Dialogs\CustomWarningDlg.wxs" />
@@ -75,6 +76,10 @@
     <Content Include="Images\HB_20x20.ico" />
     <Content Include="Images\honeybadgerbanner.bmp" />
     <Content Include="Images\honeybadgerdialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="en-us.wxl" />
+    <EmbeddedResource Include="hu-hu.wxl" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
