@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Application.Setup" Language="1033" Version="1.0.0.0" Manufacturer="Honey Badgers" UpgradeCode="b15a0165-41c0-41d1-8a9f-cbef50b48149">
+	<Product Id="*" Name="Honey Badger Application" Language="1033" Version="1.0.0.0" Manufacturer="Honey Badgers" UpgradeCode="b15a0165-41c0-41d1-8a9f-cbef50b48149">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -18,6 +18,10 @@
       <Feature Id="DocumentationFeature" Title="Documentations" Level="1">
         <ComponentGroupRef Id="DocumentationComponents"/>
       </Feature>
+    
+      <Feature Id="ServiceFeature" Title="Service.Host" Level="1">
+        <ComponentGroupRef Id="ServiceComponents"/>
+      </Feature>
 		</Feature>
     
     <Feature Id="ExamplesFeature" Title="Examples" Level="4">
@@ -29,7 +33,7 @@
     <PropertyRef Id="NPP_PATH"/>
     <PropertyRef Id="MyTestProperty"/>
     
-    <Icon Id="ProgramsAndFeaturesIcon" SourceFile="Images\honeybadger_16x16.ico"/>
+    <Icon Id="ProgramsAndFeaturesIcon" SourceFile="Images\HB_20x20.ico"/>
     <Property Id="ARPPRODUCTICON" Value="ProgramsAndFeaturesIcon" />
     
     <!-- UI --> 

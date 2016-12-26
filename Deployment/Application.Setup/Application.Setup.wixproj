@@ -29,6 +29,7 @@
     <Compile Include="Fragments\DocumentationComponents.wxs" />
     <Compile Include="Fragments\ProductComponents.wxs" />
     <Compile Include="Fragments\Properties.wxs" />
+    <Compile Include="Fragments\ServiceComponents.wxs" />
     <Compile Include="HoneyBadger_Mondo.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
@@ -49,6 +50,14 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\Service.Host\Service.Host.csproj">
+      <Name>Service.Host</Name>
+      <Project>{960fcef3-90c1-4c24-bb34-bb7fd3709b71}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fragments" />
@@ -63,9 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="HoneyBadgerLicense.rtf" />
+    <Content Include="Images\HB_20x20.ico" />
     <Content Include="Images\honeybadgerbanner.bmp" />
     <Content Include="Images\honeybadgerdialog.bmp" />
-    <Content Include="Images\honeybadger_16x16.ico" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
