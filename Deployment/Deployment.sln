@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Implementation", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Host", "Service.Host\Service.Host.csproj", "{960FCEF3-90C1-4C24-BB34-BB7FD3709B71}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Application.Bundle", "Application.Bundle\Application.Bundle.wixproj", "{347207A9-9354-4284-BD3F-2207BE18AC58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,14 @@ Global
 		{960FCEF3-90C1-4C24-BB34-BB7FD3709B71}.Release|x64.Build.0 = Release|Any CPU
 		{960FCEF3-90C1-4C24-BB34-BB7FD3709B71}.Release|x86.ActiveCfg = Release|Any CPU
 		{960FCEF3-90C1-4C24-BB34-BB7FD3709B71}.Release|x86.Build.0 = Release|Any CPU
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Debug|x64.ActiveCfg = Debug|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Debug|x86.ActiveCfg = Debug|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Debug|x86.Build.0 = Debug|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Release|Any CPU.ActiveCfg = Release|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Release|x64.ActiveCfg = Release|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Release|x86.ActiveCfg = Release|x86
+		{347207A9-9354-4284-BD3F-2207BE18AC58}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

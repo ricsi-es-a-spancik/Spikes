@@ -13,6 +13,7 @@ namespace LibraryCLRWrapper {
 	public:
 		ImageDisplay();
 		void Display(System::String^ imagePath);
+		array<byte>^ GetByteArray();
 		~ImageDisplay();
 	private:
 		Library::ImageDisplay* _imageDisplay;

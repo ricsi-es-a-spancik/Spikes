@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="Honey Badger Bundle" 
+          Version="1.0.0.0" 
+          Manufacturer="Honey Badgers" 
+          UpgradeCode="347207a9-9354-4284-bd3f-2207be18ac58">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense"/>
+
+		<Chain>
+      <PackageGroupRef Id="NetFx46Web"/>
+      
+      <MsiPackage SourceFile="$(var.Application.Setup.TargetDir)\en-US\Application.Setup.msi" 
+                  DisplayInternalUI="yes" 
+                  Vital="yes"
+                  Visible="yes"
+                  Compressed="yes"/>
+		</Chain>
+	</Bundle>
+</Wix>

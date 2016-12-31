@@ -15,9 +15,21 @@ namespace LibraryCLRWrapper {
 	void ImageDisplay::Display(System::String^ imagePath)
 	{
 		msclr::interop::marshal_context context;
-		std::string standardImagePart = context.marshal_as<std::string>(imagePath);
+		std::string standardImagePath = context.marshal_as<std::string>(imagePath);
+		
+		_imageDisplay->Display(standardImagePath);
+	}
 
-		_imageDisplay->Display(standardImagePart);
+	array<byte>^ ImageDisplay::GetByteArray()
+	{
+		array<byte>^ ret = gcnew array<byte>(5);
+		
+		for (int i = 0; i < 5; ++i)
+		{
+			ret[i] = i * 11;
+		}
+		
+		return ret;
 	}
 
 	ImageDisplay::~ImageDisplay()

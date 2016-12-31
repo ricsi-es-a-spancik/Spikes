@@ -18,6 +18,8 @@ namespace Application.Console
 
                 PrintLoadedAssemblies();
 
+                GetAndPrintByteArray();
+
                 System.Console.ReadLine();
             }
             else
@@ -36,6 +38,19 @@ namespace Application.Console
                 System.Console.WriteLine($"  {assembly.FullName}");
                 System.Console.WriteLine($"  {assembly.CodeBase}");
                 System.Console.WriteLine($"  {assembly.Version}\n");
+            }
+        }
+
+        static void GetAndPrintByteArray()
+        {
+            var imageDisplay = new ImageDisplay();
+            var array = imageDisplay.GetByteArray();
+
+            System.Console.WriteLine("Elements from the received byte array:");
+
+            foreach(var elem in array)
+            {
+                System.Console.WriteLine($"  {elem}");
             }
         }
     }
