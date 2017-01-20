@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    
+    <CustomAction Id="CA_ShowCustomMessage"
+                  BinaryKey="CustomActionsDLL"
+                  DllEntry="ShowCustomMessage"
+                  Execute="immediate"
+                  Return="check"/>
+
+    <CustomAction Id="CA_SelectATxtFile"
+                  BinaryKey="CustomActionsDLL"
+                  DllEntry="SelectATxtFile"
+                  Execute="immediate"
+                  Return="check"/>
+
+    <CustomAction Id="CA_ValidateSelectedDirectryAndSelectedFile"
+                  BinaryKey="CustomActionsDLL"
+                  DllEntry="ValidateSelectedDirectryAndSelectedFile"
+                  Execute="immediate"
+                  Return="check"/>
+    
+    <UI>
+      <Property Id="SELECTEDDIRECTORY" Value="C:\"/>
+      <Property Id="SELECTEDFILE" Value="C:\"/>
+      
+      <Dialog Id="OptionsDlg" Width="370" Height="270" Title="!(loc.OptionsDlg_Title)">
+        <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
+          <Publish Event="DoAction" Value="CA_ValidateSelectedDirectryAndSelectedFile" Order="1">1</Publish>
+          <Publish Property="CUSTOMWARNINGMESSAGE" Value="!(loc.OptionsDlgCustomWarningMessage)" Order="2"><![CDATA[SELECTEDPATHSAREVALID <> "True"]]></Publish>
+          <Publish Event="SpawnDialog" Value="CustomWarningDlg" Order="3"><![CDATA[SELECTEDPATHSAREVALID <> "True"]]></Publish>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+        </Control>
+        
+        <Control Id="Description" Type="Text" X="25" Y="23" Width="340" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.OptionsDlgDescription)" />
+        <Control Id="Title" Type="Text" X="15" Y="6" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.OptionsDlgTitle)" />
+        <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.OptionsDlgBannerBitmap)" />
+        <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+
+        <!--Doing a custom action after enabling it with a checkbox-->
+        <Control Id="EnableDoCustomActionCheckBox"
+                 Type="CheckBox"
+                 Property="EnableDoCustomAction"
+                 CheckBoxValue="0"
+                 Text="!(loc.OptionsDlgEnableDoCustomActionText)"
+                 X="25" Y="55" Height="10" Width="150"/>
+
+        <Control Id="CustomMessageText"
+                 Type="Text"
+                 Text="!(loc.OptionsDlgCustomMessage)"
+                 X="25" Y="70" Height="10" Width="75"/>
+        
+        <Control Id="CustomMessageEdit"
+                 Type="Edit"
+                 Property="CUSTOMMESSAGE"
+                 X="100" Y="70" Height="17" Width="150">
+
+          <Condition Action="enable">
+            <![CDATA[EnableDoCustomAction = 0]]>
+          </Condition>
+
+          <Condition Action="disable">
+            <![CDATA[EnableDoCustomAction <> 0]]>
+          </Condition>
+        </Control>
+                 
+        <Control Id="EnableDoCustomActionButton"
+                 Type="PushButton"
+                 Text="!(loc.OptionsDlgDoCustomActionButtonText)"
+                 X="25" Y="87" Height="17" Width="100">
+          
+          <Condition Action="enable">
+            <![CDATA[EnableDoCustomAction = 0]]>
+          </Condition>
+          
+          <Condition Action="disable">
+            <![CDATA[EnableDoCustomAction <> 0]]>
+          </Condition>
+
+          <Publish Event="DoAction" Value="CA_ShowCustomMessage">1</Publish>
+          
+          <!--<Publish Event="EndDialog" Value="Exit"/>-->
+        </Control>
+        
+        <!--Selecting a directory-->
+        <Control Id="SelectADirectoryText"
+                 Type="Text"
+                 Text="!(loc.OptionsDlgSelectADirectoryText)"
+                 X="25" Y="135" Height="10" Width="75"/>
+        
+        <Control Id="SelectedDirectoryEdit"
+                 Type="Edit"
+                 Property="SELECTEDDIRECTORY"
+                 X="100" Y="135" Height="17" Width="175"/>
+
+        <!--<Control Id="SelectADirectoryBrowseButton"
+                 Type="PushButton"
+                 Text="..."
+                 X="280" Y="130" Height="17" Width="25">
+        </Control>-->
+
+        <!--Selecting a file within a custom action-->
+        <Control Id="SelectAFileText"
+                 Type="Text"
+                 Text="!(loc.OptionsDlgSelectAFileText)"
+                 X="25" Y="155" Height="10" Width="75"/>
+        
+        <Control Id="SelectedFileEdit"
+                 Type="Edit"
+                 Property="SELECTEDFILE"
+                 Indirect="no"
+                 X="100" Y="155" Height="17" Width="175"/>
+
+        <Control Id="SelectAFileBrowseButton"
+                 Type="PushButton"
+                 Text="!(loc.OptionsDlgBrowse)"
+                 X="280" Y="155" Height="17" Width="66">
+
+          <Publish Event="DoAction" Value="CA_SelectATxtFile" Order="1">1</Publish>
+          <Publish Property="SELECTEDFILE" Value="[SELECTEDFILE]" Order="2">1</Publish>
+        </Control>
+      </Dialog>
+    </UI>
+	</Fragment>
+</Wix>

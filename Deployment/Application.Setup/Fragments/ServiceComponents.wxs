@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <ComponentGroup Id="ServiceComponents">
+      <Component Id="CMP_ServiceInterfaces" Directory="BinFolder" Win64="yes">
+        <File Id="FILE_Service.Interfaces.dll" Source="$(var.Service.Host.TargetDir)Service.Interfaces.dll" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP_ServiceImplementation" Directory="BinFolder" Win64="yes">
+        <File Id="FILE_Service.Implementation.dll" Source="$(var.Service.Host.TargetDir)Service.Implementation.dll" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP_ServiceHostConfig" Directory="BinFolder" Win64="yes">
+        <File Id="FILE_Service.Host.exe.config" Source="$(var.Service.Host.TargetPath).config" KeyPath="yes"/>
+      </Component>
+      
+      <Component Id="CMP_ServiceHost" Directory="BinFolder" Win64="yes">
+        <File Id="FILE_Service.Host.exe" Source="$(var.Service.Host.TargetPath)" KeyPath="yes"/>
+        <ServiceInstall Id="ServiceInstallServiceHost" Name="HoneyService" DisplayName="Honey Badger Service" Start="auto" ErrorControl="normal" Type="ownProcess"/>
+        <ServiceControl Id="ServiceControlServiceHost" Name="HoneyService" Start="install" Stop="both" Remove="uninstall" Wait="yes"/>
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>

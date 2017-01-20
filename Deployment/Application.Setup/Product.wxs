@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Honey Badger Application" Language="!(loc.LocaleId)" Codepage="1252" Version="1.0.0.0" Manufacturer="Honey Badgers" UpgradeCode="b15a0165-41c0-41d1-8a9f-cbef50b48149">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" Languages="!(loc.LocaleId)" SummaryCodepage="!(loc.SummaryCodepage)"/>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <!-- Properties -->
+    <PropertyRef Id="NPP_PATH"/>
+    <PropertyRef Id="MyTestProperty"/>
+    
+    <!-- Launch properties -->
+    <Property Id="LaunchConditionProperty" Value="1"/>
+    
+    <Condition Message="Value of launch condition property must be greater than 0.">
+      <![CDATA[Installed OR LaunchConditionProperty > 0]]>
+    </Condition>
+    
+    <!-- Features -->
+		<Feature Id="ProductFeature" Title="Application.Setup" Level="1">
+			<ComponentGroupRef Id="ProductComponents"/>
+    
+      <Feature Id="DocumentationFeature" Title="Documentations" Level="1">
+        <ComponentGroupRef Id="DocumentationComponents"/>
+      </Feature>
+    
+      <Feature Id="ServiceFeature" Title="Service.Host" Level="1">
+        <ComponentGroupRef Id="ServiceComponents"/>
+      </Feature>
+		</Feature>
+    
+    <Feature Id="ExamplesFeature" Title="Examples" Level="4">
+      <Component Id="CMP_Examples" Directory="ExamplesFolder" Win64="yes" KeyPath="yes" Guid="{095940C3-4C7A-4C85-8298-0BE3855C60A8}">
+        <CreateFolder/>
+      </Component>
+    </Feature>
+
+    <!-- Icons and UI -->
+    <Icon Id="ProgramsAndFeaturesIcon" SourceFile="Images\HB_20x20.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="ProgramsAndFeaturesIcon" />
+    
+    <WixVariable Id="WixUIDialogBmp" Value="Images\honeybadgerdialog.bmp"/>
+    <WixVariable Id="WixUIBannerBmp" Value="Images\honeybadgerbanner.bmp"/>
+    <WixVariable Id="WixUILicenseRtf" Value="HoneyBadgerLicense.rtf"/>
+    
+    <!--<UIRef Id="WixUI_InstallDir"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>-->
+
+    <!--<UIRef Id="WixUI_FeatureTree"/>-->
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
+    <UIRef Id="HoneyBadger_Mondo"/>
+    
+    <!-- Custom Actions -->
+    <CustomAction Id="MyCustomActionInUISequence" Property="MyTestProperty" Value="666"/>
+  
+    <InstallUISequence>
+      <Custom Action="MyCustomActionInUISequence" After="CostFinalize"/>
+    </InstallUISequence>
+  
+    <CustomAction Id="MyCustomActionInExecuteSequence" Property="MyTestProperty" Value="777"/>
+  
+    <InstallExecuteSequence>
+      <Custom Action="MyCustomActionInExecuteSequence" Before="InstallFinalize"/>
+    </InstallExecuteSequence>
+  
+    <Binary Id="CustomActionsDLL" SourceFile="$(var.Application.Setup.CustomActions.TargetDir)Application.Setup.CustomActions.CA.dll"/>
+  
+    <CustomAction Id="CA_CustomAction1"
+                  BinaryKey="CustomActionsDLL"
+                  DllEntry="CustomAction1"
+                  Execute="immediate"
+                  Return="check"/>
+
+    <!--<InstallUISequence>
+      <Custom Action="CA_CustomAction1" After="MyCustomActionInUISequence">
+        <![CDATA[NOT Installed]]>
+      </Custom>
+    </InstallUISequence>-->
+	</Product>
+</Wix>

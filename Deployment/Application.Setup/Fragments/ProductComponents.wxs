@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <ComponentGroup Id="ProductComponents">
+      <Component Id="CMP_ApplicationConsoleSetup" Directory="INSTALLFOLDER" Win64="yes">
+        <File Id="FILE_Application.Console.exe" Source="$(var.Application.Console.TargetPath)" KeyPath="yes" />
+        <File Id="FILE_Application.Console.exe.config" Source="$(var.Application.Console.TargetPath).config" />
+      </Component>
+
+      <Component Id="CMP_SampleImages" Directory="SampleImagesFolder" Win64="yes">
+        <File Id="FILE_HoneyBagderSample.jpg" Source="$(var.Application.Console.TargetDir)\Images\honey-badger.jpg" />
+      </Component>
+
+      <Component Id="CMP_OpenCVAssemblies" Directory="BinFolder" Win64="yes" Guid="0ed15f34-da13-417f-b415-f7b1b150c175">
+        <File Id="FILE_LibraryCLRWrapper.dll" Source="$(var.Application.Console.TargetDir)\LibraryCLRWrapper.dll" />
+        <File Id="FILE_opencv_world300.dll" Source="$(env.OPENCV_DIR)\bin\opencv_world300.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

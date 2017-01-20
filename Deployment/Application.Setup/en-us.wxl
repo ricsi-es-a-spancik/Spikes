@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-US" Codepage="1252" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="LocaleId">1033</String>
+  <String Id="SummaryCodepage">1252</String>
+  
+	<String Id="OptionsDlg_Title">[ProductName] Setup</String>
+  <String Id="OptionsDlgDescription">Please fill in the following custom settings.</String>
+  <String Id="OptionsDlgTitle">{\WixUI_Font_Title}Custom settings</String>
+  <String Id="OptionsDlgBannerBitmap">WixUI_Bmp_Banner</String>
+  <String Id="OptionsDlgEnableDoCustomActionText">Enable doing a custom action</String>
+  <String Id="OptionsDlgCustomMessage">Enter a message:</String>
+  <String Id="OptionsDlgDoCustomActionButtonText">Do custom action</String>
+  <String Id="OptionsDlgSelectADirectoryText">Select a directory:</String>
+  <String Id="OptionsDlgSelectAFileText">Select a .txt file:</String>
+  <String Id="OptionsDlgBrowse">Browse...</String>
+  <String Id="OptionsDlgCustomWarningMessage">The selected directory or file paths is invalid.</String>
+
+  <String Id="CustomWarningDlg_Title">Warning!</String>
+  <String Id="CustomWarningDlgOk">Ok</String>
+  <String Id="CustomWarningDlgExit">Exit</String>
+  <String Id="CustomWarningDlgIcoExclam">WixUI_Ico_Exclam</String>
+</WixLocalization>
