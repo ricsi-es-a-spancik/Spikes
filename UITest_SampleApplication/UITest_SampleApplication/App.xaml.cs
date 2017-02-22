@@ -1,45 +1,72 @@
-﻿using Microsoft.Practices.Prism.PubSubEvents;
-using System.Windows;
-using UITest_SampleApplication.View;
-using UITest_SampleApplication.ViewModel;
-using UITest_SampleApplication.ViewModel.Events;
-using UITest_SampleApplication.Model;
-
-namespace UITest_SampleApplication
+﻿namespace UITest_SampleApplication
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Windows;
+
+    using Prism.Events;
+
+    using UITest_SampleApplication.Model;
+    using UITest_SampleApplication.View;
+    using UITest_SampleApplication.ViewModel;
+    using UITest_SampleApplication.ViewModel.Events;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    public partial class App
     {
-        private IEventAggregator _eventAggregator = new EventAggregator();
+        private readonly IEventAggregator _eventAggregator = new EventAggregator();
+
         private LoginWindow _loginView;
+        private MainWindow _mainView;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             _eventAggregator.GetEvent<LoginRequested>().Subscribe(OnLoginRequested);
+            _eventAggregator.GetEvent<CancelLoginRequested>().Subscribe(OnCancelLoginRequested);
+            _eventAggregator.GetEvent<SignOutRequested>().Subscribe(OnSignOutRequested);
 
             var loginViewModel = new LoginViewModel(_eventAggregator);
             _loginView = new LoginWindow { DataContext = loginViewModel };
+            _loginView.Closed += OnApplicationWindowClosed;
 
             _loginView.Show();
         }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            OnApplicationWindowClosed(null, EventArgs.Empty);
+        }
+
         private void OnLoginRequested(UserCredentials credentials)
         {
-            if (string.IsNullOrWhiteSpace(credentials.LoginName))
-            {
-                MessageBox.Show("You must provide a valid login name!", "Error");
-                return;
-            }
-                
             var mainViewModel = new MainViewModel(_eventAggregator, credentials.LoginName);
-            var mainView = new MainWindow { DataContext = mainViewModel };
+            _mainView = new MainWindow { DataContext = mainViewModel };
+            _mainView.Closed += OnApplicationWindowClosed;
 
-            mainView.Show();
+            _mainView.Show();
+            _loginView.Hide();
+        }
+
+        private void OnCancelLoginRequested()
+        {
+            Shutdown();
+        }
+
+        private void OnSignOutRequested()
+        {
+            _loginView.Show();
+            _mainView.Hide();
+        }
+
+        private void OnApplicationWindowClosed(object sender, EventArgs e)
+        {
             _loginView.Close();
+            _mainView?.Close();
         }
     }
 }

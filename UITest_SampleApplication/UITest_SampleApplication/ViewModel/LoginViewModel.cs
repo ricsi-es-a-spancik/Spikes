@@ -1,35 +1,50 @@
-﻿using Microsoft.Practices.Prism.Commands;
-using System.Windows.Input;
-using Microsoft.Practices.Prism.PubSubEvents;
-using UITest_SampleApplication.Model;
-using UITest_SampleApplication.ViewModel.Events;
-
-namespace UITest_SampleApplication.ViewModel
+﻿namespace UITest_SampleApplication.ViewModel
 {
+    using Prism.Events;
+
+    using UITest_SampleApplication.Model;
+    using UITest_SampleApplication.ViewModel.Events;
+
     public class LoginViewModel : BindableBase
     {
-        private IEventAggregator _eventAggregator;
+        private readonly LoginProgressViewModel _loginProgressViewModel;
+        private readonly CredentialsFormViewModel _credentialsFormViewModel;
 
-        private UserCredentials _credentials;
+        private BindableBase _currentViewModel;
 
         public LoginViewModel(IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;
-            _credentials = new UserCredentials();
-            Login = new DelegateCommand(OnLogin);
+            _credentialsFormViewModel = new CredentialsFormViewModel(eventAggregator);
+            _loginProgressViewModel = new LoginProgressViewModel(eventAggregator);
+
+            eventAggregator.GetEvent<ValidatingCredentialsRequested>().Subscribe(OnValidatingCredentialsRequested);
+            eventAggregator.GetEvent<ReenterCredentialsRequested>().Subscribe(OnReenterCredentialsRequested);
+            eventAggregator.GetEvent<SignOutRequested>().Subscribe(OnSignOutRequested);
+
+            CurrentViewModel = _credentialsFormViewModel;
         }
 
-        public UserCredentials Credentials
+        public BindableBase CurrentViewModel
         {
-            get { return _credentials; }
-            set { SetProperty(ref _credentials, value); }
+            get { return _currentViewModel; }
+            set { SetProperty(ref _currentViewModel, value); }
         }
 
-        public ICommand Login { get; private set; }
-
-        private void OnLogin()
+        private void OnValidatingCredentialsRequested(UserCredentials credentials)
         {
-            _eventAggregator.GetEvent<LoginRequested>().Publish(_credentials);
+            CurrentViewModel = _loginProgressViewModel;
+            _loginProgressViewModel.AuthenticateUser(credentials);
+        }
+
+        private void OnReenterCredentialsRequested()
+        {
+            CurrentViewModel = _credentialsFormViewModel;
+        }
+
+        private void OnSignOutRequested()
+        {
+            CurrentViewModel = _loginProgressViewModel;
+            _loginProgressViewModel.SignOutUser();
         }
     }
 }

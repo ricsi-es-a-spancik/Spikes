@@ -4,7 +4,7 @@
 
     using UITest_SampleApplication.Model;
 
-    public class LoginRequested : PubSubEvent<UserCredentials>
+    public class ValidatingCredentialsRequested : PubSubEvent<UserCredentials>
     {
     }
 }
