@@ -1,24 +1,22 @@
 namespace UiTests
 {
     using TestStack.White.UIItems;
-    using TestStack.White.UIItems.Finders;
     using TestStack.White.UIItems.MenuItems;
     using TestStack.White.UIItems.WindowItems;
 
-    public class MainWindow
+    public class MainWindow : WindowObject
     {
-        private readonly Window _window;
+        private const string SIGN_OUT = "Sign out";
+        private const string ACTIVE_USER_BUTTON_AUTOMATION_ID = "ActiveUserButton";
 
-        public MainWindow(Window window)
+        internal MainWindow(Window window)
+            : base(window)
         {
-            _window = window;
         }
 
-        public bool IsCurrentlyActive => _window.IsCurrentlyActive;
+        private Button ActiveUserButton => ButtonById(ACTIVE_USER_BUTTON_AUTOMATION_ID);
 
-        private Button ActiveUserButton => _window.Get<Button>(SearchCriteria.ByAutomationId("ActiveUserButton"));
-
-        private Menu SignOutMenu => _window.Get<Menu>(SearchCriteria.ByText("Sign out"));
+        private Menu SignOutMenu => Menu(SIGN_OUT);
 
         public void SignOutFromUserContextMenu()
         {

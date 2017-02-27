@@ -67,6 +67,7 @@
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestApplication.cs" />
+    <Compile Include="WindowObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
