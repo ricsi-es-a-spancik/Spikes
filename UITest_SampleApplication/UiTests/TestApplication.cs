@@ -11,17 +11,15 @@ namespace UiTests
     {
         private static Application _application;
 
-        public static LoginWindow LoginWindow { get; private set; }
+        public static LoginWindow LoginWindow => new LoginWindow(GetWindow("LoginWindow"));
 
-        public static MainWindow MainWindow { get; private set; }
+        public static MainWindow MainWindow => new MainWindow(GetWindow("MainWindow"));
 
         public static bool HasExited => _application.HasExited;
 
         public static void Init(Application application)
         {
             _application = application;
-            LoginWindow = new LoginWindow(() => GetWindow("LoginWindow"));
-            MainWindow = new MainWindow(() => GetWindow("MainWindow"));
         }
 
         private static Window GetWindow(string title)

@@ -1,7 +1,5 @@
 namespace UiTests
 {
-    using System;
-
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.Finders;
     using TestStack.White.UIItems.MenuItems;
@@ -9,18 +7,18 @@ namespace UiTests
 
     public class MainWindow
     {
-        private readonly Func<Window> _getWindow;
+        private readonly Window _window;
 
-        public MainWindow(Func<Window> getWindow)
+        public MainWindow(Window window)
         {
-            _getWindow = getWindow;
+            _window = window;
         }
 
-        public bool IsCurrentlyActive => _getWindow().IsCurrentlyActive;
+        public bool IsCurrentlyActive => _window.IsCurrentlyActive;
 
-        private Button ActiveUserButton => _getWindow().Get<Button>(SearchCriteria.ByAutomationId("ActiveUserButton"));
+        private Button ActiveUserButton => _window.Get<Button>(SearchCriteria.ByAutomationId("ActiveUserButton"));
 
-        private Menu SignOutMenu => _getWindow().Get<Menu>(SearchCriteria.ByText("Sign out"));
+        private Menu SignOutMenu => _window.Get<Menu>(SearchCriteria.ByText("Sign out"));
 
         public void SignOutFromUserContextMenu()
         {
