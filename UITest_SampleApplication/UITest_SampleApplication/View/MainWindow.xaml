@@ -12,7 +12,7 @@
         d:DataContext="{d:DesignInstance d:Type=viewModel:MainViewModel, IsDesignTimeCreatable=True}">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Content="{Binding ActiveUser}" x:Name="ActiveUserButton">
+            <Button Content="{Binding ActiveUser}" x:Name="ActiveUserButton" AutomationProperties.AutomationId="ActiveUserButton">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:ChangePropertyAction TargetObject="{Binding ContextMenu, ElementName=ActiveUserButton}" PropertyName="PlacementTarget" Value="{Binding ElementName=ActiveUserButton, Mode=OneWay}"/>

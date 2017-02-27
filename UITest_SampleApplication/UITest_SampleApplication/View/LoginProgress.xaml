@@ -28,7 +28,7 @@
             </Rectangle.OpacityMask>
         </Rectangle>
 
-        <TextBlock Text="The provided credentials did not match any exsiting user." Grid.Row="1" VerticalAlignment="Top" Margin="30,0" TextWrapping="Wrap"
+        <TextBlock Text="The provided credentials did not match any existing user." Grid.Row="1" VerticalAlignment="Top" Margin="30,0" TextWrapping="Wrap"
                    Visibility="{Binding IsAuthenticationFailed, Converter={StaticResource BoolToVisibilityConverter}}"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"
                     Visibility="{Binding IsAuthenticationFailed, Converter={StaticResource BoolToVisibilityConverter}}">
