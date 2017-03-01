@@ -44,6 +44,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="TestStack.White, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
       <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
       <Private>True</Private>
@@ -72,6 +73,20 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Debug.config">
+      <DependentUpon>App.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Release.config">
+      <DependentUpon>App.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -92,11 +107,17 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <PropertyGroup>
+    <BuildDependsOn>UpdateConfiguration;AddTestApplicationExecutablePathToAppConfig;$(BuildDependsOn)</BuildDependsOn>
+	<CleanDependsOn>CleanConfiguration;$(CleanDependsOn)</CleanDependsOn>
+  </PropertyGroup>
+  <Target Name="UpdateConfiguration">
+    <Copy SourceFiles="App.$(Configuration).config" DestinationFiles="App.config" />
   </Target>
-  <Target Name="AfterBuild">
+  <Target Name="CleanConfiguration">
+    <Delete Files="App.config" />
   </Target>
-  -->
+  <Target Name="AddTestApplicationExecutablePathToAppConfig">
+    <XmlPoke XmlInputPath="App.Config" Query="/configuration/appSettings/add[@key='UITest_SampleApplicationExecutablePath']/@value" Value="$(ProjectDir)..\UITest_SampleApplication\bin\$(Configuration)\UITest_SampleApplication.exe" />
+  </Target>
 </Project>

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITest_SampleApplication", "UITest_SampleApplication\UITest_SampleApplication.csproj", "{EEBF92EB-18F5-4E16-B2CB-5379CADD7834}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UiTests", "UiTests\UiTests.csproj", "{D22D3DBD-88FA-4B15-8828-143347321839}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEBF92EB-18F5-4E16-B2CB-5379CADD7834} = {EEBF92EB-18F5-4E16-B2CB-5379CADD7834}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

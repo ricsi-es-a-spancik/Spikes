@@ -1,6 +1,7 @@
 ﻿namespace UiTests
 {
     using System;
+    using System.Configuration;
     using System.IO;
 
     using NUnit.Framework;
@@ -10,7 +11,6 @@
     [TestFixture]
     public class SmokeTests
     {
-        private const string EXECUTABLE = @"C:\Users\d.hornyak\gitrepo\Spikes\UITest_SampleApplication\UITest_SampleApplication\bin\Debug\UITest_SampleApplication.exe";
         private const string USER_LOGIN_NAME = "Mr. Asd";
 
         [SetUp]
@@ -18,7 +18,7 @@
         {
             Console.WriteLine(Directory.GetCurrentDirectory());
 
-            var application = Application.Launch(EXECUTABLE);
+            var application = Application.Launch(ConfigurationManager.AppSettings["UITest_SampleApplicationExecutablePath"]);
             TestApplication.Init(application);
         }
 
