@@ -8,7 +8,6 @@
     using Prism.Events;
 
     using UITest_SampleApplication.Model;
-    using UITest_SampleApplication.ViewModel.Events;
 
     public class LoginProgressViewModel : BindableBase
     {
@@ -55,7 +54,7 @@
             }
             else
             {
-                _eventAggregator.GetEvent<LoginRequested>().Publish(credentials);
+                _eventAggregator.GetEvent<Events.LoginRequested>().Publish(credentials);
             }
         }
 
@@ -65,17 +64,17 @@
 
             await Task.Delay(TimeSpan.FromSeconds(3));
 
-            _eventAggregator.GetEvent<ReenterCredentialsRequested>().Publish();
+            _eventAggregator.GetEvent<Events.ReenterCredentialsRequested>().Publish();
         }
 
         private void OnCancelLogin()
         {
-            _eventAggregator.GetEvent<CancelLoginRequested>().Publish();
+            _eventAggregator.GetEvent<Events.CancelLoginRequested>().Publish();
         }
 
         private void OnReenterCredentials()
         {
-            _eventAggregator.GetEvent<ReenterCredentialsRequested>().Publish();
+            _eventAggregator.GetEvent<Events.ReenterCredentialsRequested>().Publish();
         }
     }
 }

@@ -7,7 +7,6 @@
     using Prism.Events;
 
     using UITest_SampleApplication.Model;
-    using UITest_SampleApplication.ViewModel.Events;
 
     public class CredentialsFormViewModel : BindableBase
     {
@@ -31,7 +30,7 @@
 
         private void OnLogin()
         {
-            _eventAggregator.GetEvent<ValidatingCredentialsRequested>().Publish(_credentials);
+            _eventAggregator.GetEvent<Events.ValidatingCredentialsRequested>().Publish(_credentials);
         }
     }
 }

@@ -68,6 +68,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Character.cs" />
+    <Compile Include="Model\DataContext.cs" />
+    <Compile Include="Model\IDataContext.cs" />
+    <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\Vehicle.cs" />
+    <Compile Include="ViewModel\Events.cs" />
+    <Compile Include="ViewModel\NewOrganizationDialogViewModel.cs" />
+    <Compile Include="ViewModel\OrganizationViewModel.cs" />
+    <Compile Include="View\UserControls\AddButton.xaml.cs">
+      <DependentUpon>AddButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\NewOrganizationDialog.xaml.cs">
+      <DependentUpon>NewOrganizationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\OrganizationsControl.xaml.cs">
+      <DependentUpon>OrganizationsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\RichTextFile.cs" />
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,16 +116,11 @@
     </Compile>
     <Compile Include="Model\UserCredentials.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
-    <Compile Include="ViewModel\Events\CancelLoginRequested.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="ViewModel\Events\LoginRequested.cs" />
     <Compile Include="ViewModel\CredentialsFormViewModel.cs" />
     <Compile Include="ViewModel\LoginProgressViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\Events\ValidatingCredentialsRequested.cs" />
-    <Compile Include="ViewModel\Events\ReenterCredentialsRequested.cs" />
-    <Compile Include="ViewModel\Events\SignOutRequested.cs" />
     <Compile Include="View\CredentialsForm.xaml.cs">
       <DependentUpon>CredentialsForm.xaml</DependentUpon>
     </Compile>
@@ -121,6 +134,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\UserControls\AddButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\NewOrganizationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\OrganizationsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -146,6 +171,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\Organizations\GALACTIC_EMPIRE.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Organizations\REBEL_ALLIANCE.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +188,7 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

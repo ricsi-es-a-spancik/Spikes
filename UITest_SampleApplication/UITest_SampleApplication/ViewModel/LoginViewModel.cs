@@ -3,7 +3,6 @@
     using Prism.Events;
 
     using UITest_SampleApplication.Model;
-    using UITest_SampleApplication.ViewModel.Events;
 
     public class LoginViewModel : BindableBase
     {
@@ -17,9 +16,9 @@
             _credentialsFormViewModel = new CredentialsFormViewModel(eventAggregator);
             _loginProgressViewModel = new LoginProgressViewModel(eventAggregator);
 
-            eventAggregator.GetEvent<ValidatingCredentialsRequested>().Subscribe(OnValidatingCredentialsRequested);
-            eventAggregator.GetEvent<ReenterCredentialsRequested>().Subscribe(OnReenterCredentialsRequested);
-            eventAggregator.GetEvent<SignOutRequested>().Subscribe(OnSignOutRequested);
+            eventAggregator.GetEvent<Events.ValidatingCredentialsRequested>().Subscribe(OnValidatingCredentialsRequested);
+            eventAggregator.GetEvent<Events.ReenterCredentialsRequested>().Subscribe(OnReenterCredentialsRequested);
+            eventAggregator.GetEvent<Events.SignOutRequested>().Subscribe(OnSignOutRequested);
 
             CurrentViewModel = _credentialsFormViewModel;
         }
