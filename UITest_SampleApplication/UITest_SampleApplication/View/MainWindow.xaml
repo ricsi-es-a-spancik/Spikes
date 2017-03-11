@@ -12,7 +12,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="640" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
         d:DataContext="{d:DesignInstance d:Type=viewModel:MainViewModel, IsDesignTimeCreatable=True}"
-        dialog:DialogParticipation.Register="{Binding}">
+        dialog:DialogParticipation.Register="{Binding}"
+        RightWindowCommandsOverlayBehavior="Never" WindowButtonCommandsOverlayBehavior="Always">
+    
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Content="{Binding ActiveUser}" x:Name="ActiveUserButton" AutomationProperties.AutomationId="ActiveUserButton">
@@ -31,6 +33,14 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
 
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout Position="Right" Width="280" IsOpen="{Binding CharacterDetailsFlyoutIsOpen}" IsModal="True">
+                <usercontrols:CharacterDetailsControl DataContext="{Binding RelativeSource={RelativeSource AncestorType=controls:MetroWindow}, Path=DataContext.CharactersViewModel.SelectedCharacter}"/>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -39,10 +49,10 @@
 
         <controls:MetroAnimatedTabControl controls:TabControlHelper.IsUnderlined="True" Margin="10" TabStripMargin="0,0,5,10">
             <controls:MetroTabItem Header="Organizations">
-                <usercontrols:OrganizationsControl DataContext="{Binding OrganizationViewModel}"/>
+                <usercontrols:OrganizationsControl DataContext="{Binding OrganizationsViewModel}"/>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Characters">
-                <TextBlock Text="Content of Tab 2"/>
+                <usercontrols:CharactersControl DataContext="{Binding CharactersViewModel}"/>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Vehicles">
                 <TextBlock Text="Content of Tab 3"/>

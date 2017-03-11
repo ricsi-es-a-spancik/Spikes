@@ -30,11 +30,23 @@
         {
         }
 
-        public class SaveNewOrganizationRequested : PubSubEvent<Organization>
+        public class SaveNewOrganizationRequested : PubSubEvent<OrganizationViewModel>
         {
         }
 
         public class CloseActiveDialogRequested : PubSubEvent
+        {
+        }
+
+        public class OpenCharacterDetailsFlyoutRequested : PubSubEvent
+        {
+        }
+
+        public class OpenNewCharacterDialogRequested : PubSubEvent
+        {
+        }
+
+        public class SaveNewCharacterRequested : PubSubEvent<CharacterViewModel>
         {
         }
     }

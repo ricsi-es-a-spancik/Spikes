@@ -4,12 +4,12 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for OrganizationsControl.xaml
+    /// Interaction logic for CharactersControl.xaml
     /// </summary>
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-    public partial class OrganizationsControl : UserControl
+    public partial class CharactersControl : UserControl
     {
-        public OrganizationsControl()
+        public CharactersControl()
         {
             InitializeComponent();
         }

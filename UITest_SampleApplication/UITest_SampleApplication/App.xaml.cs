@@ -35,6 +35,7 @@
             _eventAggregator.GetEvent<Events.CancelLoginRequested>().Subscribe(OnCancelLoginRequested);
             _eventAggregator.GetEvent<Events.SignOutRequested>().Subscribe(OnSignOutRequested);
             _eventAggregator.GetEvent<Events.OpenNewOrganizationDialogRequested>().Subscribe(OnOpenNewOrganizationDialogRequested);
+            _eventAggregator.GetEvent<Events.OpenNewCharacterDialogRequested>().Subscribe(OnOpenNewCharacterDialogRequested);
             _eventAggregator.GetEvent<Events.CloseActiveDialogRequested>().Subscribe(OnCloseActiveDialogRequested);
 
             var loginViewModel = new LoginViewModel(_eventAggregator);
@@ -76,15 +77,21 @@
             _mainView?.Close();
         }
 
-        private void OnCloseActiveDialogRequested()
-        {
-            _dialogCoordinator.HideMetroDialogAsync(_mainViewModel, _activeDialog);
-        }
-
         private void OnOpenNewOrganizationDialogRequested()
         {
             _activeDialog = new CustomDialog(_mainView) { Content = new NewOrganizationDialog { DataContext = new NewOrganizationDialogViewModel(_eventAggregator) } };
             _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
+        }
+
+        private void OnOpenNewCharacterDialogRequested()
+        {
+            _activeDialog = new CustomDialog(_mainView) { Content = new NewCharacterDialog { DataContext = new NewCharacterDialogViewModel(_eventAggregator) } };
+            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
+        }
+
+        private void OnCloseActiveDialogRequested()
+        {
+            _dialogCoordinator.HideMetroDialogAsync(_mainViewModel, _activeDialog);
         }
     }
 }

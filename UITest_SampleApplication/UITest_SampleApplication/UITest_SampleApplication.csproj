@@ -72,12 +72,28 @@
     <Compile Include="Model\DataContext.cs" />
     <Compile Include="Model\IDataContext.cs" />
     <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\StaticResources.cs" />
     <Compile Include="Model\Vehicle.cs" />
+    <Compile Include="ViewModel\CharactersViewModel.cs" />
+    <Compile Include="ViewModel\CharacterViewModel.cs" />
+    <Compile Include="ViewModel\Converters\AvatarPathToBitmapImageConverter.cs" />
     <Compile Include="ViewModel\Events.cs" />
+    <Compile Include="ViewModel\NewCharacterDialogViewModel.cs" />
+    <Compile Include="ViewModel\NewDialogViewModel.cs" />
     <Compile Include="ViewModel\NewOrganizationDialogViewModel.cs" />
+    <Compile Include="ViewModel\OrganizationsViewModel.cs" />
     <Compile Include="ViewModel\OrganizationViewModel.cs" />
     <Compile Include="View\UserControls\AddButton.xaml.cs">
       <DependentUpon>AddButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\CharacterDetailsControl.xaml.cs">
+      <DependentUpon>CharacterDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\CharactersControl.xaml.cs">
+      <DependentUpon>CharactersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\NewCharacterDialog.xaml.cs">
+      <DependentUpon>NewCharacterDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\NewOrganizationDialog.xaml.cs">
       <DependentUpon>NewOrganizationDialog.xaml</DependentUpon>
@@ -138,6 +154,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\CharacterDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\CharactersControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\NewCharacterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\NewOrganizationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,7 +216,34 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Characters\chewbacca.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\default.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\han.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\leia.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\luke.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\sidious.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\vader.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\circlemask.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

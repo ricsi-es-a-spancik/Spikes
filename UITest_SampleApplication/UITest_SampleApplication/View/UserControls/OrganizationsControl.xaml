@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:UITest_SampleApplication.View.UserControls"
-             xmlns:viewModel="clr-namespace:UITest_SampleApplication.ViewModel"
+             xmlns:viewmodel="clr-namespace:UITest_SampleApplication.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance d:Type=viewModel:OrganizationViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance d:Type=viewmodel:OrganizationsViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
