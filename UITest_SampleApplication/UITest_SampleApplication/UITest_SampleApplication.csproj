@@ -81,8 +81,11 @@
     <Compile Include="ViewModel\NewCharacterDialogViewModel.cs" />
     <Compile Include="ViewModel\NewDialogViewModel.cs" />
     <Compile Include="ViewModel\NewOrganizationDialogViewModel.cs" />
+    <Compile Include="ViewModel\NewVehicleDialogViewModel.cs" />
     <Compile Include="ViewModel\OrganizationsViewModel.cs" />
     <Compile Include="ViewModel\OrganizationViewModel.cs" />
+    <Compile Include="ViewModel\VehiclesViewModel.cs" />
+    <Compile Include="ViewModel\VehicleViewModel.cs" />
     <Compile Include="View\UserControls\AddButton.xaml.cs">
       <DependentUpon>AddButton.xaml</DependentUpon>
     </Compile>
@@ -98,10 +101,16 @@
     <Compile Include="View\UserControls\NewOrganizationDialog.xaml.cs">
       <DependentUpon>NewOrganizationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\NewVehicleDialog.xaml.cs">
+      <DependentUpon>NewVehicleDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\OrganizationsControl.xaml.cs">
       <DependentUpon>OrganizationsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\RichTextFile.cs" />
+    <Compile Include="View\UserControls\VehiclesControl.xaml.cs">
+      <DependentUpon>VehiclesControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,7 +179,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\NewVehicleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\OrganizationsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\VehiclesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

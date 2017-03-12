@@ -19,7 +19,7 @@
                 <ColumnDefinition  Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <local:AddButton Grid.ColumnSpan="2" HorizontalAlignment="Left" Command="{Binding OpenNewOrganizationDialog}"/>
+            <local:AddButton Grid.ColumnSpan="2" HorizontalAlignment="Left" Command="{Binding OpenNewOrganizationDialog}" Margin="0,0,0,10"/>
 
             <ListView ItemsSource="{Binding Organizations}" SelectedItem="{Binding SelectedOrganization}" Grid.Row="1" Grid.Column="0" BorderThickness="0" SelectionMode="Single" Width="150">
                 <ListView.ItemTemplate>

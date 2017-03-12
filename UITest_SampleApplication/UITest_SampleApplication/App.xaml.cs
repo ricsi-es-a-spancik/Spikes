@@ -1,7 +1,6 @@
 ﻿namespace UITest_SampleApplication
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
 
     using MahApps.Metro.Controls.Dialogs;
@@ -13,10 +12,6 @@
     using UITest_SampleApplication.View.UserControls;
     using UITest_SampleApplication.ViewModel;
 
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public partial class App
     {
         private readonly IEventAggregator _eventAggregator = new EventAggregator();
@@ -36,6 +31,7 @@
             _eventAggregator.GetEvent<Events.SignOutRequested>().Subscribe(OnSignOutRequested);
             _eventAggregator.GetEvent<Events.OpenNewOrganizationDialogRequested>().Subscribe(OnOpenNewOrganizationDialogRequested);
             _eventAggregator.GetEvent<Events.OpenNewCharacterDialogRequested>().Subscribe(OnOpenNewCharacterDialogRequested);
+            _eventAggregator.GetEvent<Events.OpenNewVehicleDialogRequested>().Subscribe(OnOpenNewVehicleDialogRequested);
             _eventAggregator.GetEvent<Events.CloseActiveDialogRequested>().Subscribe(OnCloseActiveDialogRequested);
 
             var loginViewModel = new LoginViewModel(_eventAggregator);
@@ -86,6 +82,12 @@
         private void OnOpenNewCharacterDialogRequested()
         {
             _activeDialog = new CustomDialog(_mainView) { Content = new NewCharacterDialog { DataContext = new NewCharacterDialogViewModel(_eventAggregator) } };
+            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
+        }
+
+        private void OnOpenNewVehicleDialogRequested()
+        {
+            _activeDialog = new CustomDialog(_mainView) { Content = new NewVehicleDialog { DataContext = new NewVehicleDialogViewModel(_eventAggregator) } };
             _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
         }
 

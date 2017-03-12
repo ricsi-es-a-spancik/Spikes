@@ -10,7 +10,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="640" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
+        Title="MainWindow" Height="480" Width="640" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
         d:DataContext="{d:DesignInstance d:Type=viewModel:MainViewModel, IsDesignTimeCreatable=True}"
         dialog:DialogParticipation.Register="{Binding}"
         RightWindowCommandsOverlayBehavior="Never" WindowButtonCommandsOverlayBehavior="Always">
@@ -55,7 +55,7 @@
                 <usercontrols:CharactersControl DataContext="{Binding CharactersViewModel}"/>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Vehicles">
-                <TextBlock Text="Content of Tab 3"/>
+                <usercontrols:VehiclesControl DataContext="{Binding VehiclesViewModel}"/>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
 

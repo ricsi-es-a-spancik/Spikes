@@ -23,6 +23,7 @@
 
             OrganizationsViewModel = new OrganizationsViewModel(_eventAggregator, dataContext);
             CharactersViewModel = new CharactersViewModel(_eventAggregator, dataContext);
+            VehiclesViewModel = new VehiclesViewModel(_eventAggregator, dataContext);
         }
 
         public string ActiveUser { get; private set; }
@@ -32,6 +33,8 @@
         public OrganizationsViewModel OrganizationsViewModel { get; private set; }
 
         public CharactersViewModel CharactersViewModel { get; private set; }
+
+        public VehiclesViewModel VehiclesViewModel { get; private set; }
 
         public bool CharacterDetailsFlyoutIsOpen
         {

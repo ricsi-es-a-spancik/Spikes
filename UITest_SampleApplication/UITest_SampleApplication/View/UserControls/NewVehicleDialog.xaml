@@ -1,16 +1,16 @@
-﻿<UserControl x:Class="UITest_SampleApplication.View.UserControls.NewCharacterDialog"
+﻿<UserControl x:Class="UITest_SampleApplication.View.UserControls.NewVehicleDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:viewmodel="clr-namespace:UITest_SampleApplication.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance d:Type=viewmodel:NewCharacterDialogViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance d:Type=viewmodel:NewVehicleDialogViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid Width="320" VerticalAlignment="Center">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -23,26 +23,20 @@
 
             <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>
             <DockPanel LastChildFill="True" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,10">
-                <TextBox Text="{Binding NewCharacter.Name}"/>
+                <TextBox Text="{Binding NewVehicle.Name}"/>
             </DockPanel>
 
             <TextBlock Text="Organization" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>
             <DockPanel LastChildFill="True" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,10">
-                <TextBox Text="{Binding NewCharacter.Organization}"/>
+                <TextBox Text="{Binding NewVehicle.Organization}"/>
             </DockPanel>
 
-            <TextBlock Text="Avatar path" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>
-            <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="True" VerticalAlignment="Top" Margin="0,0,0,10">
-                <Button Content="..." Command="{Binding BrowseAvatarPath}" DockPanel.Dock="Right"/>
-                <TextBox Text="{Binding NewCharacter.AvatarPath}" Margin="0,0,5,0" IsEnabled="False"/>
+            <TextBlock Text="Dimensions" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+            <DockPanel LastChildFill="True" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,10">
+                <controls:NumericUpDown Value="{Binding NewVehicle.Dimensions}" Minimum="0.0" HasDecimals="True"/>
             </DockPanel>
 
-            <TextBlock Text="Details" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>
-            <DockPanel LastChildFill="True" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,10">
-                <TextBox Text="{Binding NewCharacter.Details}" TextWrapping="Wrap" AcceptsReturn="True" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            </DockPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,10">
                 <Button Content="Save" Command="{Binding Save}" Width="60" Margin="0,0,10,0" VerticalAlignment="Top"/>
                 <Button Content="Cancel" Command="{Binding Cancel}" Width="60" VerticalAlignment="Top"/>
             </StackPanel>

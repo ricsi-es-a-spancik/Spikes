@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModel="clr-namespace:UITest_SampleApplication.ViewModel"
+             xmlns:viewmodel="clr-namespace:UITest_SampleApplication.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance d:Type=viewModel:NewOrganizationDialogViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance d:Type=viewmodel:NewOrganizationDialogViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid Width="320" VerticalAlignment="Center">
             <Grid.RowDefinitions>

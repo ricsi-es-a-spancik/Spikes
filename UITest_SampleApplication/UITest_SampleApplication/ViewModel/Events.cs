@@ -49,5 +49,13 @@
         public class SaveNewCharacterRequested : PubSubEvent<CharacterViewModel>
         {
         }
+
+        public class OpenNewVehicleDialogRequested : PubSubEvent
+        {
+        }
+
+        public class SaveNewVehicleRequested : PubSubEvent<VehicleViewModel>
+        {
+        }
     }
 }
