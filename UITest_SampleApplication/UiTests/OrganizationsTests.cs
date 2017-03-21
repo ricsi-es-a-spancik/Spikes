@@ -1,5 +1,7 @@
 ﻿namespace UiTests
 {
+    using System.IO;
+
     using NUnit.Framework;
 
     public class OrganizationsTests : TestBase
@@ -8,21 +10,24 @@
         public new void SetUp()
         {
             PassLogin();
+            TestApplication.MainWindow.SelectOrganizationsTabPage();
         }
 
         [Test]
         public void CanAddNewCharacter()
         {
-            const string NEW_ORGANIZATION_NAME = "New Organization";
-            TestApplication.MainWindow.AddOrganization();
+            const string NEW_ORGANIZATION_NAME = "Galactic Empire";
+            var newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "GALACTIC_EMPIRE.rtf");
+
+            TestApplication.MainWindow.OrganizationsTab.AddOrganization();
 
             TestApplication.NewOrganizationDialog
                            .SetName(NEW_ORGANIZATION_NAME)
-                           .SetDetailsPath(@"C:\Users\d.hornyak\Documents\REBEL_ALLIANCE.rtf")
+                           .SetDetailsPath(newOrganizationDetailsPath)
                            .Save();
 
             Assert.True(
-                        TestApplication.MainWindow.IsOrganizationInList(NEW_ORGANIZATION_NAME),
+                        TestApplication.MainWindow.OrganizationsTab.IsOrganizationInList(NEW_ORGANIZATION_NAME),
                         $"'{NEW_ORGANIZATION_NAME}' is expected to be in organizations' list.");
         }
     }
