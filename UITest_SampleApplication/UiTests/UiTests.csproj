@@ -65,9 +65,14 @@
   <ItemGroup>
     <Compile Include="LoginWindow.cs" />
     <Compile Include="MainWindow.cs" />
-    <Compile Include="SmokeTests.cs" />
+    <Compile Include="AuthenticationTests.cs" />
+    <Compile Include="NewDialog.cs" />
+    <Compile Include="NewOrganizationDialog.cs" />
+    <Compile Include="OpenFileDialog.cs" />
+    <Compile Include="OrganizationsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestApplication.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="WindowObject.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +114,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <BuildDependsOn>UpdateConfiguration;AddTestApplicationExecutablePathToAppConfig;$(BuildDependsOn)</BuildDependsOn>
-	<CleanDependsOn>CleanConfiguration;$(CleanDependsOn)</CleanDependsOn>
+    <CleanDependsOn>CleanConfiguration;$(CleanDependsOn)</CleanDependsOn>
   </PropertyGroup>
   <Target Name="UpdateConfiguration">
     <Copy SourceFiles="App.$(Configuration).config" DestinationFiles="App.config" />

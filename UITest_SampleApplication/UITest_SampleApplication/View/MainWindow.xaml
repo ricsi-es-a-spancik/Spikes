@@ -47,7 +47,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <controls:MetroAnimatedTabControl controls:TabControlHelper.IsUnderlined="True" Margin="10" TabStripMargin="0,0,5,10">
+        <controls:MetroAnimatedTabControl controls:TabControlHelper.IsUnderlined="True" Margin="10" TabStripMargin="0,0,5,10" AutomationProperties.AutomationId="NavigationTabs">
             <controls:MetroTabItem Header="Organizations">
                 <usercontrols:OrganizationsControl DataContext="{Binding OrganizationsViewModel}"/>
             </controls:MetroTabItem>

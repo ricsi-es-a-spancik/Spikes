@@ -234,27 +234,27 @@
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Characters\chewbacca.jpg">
+    <Resource Include="Resources\Characters\chewbacca.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Characters\default.jpg">
+    </Resource>
+    <Resource Include="Resources\Characters\default.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Characters\han.jpg">
+    </Resource>
+    <Resource Include="Resources\Characters\han.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Characters\leia.jpg">
+    </Resource>
+    <Resource Include="Resources\Characters\leia.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Characters\luke.jpg">
+    </Resource>
+    <Resource Include="Resources\Characters\luke.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Characters\sidious.jpg">
+    </Resource>
+    <Resource Include="Resources\Characters\sidious.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Characters\vader.jpg">
+    </Resource>
+    <Resource Include="Resources\Characters\vader.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\circlemask.png">

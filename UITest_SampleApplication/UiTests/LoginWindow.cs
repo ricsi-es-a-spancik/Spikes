@@ -45,10 +45,5 @@ namespace UiTests
         {
             CancelButton.Click();
         }
-
-        public void Close()
-        {
-            _window.Close();
-        }
     }
 }

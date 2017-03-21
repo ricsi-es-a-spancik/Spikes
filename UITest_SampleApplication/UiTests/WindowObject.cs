@@ -4,7 +4,9 @@ namespace UiTests
 
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.Finders;
+    using TestStack.White.UIItems.ListBoxItems;
     using TestStack.White.UIItems.MenuItems;
+    using TestStack.White.UIItems.TabItems;
     using TestStack.White.UIItems.WindowItems;
     using TestStack.White.Utility;
 
@@ -42,6 +44,16 @@ namespace UiTests
         protected Menu Menu(string text)
         {
             return _window.Get<Menu>(SearchCriteria.ByText(text));
+        }
+
+        protected TabPage TabPage(string header)
+        {
+            return _window.Get<TabPage>(SearchCriteria.ByText(header));
+        }
+
+        protected ListBox ListBox()
+        {
+            return _window.Get<ListBox>();
         }
 
         protected T TryGetControl<T>(T control, double defaultTimeoutInSeconds = 5)
