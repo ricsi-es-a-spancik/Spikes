@@ -3,7 +3,7 @@
     public class VehicleViewModel : BindableBase
     {
         private string _name;
-        private string _organization;
+        private OrganizationViewModel _organization;
         private double _dimensions;
 
         public string Name
@@ -12,7 +12,7 @@
             set { SetProperty(ref _name, value); }
         }
 
-        public string Organization
+        public OrganizationViewModel Organization
         {
             get { return _organization; }
             set { SetProperty(ref _organization, value); }

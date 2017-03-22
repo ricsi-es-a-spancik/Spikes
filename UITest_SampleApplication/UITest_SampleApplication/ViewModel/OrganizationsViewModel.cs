@@ -25,11 +25,7 @@
 
             _eventAggregator.GetEvent<Events.SaveNewOrganizationRequested>().Subscribe(OnSaveNewOrganizationRequested);
 
-            Organizations = new ObservableCollection<OrganizationViewModel>(_dataContext.Organizations.Select(organization => new OrganizationViewModel
-                                                                                                                                  {
-                                                                                                                                      Name = organization.Name,
-                                                                                                                                      DetailsPath = organization.DetailsPath
-                                                                                                                                  }));
+            Organizations = new ObservableCollection<OrganizationViewModel>(_dataContext.Organizations.Select(organization => organization.ToViewModel()));
             OpenNewOrganizationDialog = new DelegateCommand(OnOpenNewOrganizationDialog);
         }
 
@@ -58,13 +54,7 @@
                 !string.IsNullOrWhiteSpace(newOrganization.DetailsPath) && 
                 File.Exists(newOrganization.DetailsPath))
             {
-                var organization = new Organization
-                                       {
-                                           Name = newOrganization.Name,
-                                           DetailsPath = newOrganization.DetailsPath
-                                       };
-
-                _dataContext.Organizations.Add(organization);
+                _dataContext.Organizations.Add(newOrganization.ToModel());
                 Organizations.Add(newOrganization);
                 SelectedOrganization = newOrganization;
             }

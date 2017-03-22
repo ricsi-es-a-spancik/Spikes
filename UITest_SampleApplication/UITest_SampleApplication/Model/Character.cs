@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
 
-        public string Organization { get; set; }
+        public Organization Organization { get; set; }
 
         public string Details { get; set; }
 

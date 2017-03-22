@@ -3,7 +3,7 @@
     public class CharacterViewModel : BindableBase
     {
         private string _name;
-        private string _organization;
+        private OrganizationViewModel _organization;
         private string _details;
         private string _avatarPath;
 
@@ -13,7 +13,7 @@
             set { SetProperty(ref _name, value); }
         }
 
-        public string Organization
+        public OrganizationViewModel Organization
         {
             get { return _organization; }
             set { SetProperty(ref _organization, value); }

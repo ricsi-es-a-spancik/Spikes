@@ -14,6 +14,7 @@
 
     public partial class App
     {
+        private readonly IDataContext _dataContext = new DataContext();
         private readonly IEventAggregator _eventAggregator = new EventAggregator();
         private readonly DialogCoordinator _dialogCoordinator = new DialogCoordinator();
 
@@ -48,7 +49,7 @@
 
         private void OnLoginRequested(UserCredentials credentials)
         {
-            _mainViewModel = new MainViewModel(_eventAggregator, new DataContext(), credentials.LoginName);
+            _mainViewModel = new MainViewModel(_eventAggregator, _dataContext, credentials.LoginName);
             _mainView = new MainWindow { DataContext = _mainViewModel };
             _mainView.Closed += OnApplicationWindowClosed;
 
@@ -81,13 +82,13 @@
 
         private void OnOpenNewCharacterDialogRequested()
         {
-            _activeDialog = new CustomDialog(_mainView) { Content = new NewCharacterDialog { DataContext = new NewCharacterDialogViewModel(_eventAggregator) } };
+            _activeDialog = new CustomDialog(_mainView) { Content = new NewCharacterDialog { DataContext = new NewCharacterDialogViewModel(_eventAggregator, _dataContext) } };
             _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
         }
 
         private void OnOpenNewVehicleDialogRequested()
         {
-            _activeDialog = new CustomDialog(_mainView) { Content = new NewVehicleDialog { DataContext = new NewVehicleDialogViewModel(_eventAggregator) } };
+            _activeDialog = new CustomDialog(_mainView) { Content = new NewVehicleDialog { DataContext = new NewVehicleDialogViewModel(_eventAggregator, _dataContext) } };
             _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
         }
 

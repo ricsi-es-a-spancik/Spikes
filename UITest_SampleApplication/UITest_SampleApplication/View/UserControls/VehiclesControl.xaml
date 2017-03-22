@@ -13,9 +13,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <local:AddButton HorizontalAlignment="Left" Command="{Binding OpenNewVehicleDialog}" Margin="0,0,0,10"/>
-        
-        <DataGrid ItemsSource="{Binding Vehicles}" Grid.Row="1" IsReadOnly="True"/>
+
+        <DataGrid ItemsSource="{Binding Vehicles}" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Organization" Binding="{Binding Organization.Name}"/>
+                <DataGridTextColumn Header="Dimensions" Binding="{Binding Dimensions}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

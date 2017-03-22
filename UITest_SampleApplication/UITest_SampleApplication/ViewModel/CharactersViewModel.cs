@@ -25,13 +25,7 @@
 
             _eventAggregator.GetEvent<Events.SaveNewCharacterRequested>().Subscribe(OnSaveNewCharacterRequested);
 
-            Characters = new ObservableCollection<CharacterViewModel>(_dataContext.Characters.Select(character => new CharacterViewModel
-                                                                                                                      {
-                                                                                                                          Name = character.Name,
-                                                                                                                          Organization = character.Organization,
-                                                                                                                          Details = character.Details,
-                                                                                                                          AvatarPath = character.AvatarPath
-                                                                                                                      }));
+            Characters = new ObservableCollection<CharacterViewModel>(_dataContext.Characters.Select(character => character.ToViewModel()));
 
             OpenNewCharacterDialog = new DelegateCommand(OnOpenNewCharacterDialog);
             OpenCharacterDetails = new DelegateCommand<CharacterViewModel>(OnOpenCharacterDetails);
@@ -67,19 +61,11 @@
         private void OnSaveNewCharacterRequested(CharacterViewModel newCharacter)
         {
             if (!string.IsNullOrWhiteSpace(newCharacter.Name) && 
-                !string.IsNullOrWhiteSpace(newCharacter.Organization) &&
+                newCharacter.Organization != null &&
                 !string.IsNullOrWhiteSpace(newCharacter.Details) && 
                 File.Exists(newCharacter.AvatarPath))
             {
-                var character = new Character
-                                       {
-                                           Name = newCharacter.Name,
-                                           Organization = newCharacter.Organization,
-                                           AvatarPath = newCharacter.AvatarPath,
-                                           Details = newCharacter.Details
-                                       };
-
-                _dataContext.Characters.Add(character);
+                _dataContext.Characters.Add(newCharacter.ToModel(_dataContext));
                 Characters.Add(newCharacter);
             }
         }

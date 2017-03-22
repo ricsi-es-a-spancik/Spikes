@@ -23,12 +23,7 @@
 
             _eventAggregator.GetEvent<Events.SaveNewVehicleRequested>().Subscribe(OnSaveNewVehicleRequested);
 
-            Vehicles = new ObservableCollection<VehicleViewModel>(_dataContext.Vehicles.Select(vehicle => new VehicleViewModel
-                                                                                                              {
-                                                                                                                  Name = vehicle.Name,
-                                                                                                                  Organization = vehicle.Organization,
-                                                                                                                  Dimensions = vehicle.Dimensions
-                                                                                                              }));
+            Vehicles = new ObservableCollection<VehicleViewModel>(_dataContext.Vehicles.Select(vehicle => vehicle.ToViewModel()));
 
             OpenNewVehicleDialog = new DelegateCommand(OnOpenNewVehicleDialog);
         }
@@ -49,16 +44,9 @@
         private void OnSaveNewVehicleRequested(VehicleViewModel newVehicle)
         {
             if (!string.IsNullOrWhiteSpace(newVehicle.Name) &&
-                !string.IsNullOrWhiteSpace(newVehicle.Organization))
+                newVehicle.Organization != null)
             {
-                var vehicle = new Vehicle()
-                {
-                    Name = newVehicle.Name,
-                    Organization = newVehicle.Organization,
-                    Dimensions = newVehicle.Dimensions
-                };
-
-                _dataContext.Vehicles.Add(vehicle);
+                _dataContext.Vehicles.Add(newVehicle.ToModel(_dataContext));
                 Vehicles.Add(newVehicle);
             }
         }

@@ -78,6 +78,7 @@
     <Compile Include="ViewModel\CharacterViewModel.cs" />
     <Compile Include="ViewModel\Converters\AvatarPathToBitmapImageConverter.cs" />
     <Compile Include="ViewModel\Events.cs" />
+    <Compile Include="ViewModel\Extensions.cs" />
     <Compile Include="ViewModel\NewCharacterDialogViewModel.cs" />
     <Compile Include="ViewModel\NewDialogViewModel.cs" />
     <Compile Include="ViewModel\NewOrganizationDialogViewModel.cs" />

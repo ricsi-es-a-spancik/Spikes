@@ -28,7 +28,13 @@
 
             <TextBlock Text="Organization" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>
             <DockPanel LastChildFill="True" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,10">
-                <TextBox Text="{Binding NewVehicle.Organization}"/>
+                <ComboBox ItemsSource="{Binding Organizations}" SelectedItem="{Binding NewVehicle.Organization}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </DockPanel>
 
             <TextBlock Text="Dimensions" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,10"/>

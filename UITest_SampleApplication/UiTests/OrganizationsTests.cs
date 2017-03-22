@@ -14,7 +14,7 @@
         }
 
         [Test]
-        public void CanAddNewCharacter()
+        public void CanAddNewOrganization()
         {
             const string NEW_ORGANIZATION_NAME = "Galactic Empire";
             var newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "GALACTIC_EMPIRE.rtf");
