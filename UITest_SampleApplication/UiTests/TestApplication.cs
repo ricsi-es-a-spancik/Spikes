@@ -20,6 +20,8 @@ namespace UiTests
 
         public static NewOrganizationDialog NewOrganizationDialog => new NewOrganizationDialog(GetWindow(MAIN_WINDOW_TITLE));
 
+        public static NewCharacterDialog NewCharacterDialog => new NewCharacterDialog(GetWindow(MAIN_WINDOW_TITLE));
+
         public static bool HasExited => _application.HasExited;
 
         public static void Init(Application application)

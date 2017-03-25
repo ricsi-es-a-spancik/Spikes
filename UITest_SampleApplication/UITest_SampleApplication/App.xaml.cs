@@ -18,6 +18,12 @@
         private readonly IEventAggregator _eventAggregator = new EventAggregator();
         private readonly DialogCoordinator _dialogCoordinator = new DialogCoordinator();
 
+        private readonly MetroDialogSettings _metroDialogSettings = new MetroDialogSettings
+                                                                        {
+                                                                            AnimateShow = false,
+                                                                            AnimateHide = false
+                                                                        };
+
         private LoginWindow _loginView;
         private MainWindow _mainView;
         private MainViewModel _mainViewModel;
@@ -77,24 +83,24 @@
         private void OnOpenNewOrganizationDialogRequested()
         {
             _activeDialog = new CustomDialog(_mainView) { Content = new NewOrganizationDialog { DataContext = new NewOrganizationDialogViewModel(_eventAggregator) } };
-            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
+            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog, _metroDialogSettings);
         }
 
         private void OnOpenNewCharacterDialogRequested()
         {
             _activeDialog = new CustomDialog(_mainView) { Content = new NewCharacterDialog { DataContext = new NewCharacterDialogViewModel(_eventAggregator, _dataContext) } };
-            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
+            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog, _metroDialogSettings);
         }
 
         private void OnOpenNewVehicleDialogRequested()
         {
             _activeDialog = new CustomDialog(_mainView) { Content = new NewVehicleDialog { DataContext = new NewVehicleDialogViewModel(_eventAggregator, _dataContext) } };
-            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog);
+            _dialogCoordinator.ShowMetroDialogAsync(_mainViewModel, _activeDialog, _metroDialogSettings);
         }
 
         private void OnCloseActiveDialogRequested()
         {
-            _dialogCoordinator.HideMetroDialogAsync(_mainViewModel, _activeDialog);
+            _dialogCoordinator.HideMetroDialogAsync(_mainViewModel, _activeDialog, _metroDialogSettings);
         }
     }
 }

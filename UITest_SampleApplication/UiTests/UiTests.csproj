@@ -63,12 +63,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CharacterCreator.cs" />
+    <Compile Include="CharactersTab.cs" />
+    <Compile Include="CharactersTests.cs" />
     <Compile Include="LoginWindow.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="AuthenticationTests.cs" />
+    <Compile Include="MainWindowTab.cs" />
+    <Compile Include="NewCharacterDialog.cs" />
     <Compile Include="NewDialog.cs" />
     <Compile Include="NewOrganizationDialog.cs" />
     <Compile Include="OpenFileDialog.cs" />
+    <Compile Include="OrganizationCreator.cs" />
     <Compile Include="OrganizationsTab.cs" />
     <Compile Include="OrganizationsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +104,29 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Characters\chewbacca.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\default.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\han.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\leia.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\luke.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\sidious.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Characters\vader.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

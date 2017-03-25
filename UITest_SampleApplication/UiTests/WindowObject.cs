@@ -31,14 +31,19 @@ namespace UiTests
             return _window.Get<Button>(SearchCriteria.ByAutomationId(automationId));
         }
 
+        protected ComboBox ComboBox()
+        {
+            return _window.Get<ComboBox>();
+        }
+
         protected Label Label(string content)
         {
             return _window.Get<Label>(SearchCriteria.ByText(content));
         }
 
-        protected TextBox TextBox(int index)
+        protected ListBox ListBox()
         {
-            return _window.Get<TextBox>(SearchCriteria.Indexed(index));
+            return _window.Get<ListBox>();
         }
 
         protected Menu Menu(string text)
@@ -51,9 +56,9 @@ namespace UiTests
             return _window.Get<TabPage>(SearchCriteria.ByText(header));
         }
 
-        protected ListBox ListBox()
+        protected TextBox TextBox(int index)
         {
-            return _window.Get<ListBox>();
+            return _window.Get<TextBox>(SearchCriteria.Indexed(index));
         }
 
         protected T TryGetControl<T>(T control, double defaultTimeoutInSeconds = 5)

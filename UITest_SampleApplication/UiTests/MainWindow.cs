@@ -1,5 +1,8 @@
 namespace UiTests
 {
+    using System;
+    using System.Threading.Tasks;
+
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.MenuItems;
     using TestStack.White.UIItems.TabItems;
@@ -10,6 +13,7 @@ namespace UiTests
         private const string SIGN_OUT = "Sign out";
         private const string ACTIVE_USER_BUTTON_AUTOMATION_ID = "ActiveUserButton";
         private const string ORGANIZATIONS_TAB_HEADER = "Organizations";
+        private const string CHARACTERS_TAB_HEADER = "Characters";
 
         internal MainWindow(Window window)
             : base(window)
@@ -18,11 +22,15 @@ namespace UiTests
 
         public OrganizationsTab OrganizationsTab => new OrganizationsTab(_window);
 
+        public CharactersTab CharactersTab => new CharactersTab(_window);
+
         private Button ActiveUserButton => ButtonById(ACTIVE_USER_BUTTON_AUTOMATION_ID);
 
         private Menu SignOutMenu => Menu(SIGN_OUT);
 
         private TabPage OrganizationsTabPage => TabPage(ORGANIZATIONS_TAB_HEADER);
+
+        private TabPage CharactersTabPage => TabPage(CHARACTERS_TAB_HEADER);
 
         public void SignOutFromUserContextMenu()
         {
@@ -33,6 +41,13 @@ namespace UiTests
         public void SelectOrganizationsTabPage()
         {
             OrganizationsTabPage.Select();
+            Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
+        }
+
+        public void SelectCharactersTabPage()
+        {
+            CharactersTabPage.Select();
+            Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
         }
     }
 }

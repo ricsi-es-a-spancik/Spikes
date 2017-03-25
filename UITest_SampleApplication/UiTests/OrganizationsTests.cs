@@ -4,13 +4,13 @@
 
     using NUnit.Framework;
 
+    [TestFixture]
     public class OrganizationsTests : TestBase
     {
         [SetUp]
         public new void SetUp()
         {
             PassLogin();
-            TestApplication.MainWindow.SelectOrganizationsTabPage();
         }
 
         [Test]
@@ -19,12 +19,7 @@
             const string NEW_ORGANIZATION_NAME = "Galactic Empire";
             var newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "GALACTIC_EMPIRE.rtf");
 
-            TestApplication.MainWindow.OrganizationsTab.AddOrganization();
-
-            TestApplication.NewOrganizationDialog
-                           .SetName(NEW_ORGANIZATION_NAME)
-                           .SetDetailsPath(newOrganizationDetailsPath)
-                           .Save();
+            OrganizationCreator.Create(NEW_ORGANIZATION_NAME, newOrganizationDetailsPath);
 
             Assert.True(
                         TestApplication.MainWindow.OrganizationsTab.IsOrganizationInList(NEW_ORGANIZATION_NAME),
