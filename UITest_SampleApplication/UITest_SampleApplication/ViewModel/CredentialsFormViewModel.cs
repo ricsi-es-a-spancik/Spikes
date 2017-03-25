@@ -28,6 +28,11 @@
 
         public ICommand Login { get; private set; }
 
+        public void ClearPassword()
+        {
+            Credentials.Password = string.Empty;
+        }
+
         private void OnLogin()
         {
             _eventAggregator.GetEvent<Events.ValidatingCredentialsRequested>().Publish(_credentials);

@@ -38,6 +38,7 @@
         private void OnReenterCredentialsRequested()
         {
             CurrentViewModel = _credentialsFormViewModel;
+            _credentialsFormViewModel.ClearPassword();
         }
 
         private void OnSignOutRequested()
