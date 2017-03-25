@@ -27,7 +27,7 @@
                 <TextBlock Text="{Binding Organization.Name}" Grid.Row="1" Grid.Column="1"/>
 
                 <Button Content="Details" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Left"
-                                            Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenCharacterDetails}" CommandParameter="{Binding}"/>
+                                          Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenCharacterDetails}" CommandParameter="{Binding}"/>
             </Grid>
         </Border>
     </Grid>

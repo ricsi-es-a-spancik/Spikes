@@ -8,11 +8,14 @@
 
     public class AvatarPathToBitmapImageConverter : IValueConverter
     {
-        private const string DEFAULT_AVATAR_PATH = @"Resources\Characters\default.png";
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var path = Path.GetFullPath(value as string ?? DEFAULT_AVATAR_PATH);
+            if (!(value is string))
+            {
+                throw new ArgumentException($"Type of {nameof(value)} s expected to be string.");
+            }
+
+            var path = Path.GetFullPath((string)value);
             var bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.UriSource = new Uri(path, UriKind.Absolute);
