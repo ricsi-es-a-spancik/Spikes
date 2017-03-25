@@ -46,6 +46,11 @@ namespace UiTests
             return _window.Get<ListBox>();
         }
 
+        protected ListView ListView()
+        {
+            return _window.Get<ListView>();
+        }
+
         protected Menu Menu(string text)
         {
             return _window.Get<Menu>(SearchCriteria.ByText(text));

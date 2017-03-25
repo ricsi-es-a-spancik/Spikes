@@ -5,26 +5,35 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class CharactersTests : TestBase
+    public class CharactersTests : LoginTestBase
     {
+        private const string NEW_ORGANIZATION_NAME = "Rebel Alliance";
+        private const string NEW_CHARACTER_NAME = "Leia Organa";
+        private const string NEW_CHARACTER_DETAILS = "Details of Leia Organa.";
+        private string _newOrganizationDetailsPath;
+        private string _newCharacterAvatarPat;
+
         [SetUp]
         public new void SetUp()
         {
-            PassLogin();
+            _newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "REBEL_ALLIANCE.rtf");
+            _newCharacterAvatarPat = Path.Combine(ResourcesPath, "Characters", "leia.jpg");
         }
 
         [Test]
         public void CanAddNewCharacter()
         {
-            const string NEW_ORGANIZATION_NAME = "Rebel Alliance";
-            const string NEW_CHARACTER_NAME = "Leia Organa";
-            var newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "REBEL_ALLIANCE.rtf");
-            var newCharacterAvatarPath = Path.Combine(ResourcesPath, "Characters", "leia.jpg");
-            var newCharacterDetails = "Details of Leia Organa.";
+            OrganizationCreator.Create(NEW_ORGANIZATION_NAME, _newOrganizationDetailsPath);
 
-            OrganizationCreator.Create(NEW_ORGANIZATION_NAME, newOrganizationDetailsPath);
+            TestApplication.MainWindow.SelectCharactersTabPage();
+            TestApplication.MainWindow.CharactersTab.Add();
 
-            CharacterCreator.Create(NEW_CHARACTER_NAME, NEW_ORGANIZATION_NAME, newCharacterAvatarPath, newCharacterDetails);
+            TestApplication.NewCharacterDialog
+                           .SetName(NEW_CHARACTER_NAME)
+                           .SelectOrganization(NEW_ORGANIZATION_NAME)
+                           .SetAvatarPath(_newCharacterAvatarPat)
+                           .SetDetails(NEW_CHARACTER_DETAILS)
+                           .Save();
 
             Assert.True(
                         TestApplication.MainWindow.CharactersTab.IsCharacterInList(NEW_CHARACTER_NAME),

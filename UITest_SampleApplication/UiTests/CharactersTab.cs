@@ -9,6 +9,8 @@ namespace UiTests
 
     public class CharactersTab : MainWindowTab
     {
+        private const string CHARACTER_PREVIEW_ITEM_ID = "CharacterPreviewItem";
+
         public CharactersTab(Window window)
             : base(window)
         {
@@ -16,7 +18,7 @@ namespace UiTests
 
         public bool IsCharacterInList(string name)
         {
-            var character = _window.GetMultiple(SearchCriteria.ByAutomationId("CharacterPreviewItem")).Single();
+            var character = _window.GetMultiple(SearchCriteria.ByAutomationId(CHARACTER_PREVIEW_ITEM_ID)).Single();
             return character.Get<Label>(SearchCriteria.ByText(name)) != null;
         }
     }

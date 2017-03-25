@@ -12,8 +12,13 @@ namespace UiTests
         {
         }
 
-        protected Button SaveButton => Button(SAVE);
-
         protected OpenFileDialog OpenFileDialog => new OpenFileDialog(_window);
+
+        private Button SaveButton => Button(SAVE);
+
+        public void Save()
+        {
+            SaveButton.Click();
+        }
     }
 }

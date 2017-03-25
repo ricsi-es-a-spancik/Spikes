@@ -63,9 +63,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CharacterCreator.cs" />
     <Compile Include="CharactersTab.cs" />
     <Compile Include="CharactersTests.cs" />
+    <Compile Include="Extennsions.cs" />
+    <Compile Include="LoginTestBase.cs" />
     <Compile Include="LoginWindow.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="AuthenticationTests.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="NewCharacterDialog.cs" />
     <Compile Include="NewDialog.cs" />
     <Compile Include="NewOrganizationDialog.cs" />
+    <Compile Include="NewVehicleDialog.cs" />
     <Compile Include="OpenFileDialog.cs" />
     <Compile Include="OrganizationCreator.cs" />
     <Compile Include="OrganizationsTab.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestApplication.cs" />
     <Compile Include="TestBase.cs" />
+    <Compile Include="VehicleInList.cs" />
+    <Compile Include="VehiclesTab.cs" />
+    <Compile Include="VehiclesTests.cs" />
     <Compile Include="WindowObject.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -36,7 +36,7 @@
         [TearDown]
         public void TearDown()
         {
-            _application.Close();
+            _application.Kill();
         }
 
         protected static void PassLogin()

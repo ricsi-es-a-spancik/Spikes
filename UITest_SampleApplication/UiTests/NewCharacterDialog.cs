@@ -1,5 +1,7 @@
 namespace UiTests
 {
+    using System.Globalization;
+
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.ListBoxItems;
     using TestStack.White.UIItems.WindowItems;
@@ -47,11 +49,6 @@ namespace UiTests
                           .Open();
 
             return this;
-        }
-
-        public void Save()
-        {
-            SaveButton.Click();
         }
     }
 }

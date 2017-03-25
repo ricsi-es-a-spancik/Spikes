@@ -31,10 +31,5 @@ namespace UiTests
 
             return this;
         }
-
-        public void Save()
-        {
-            SaveButton.Click();   
-        }
     }
 }

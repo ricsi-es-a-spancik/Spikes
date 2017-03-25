@@ -22,6 +22,8 @@ namespace UiTests
 
         public static NewCharacterDialog NewCharacterDialog => new NewCharacterDialog(GetWindow(MAIN_WINDOW_TITLE));
 
+        public static NewVehicleDialog NewVehicleDialog => new NewVehicleDialog(GetWindow(MAIN_WINDOW_TITLE));
+
         public static bool HasExited => _application.HasExited;
 
         public static void Init(Application application)

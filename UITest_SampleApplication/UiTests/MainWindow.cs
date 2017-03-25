@@ -14,6 +14,7 @@ namespace UiTests
         private const string ACTIVE_USER_BUTTON_AUTOMATION_ID = "ActiveUserButton";
         private const string ORGANIZATIONS_TAB_HEADER = "Organizations";
         private const string CHARACTERS_TAB_HEADER = "Characters";
+        private const string VEHICLES_TAB_HEADER = "Vehicles";
 
         internal MainWindow(Window window)
             : base(window)
@@ -24,6 +25,8 @@ namespace UiTests
 
         public CharactersTab CharactersTab => new CharactersTab(_window);
 
+        public VehiclesTab VehiclesTab => new VehiclesTab(_window);
+
         private Button ActiveUserButton => ButtonById(ACTIVE_USER_BUTTON_AUTOMATION_ID);
 
         private Menu SignOutMenu => Menu(SIGN_OUT);
@@ -31,6 +34,8 @@ namespace UiTests
         private TabPage OrganizationsTabPage => TabPage(ORGANIZATIONS_TAB_HEADER);
 
         private TabPage CharactersTabPage => TabPage(CHARACTERS_TAB_HEADER);
+
+        private TabPage VehiclesTabPage => TabPage(VEHICLES_TAB_HEADER);
 
         public void SignOutFromUserContextMenu()
         {
@@ -47,6 +52,12 @@ namespace UiTests
         public void SelectCharactersTabPage()
         {
             CharactersTabPage.Select();
+            Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
+        }
+
+        public void SelectVehiclesTabPage()
+        {
+            VehiclesTabPage.Select();
             Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
         }
     }

@@ -5,21 +5,21 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class OrganizationsTests : TestBase
+    public class OrganizationsTests : LoginTestBase
     {
+        private const string NEW_ORGANIZATION_NAME = "Galactic Empire";
+        private string _newOrganizationDetailsPath;
+
         [SetUp]
         public new void SetUp()
         {
-            PassLogin();
+            _newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "GALACTIC_EMPIRE.rtf");
         }
 
         [Test]
         public void CanAddNewOrganization()
         {
-            const string NEW_ORGANIZATION_NAME = "Galactic Empire";
-            var newOrganizationDetailsPath = Path.Combine(ResourcesPath, "Organizations", "GALACTIC_EMPIRE.rtf");
-
-            OrganizationCreator.Create(NEW_ORGANIZATION_NAME, newOrganizationDetailsPath);
+            OrganizationCreator.Create(NEW_ORGANIZATION_NAME, _newOrganizationDetailsPath);
 
             Assert.True(
                         TestApplication.MainWindow.OrganizationsTab.IsOrganizationInList(NEW_ORGANIZATION_NAME),
