@@ -4,7 +4,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    public partial class CharacterPreviewItem : UserControl
+    public partial class CharacterPreviewItem
     {
         public static readonly DependencyProperty OpenCharacterDetailsCommandProperty =
             DependencyProperty.Register("OpenCharacterDetailsCommand", typeof(ICommand), typeof(UserControl));
