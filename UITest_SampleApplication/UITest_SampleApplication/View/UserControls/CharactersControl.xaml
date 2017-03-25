@@ -29,7 +29,8 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:CharacterPreviewItem DataContext="{Binding}"/>
+                        <local:CharacterPreviewItem DataContext="{Binding}" 
+                                                    OpenCharacterDetailsCommand="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.OpenCharacterDetails}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

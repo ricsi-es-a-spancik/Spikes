@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace UITest_SampleApplication.View.UserControls
+﻿namespace UITest_SampleApplication.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for CharacterPreviewItem.xaml
-    /// </summary>
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
     public partial class CharacterPreviewItem : UserControl
     {
+        public static readonly DependencyProperty OpenCharacterDetailsCommandProperty =
+            DependencyProperty.Register("OpenCharacterDetailsCommand", typeof(ICommand), typeof(UserControl));
+
         public CharacterPreviewItem()
         {
             InitializeComponent();
+        }
+
+        public ICommand OpenCharacterDetailsCommand
+        {
+            get { return (ICommand)GetValue(OpenCharacterDetailsCommandProperty); }
+            set { SetValue(OpenCharacterDetailsCommandProperty, value); }
         }
     }
 }
