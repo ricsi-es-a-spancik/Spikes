@@ -1,4 +1,4 @@
-﻿namespace UiTests
+﻿namespace UiTests.Framework.Helpers
 {
     using System.Collections.Generic;
 

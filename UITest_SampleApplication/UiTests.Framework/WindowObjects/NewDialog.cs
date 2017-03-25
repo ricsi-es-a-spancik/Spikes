@@ -1,4 +1,4 @@
-namespace UiTests
+namespace UiTests.Framework.WindowObjects
 {
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.WindowItems;

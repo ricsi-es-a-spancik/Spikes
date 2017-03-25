@@ -1,4 +1,4 @@
-namespace UiTests
+namespace UiTests.Framework.WindowObjects
 {
     using System;
     using System.Linq;

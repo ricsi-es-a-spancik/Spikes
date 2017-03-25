@@ -1,8 +1,8 @@
-﻿namespace UiTests
+﻿namespace UiTests.Framework.Helpers
 {
     using TestStack.White.UIItems;
 
-    public static class Extennsions
+    public static class Extensions
     {
         public static bool Contains(this ListView listView, VehicleInList vehicleInList)
         {

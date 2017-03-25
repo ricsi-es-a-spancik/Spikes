@@ -4,6 +4,9 @@
 
     using NUnit.Framework;
 
+    using UiTests.Framework.WindowObjects;
+    using UiTests.Framework.Workflows;
+
     [TestFixture]
     public class CharactersTests : LoginTestBase
     {

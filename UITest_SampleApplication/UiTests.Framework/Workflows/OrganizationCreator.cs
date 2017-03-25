@@ -1,6 +1,8 @@
-﻿namespace UiTests
+﻿namespace UiTests.Framework.Workflows
 {
-    internal static class OrganizationCreator
+    using UiTests.Framework.WindowObjects;
+
+    public static class OrganizationCreator
     {
         public static void Create(string name, string detailsPath)
         {

@@ -1,7 +1,5 @@
-namespace UiTests
+namespace UiTests.Framework.WindowObjects
 {
-    using System.Globalization;
-
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.ListBoxItems;
     using TestStack.White.UIItems.WindowItems;

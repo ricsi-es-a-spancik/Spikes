@@ -2,10 +2,12 @@
 {
     using NUnit.Framework;
 
-    [TestFixture]
-    public class AuthenticationTests : TestBase
-    {
+    using UiTests.Framework;
+    using UiTests.Framework.WindowObjects;
 
+    [TestFixture]
+    public class AuthenticationTests : ApplicationTestBase
+    {
         [Test]
         public void CanRedirectToCredentialsViewAfterLoginFailed()
         {

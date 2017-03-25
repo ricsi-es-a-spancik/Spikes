@@ -1,10 +1,12 @@
-namespace UiTests
+namespace UiTests.Framework.WindowObjects
 {
     using System;
     using System.Threading.Tasks;
 
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.WindowItems;
+
+    using UiTests.Framework.Helpers;
 
     public class VehiclesTab : MainWindowTab
     {
