@@ -27,6 +27,8 @@ namespace UiTests.Framework.WindowObjects
 
         public VehiclesTab VehiclesTab => new VehiclesTab(_window);
 
+        public CharacterDetailsFlyout CharacterDetailsFlyout => new CharacterDetailsFlyout(_window);
+
         private Button ActiveUserButton => ButtonById(ACTIVE_USER_BUTTON_AUTOMATION_ID);
 
         private Menu SignOutMenu => Menu(SIGN_OUT);

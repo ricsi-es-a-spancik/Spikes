@@ -64,6 +64,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApplicationTestBase.cs" />
+    <Compile Include="WindowObjects\CharacterDetailsFlyout.cs" />
+    <Compile Include="WindowObjects\CharacterPreviewItem.cs" />
     <Compile Include="WindowObjects\CharactersTab.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="WindowObjects\LoginWindow.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="WindowObjects\NewOrganizationDialog.cs" />
     <Compile Include="WindowObjects\NewVehicleDialog.cs" />
     <Compile Include="WindowObjects\OpenFileDialog.cs" />
+    <Compile Include="Workflows\CharacterCreator.cs" />
     <Compile Include="Workflows\OrganizationCreator.cs" />
     <Compile Include="WindowObjects\OrganizationsTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

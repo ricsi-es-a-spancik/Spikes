@@ -1,11 +1,12 @@
 namespace UiTests.Framework.WindowObjects
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
-    using TestStack.White.UIItems;
     using TestStack.White.UIItems.Finders;
     using TestStack.White.UIItems.WindowItems;
-    using TestStack.White.UIItems.WPFUIItems;
 
     public class CharactersTab : MainWindowTab
     {
@@ -16,10 +17,24 @@ namespace UiTests.Framework.WindowObjects
         {
         }
 
-        public bool IsCharacterInList(string name)
+        private List<CharacterPreviewItem> CharacterPreviews => _window.GetMultiple(SearchCriteria.ByAutomationId(CHARACTER_PREVIEW_ITEM_ID))
+                                                                       .Select(item => new CharacterPreviewItem(item))
+                                                                       .ToList();
+
+        public bool IsCharacterInList(string name, string organization)
         {
-            var character = _window.GetMultiple(SearchCriteria.ByAutomationId(CHARACTER_PREVIEW_ITEM_ID)).Single();
-            return character.Get<Label>(SearchCriteria.ByText(name)) != null;
+            return GetPreviewItem(name, organization) != null;
+        }
+
+        public void OpenCharacterDetails(string name, string organization)
+        {
+            Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
+            GetPreviewItem(name, organization).DetailsButton.Click();
+        }
+
+        private CharacterPreviewItem GetPreviewItem(string name, string organization)
+        {
+            return CharacterPreviews.FirstOrDefault(preview => preview.Name.Text == name && preview.Organization.Text == organization);
         }
     }
 }

@@ -28,19 +28,28 @@
         {
             OrganizationCreator.Create(NEW_ORGANIZATION_NAME, _newOrganizationDetailsPath);
 
-            TestApplication.MainWindow.SelectCharactersTabPage();
-            TestApplication.MainWindow.CharactersTab.Add();
-
-            TestApplication.NewCharacterDialog
-                           .SetName(NEW_CHARACTER_NAME)
-                           .SelectOrganization(NEW_ORGANIZATION_NAME)
-                           .SetAvatarPath(_newCharacterAvatarPat)
-                           .SetDetails(NEW_CHARACTER_DETAILS)
-                           .Save();
+            CharacterCreator.Create(NEW_CHARACTER_NAME, NEW_ORGANIZATION_NAME, _newCharacterAvatarPat, NEW_CHARACTER_DETAILS);
 
             Assert.True(
-                        TestApplication.MainWindow.CharactersTab.IsCharacterInList(NEW_CHARACTER_NAME),
+                        TestApplication.MainWindow.CharactersTab.IsCharacterInList(NEW_CHARACTER_NAME, NEW_ORGANIZATION_NAME),
                         $"'{NEW_CHARACTER_NAME}' is expected to be in characters' list.");
+        }
+
+        [Test]
+        public void CanOpenCharacterDetailsFlyout()
+        {
+            OrganizationCreator.Create(NEW_ORGANIZATION_NAME, _newOrganizationDetailsPath);
+            CharacterCreator.Create(NEW_CHARACTER_NAME, NEW_ORGANIZATION_NAME, _newCharacterAvatarPat, NEW_CHARACTER_DETAILS);
+
+            TestApplication.MainWindow.CharactersTab.OpenCharacterDetails(NEW_CHARACTER_NAME, NEW_ORGANIZATION_NAME);
+
+            Assert.True(
+                TestApplication.MainWindow.CharacterDetailsFlyout.IsVIsible,
+                "Character details flyout control is excpected to be visible.");
+
+            Assert.True(
+                TestApplication.MainWindow.CharacterDetailsFlyout.ContainsValues(NEW_CHARACTER_NAME, NEW_ORGANIZATION_NAME, NEW_CHARACTER_DETAILS),
+                $"Characted details flyout control is excepted to contain the following values: Name - {NEW_CHARACTER_NAME}; Organization - {NEW_ORGANIZATION_NAME}; Details - {NEW_CHARACTER_DETAILS}");
         }
     }
 }

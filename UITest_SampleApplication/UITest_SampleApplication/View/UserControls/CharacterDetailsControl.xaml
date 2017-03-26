@@ -6,7 +6,8 @@
              xmlns:viewmodel="clr-namespace:UITest_SampleApplication.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance d:Type=viewmodel:CharacterViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance d:Type=viewmodel:CharacterViewModel, IsDesignTimeCreatable=True}"
+             AutomationProperties.AutomationId="CharacterDetailsFlyout">
     <Grid Margin="10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
