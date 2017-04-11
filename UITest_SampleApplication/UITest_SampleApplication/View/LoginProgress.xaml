@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="UITest_SampleApplication.View.LoginProgress"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodel="clr-namespace:UITest_SampleApplication.ViewModel"
+             xmlns:converters="clr-namespace:UITest_SampleApplication.ViewModel.Converters"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance d:Type=viewmodel:LoginProgressViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition  Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <controls:ProgressRing IsActive="{Binding IsAuthenticationInProgress}" Grid.Row="0" VerticalAlignment="Bottom" Visibility="{Binding IsAuthenticationInProgress, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <Rectangle Width="40" Height="40" Grid.Row="0" Fill="Yellow" VerticalAlignment="Bottom" Margin="0,0,0,20"
+                   Visibility="{Binding IsAuthenticationFailed, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_warning}" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+
+        <TextBlock Text="The provided credentials did not match any existing user." Grid.Row="1" VerticalAlignment="Top" Margin="30,0" TextWrapping="Wrap"
+                   Visibility="{Binding IsAuthenticationFailed, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Visibility="{Binding IsAuthenticationFailed, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Button Content="Cancel" Margin="0,0,10,0" Command="{Binding CancelLogin}"/>
+            <Button Content="Login" Margin="0,0,25,0" Command="{Binding ReenterCredentials}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
